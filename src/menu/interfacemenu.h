@@ -57,4 +57,28 @@ Menu *createMenu();
  */
 void addEntryToMenu(Menu *menu, char *message, CallbackFunct *funct);
 
+/**
+ * @brief Conecta um menu a seu header
+ * 
+ * @param menu 
+ * @param menu ponteiro para uma estrutura que contém as 
+ * informações de um menu
+ * @param header ponteiro para função de header
+ * @pre Menu carregado
+ * @post Menu possui um header
+ */
+void setHeader(Menu *menu, HeaderFunct header);
+
+/**
+ * @brief Conecta um menu a seu footer
+ * 
+ * @param menu 
+ * @param menu ponteiro para uma estrutura que contém as 
+ * informações de um menu
+ * @param footer ponteiro para função de footer
+ * @pre Menu carregado
+ * @post Menu possui um footer
+ */
+void setFooter(Menu *menu, FooterFunct footer);
+
 #endif //INTERFACE_MENU_H
