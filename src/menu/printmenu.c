@@ -45,7 +45,7 @@ void printString(const char* message) {
  */
 void printAlignedLeft(const char *message) {
     printf("|%s", message);
-    printExtended(' ', SIZE_LINE - strlen(message) - 2); // -2 por causa dos |
+    printExtended(' ', SIZE_LINE - (strlen(message) + 2));
     printf("|\n");
 }
 
@@ -63,7 +63,7 @@ void printAlignedCenter(const char *message) {
     printExtended(' ', space);
     printf("%s", message);
     printExtended(' ', space);
-    if (!(sizeRead % 2))
+    if ((sizeRead % 2))
         printf(" ");
     printf("|\n");
 }
@@ -103,7 +103,7 @@ void printLine() {
  */
 void printExtended(char c, int number) {
     for(int i = 0; i < number; i++)
-        printf("%c", c);
+        putchar(c);
 }
 
 /**
@@ -115,11 +115,28 @@ void printExtended(char c, int number) {
  */
 void printMenu(Menu *menu) {
     menu->header();
-    if(menu->queue == NULL) // verificar
-        printAlignedRight("[vazia]");
-    else
-        printEntryQueueTail(menu->queue->head, menu->queue->tail, menu->thisOption);
+    if(isEmptyList(menu->first))
+        printAlignedCenter("Menu não possui opções");
+    else {
+        printListOptions(menu->first, menu->selected);
+    }
     menu->footer();
+}
+
+/**
+ * @brief Imprime todas as opções da Lista de opções dentro do Menu
+ * 
+ * @param first Cabeça da Lista
+ * @param selected Item selecionado do menu
+ * @pre Lista de Menu carregada
+ * @post Todas as opções do Menu impressas na tela
+ */
+void printListOptions(List *first, List *selected) {
+    List *p = first;
+    for (; p->next != first; p = p->next) {
+        printOption(p, p == selected);
+    }
+    printOption(p, p == selected);
 }
 
 /**
@@ -130,30 +147,15 @@ void printMenu(Menu *menu) {
  * @pre Nenhuma
  * @post Nenhuma
  */
-void printOption(const char* message, int selected) {
-    printf("| [");
+void printOption(List *item, int selected) {
+    printf("|%d ", item->number);
     if(selected)
-        printf("x");
+        printf("->");
     else
-        printf(" ");
-    printf("] %s", message);
-    printExtended(' ', SIZE_LINE - (strlen(message) + SELECT_SIZE)); // 6 caracteres antes da mensagem e 1 depois
+        printf("  ");
+    printf(" %s", item->entryMessage);
+    printExtended(' ', SIZE_LINE - (strlen(item->entryMessage) + SELECT_SIZE)); // 6 caracteres antes da mensagem e 1 depois
     printf("|\n");
-}
-
-/**
- * @brief Printa todas as opçoes 
- * 
- * @param start ponteiro para uma estrutura que contém as informações do nó de entrada 
- * @param end ponteiro para uma estrutura que contém as informações do nó de entrada 
- * @param i inteiro utilizado para passar pela fila
- * @pre Nenhuma
- * @post Nenhuma
- */
-void printEntryQueueTail(EntryNode *start, EntryNode *end, int i) {
-    printOption(start->entryMessage, 0 == i);
-    if (start != end)
-        printEntryQueueTail(start->prox, end, --i);
 }
 
 /**

@@ -1,3 +1,6 @@
+#ifndef CIRCULAR_LIST_H
+#define CIRCULAR_LIST_H
+
 /**
  * @file circularlist.h
  * @author Victor Emanuel Almeida (victoralmeida2001@hotmail.com)
@@ -7,22 +10,44 @@
  * @date 14/06/2021
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "definemenu.h"
+#include <string.h>
 
-/**
- * @brief Estrutura que representa uma lista duplamente encadeada circular
- */
-typedef struct node {
-    int info;
-    struct node *next;
-    struct node *prev;
-}List;
+enum {MOVE_BACKWARD, MOVE_FOWARD};
 
-int isEmptyList(List *l);
+int isEmptyList(List *head);
 
 List* allocNode();
 
-List *insertAtEnd(List *head, int data);
+List *insertAtEnd(List *head, int number, char *message, CallbackFunct *funct);
+
+/**
+ * @brief Verifica se o número passado como argumento
+ * está dentro dos limites da lista
+ * 
+ * @param head ponteiro para o inicio da lista
+ * @param number número a ser analisado
+ * @return int booleano
+ * 
+ * Verdadeiro quando o número está dentro dos limites;
+ * Falso quando o número está fora dos limites;
+ * @pre Lista carregada
+ * @post Nenhuma
+ */
+int isInLimits(List *head, int number);
 
 void printList(List *head);
+
+/**
+ * @brief Imprime todas as opções da Lista de opções dentro do Menu
+ * 
+ * @param first Cabeça da Lista
+ * @param selected Item selecionado do menu
+ * @pre Lista de Menu carregada
+ * @post Todas as opções do Menu impressas na tela
+ */
+void printListOptions(List *first, List *selected);
+
+List *moveTo(List *item, int qnt, int side);
+
+#endif

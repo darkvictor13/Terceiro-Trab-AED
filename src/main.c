@@ -1,5 +1,6 @@
 #include "menu/interfacemenu.h"
 #include "menu/circularlist.h"
+#include "menu/printmenu.h"
 
 void headerPrincipal() {
     printLine();
@@ -21,6 +22,8 @@ int teste(FILE *f) {
 
 int main () {
     Menu *m = createMenu();
+    printAlignedCenter("Ola");
+    printAlignedCenter("Oi");
     setHeader(m, headerPrincipal);
     setFooter(m, footerPrincipal);
     addEntryToMenu(m, "Alguma coisa", teste);
@@ -28,15 +31,7 @@ int main () {
     addEntryToMenu(m, "Alguma coisa", teste);
     addEntryToMenu(m, "Alguma coisa", teste);
     addEntryToMenu(m, "Alguma coisa", teste);
-    //controlMenu(m, NULL);
-    List *l = NULL;
-    l = insertAtEnd(l, 1);
-    l = insertAtEnd(l, 2);
-    l = insertAtEnd(l, 3);
-    l = insertAtEnd(l, 4);
-    l = insertAtEnd(l, 5);
-    l = insertAtEnd(l, 6);
-    printList(l->prev);
-    free(l);
+    controlMenu(m, NULL);
+    free(m);
     return 0;
 }

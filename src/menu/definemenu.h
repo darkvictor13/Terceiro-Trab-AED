@@ -11,6 +11,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #ifdef __gnu_linux__
 
@@ -84,33 +85,24 @@ typedef void HeaderFunct();
 typedef void FooterFunct();
 
 /**
- * @brief Estrutura nó para os itens da fila entryQueue dentro do Menu
+ * @brief Estrutura que representa uma lista duplamente encadeada circular
  */
-typedef struct entryNode {
+typedef struct node {
+    int number;
 	char entryMessage[MESSAGE_SIZE];
     CallbackFunct *funct;
-	struct entryNode * prox;
-}EntryNode;
-
-/**
- * @brief Estrutura para fila, implementada como uma
- * lista encadeada com cabeça e cauda
- */
-typedef struct entryQueue{
-    int size;
-    struct entryNode *head;
-    struct entryNode *tail;
-}EntryQueue;
+    struct node *next;
+    struct node *prev;
+}List;
 
 /**
  * @brief estrutura para fila de itens do menu
  */
 typedef struct {
-    int options;
-    int thisOption;
     FooterFunct *footer;
     HeaderFunct *header;
-    struct entryQueue *queue;
+    List *first;
+    List *selected;
 }Menu;
 
 #endif //DEFINE_MENU_H

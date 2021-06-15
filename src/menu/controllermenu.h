@@ -10,6 +10,7 @@
  */
 
 #include "printmenu.h"
+#include "circularlist.h"
 #include <stdlib.h>
 #include <ctype.h>
 
@@ -38,53 +39,12 @@ char getChar();
 /**
  * @brief Create a Entry Queue object
  * 
- * @return EntryQueue* 
+ * @return List* 
  * @pre Nenhuma
  * @post Nenhuma
  */
-EntryQueue* createEntryQueue();
+List* createList();
 
-/**
- * @brief Aloca a estrutura EntryNode
- * 
- * @return EntryNode* 
- * @pre Nenhuma
- * @post Nenhuma
- */
-EntryNode* allocEntryNode();
-
-/**
- * @brief Informa se a lista passada como argumento é vazia
- * 
- * @param queue Uma fila
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
-int emptyEntryQueue(EntryQueue *queue);
-
-/**
- * @brief Informa se a lista passada como argumento é vazia
- * 
- * @param queue Uma fila
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
-int emptyEntryQueue(EntryQueue *queue);
-
-/**
- * @brief Executa a opção selecionada
- * 
- * @param queue ponteiro para uma estrutura que contém as 
- * informações de uma fila
- * @param option inteiro com a opcao escolhida
- * @param dataFile ponteiro para um arquivo binário com os dados da arvore
- * @return int 
- * @pre Nenhuma
- * @post retorna funct da opção
- */
-int executeEntry(EntryQueue *queue, int option, FILE *dataFile);
 
 /**
  * @brief Realiza o controle de um menu previamente criado

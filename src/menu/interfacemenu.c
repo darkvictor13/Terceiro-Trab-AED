@@ -17,36 +17,8 @@
  * @pre Nenhuma
  * @post Retorna o valor do tamanho da fila reduzido
  */
-int removeEntryQueue(EntryQueue *queue) {
-    EntryNode *head = queue->head;
-    if (head == queue->tail)
-        queue->tail = NULL;
-    queue->tail = queue->tail->prox;
-    free(head);
-    return --queue->size;
-}
-
-/**
- * @brief Insere um novo elemento na fila
- * 
- * @param queue ponteiro para uma estrutura que contém as 
- * informações de uma fila
- * @param message informação impressa no menu, resume o que a função faz
- * @param funct função a ser executada ao selecionar o item
- * @pre Nenhuma
- * @post Nenhuma
- */
-void insertEntryQueue(EntryQueue *queue, char *message, CallbackFunct *funct) {
-    EntryNode *newTail = allocEntryNode();
-    newTail->funct = funct;
-    strcpy(newTail->entryMessage, message);
-    newTail->prox = NULL;
-    if (emptyEntryQueue(queue))
-        queue->head = newTail;
-    else
-        queue->tail->prox = newTail;
-    queue->size++;
-    queue->tail = newTail;
+int removeEntryQueue(List *queue) {
+    return 1;
 }
 
 /**
@@ -58,8 +30,7 @@ void insertEntryQueue(EntryQueue *queue, char *message, CallbackFunct *funct) {
  */
 Menu *createMenu() {
     Menu* menu = (Menu *)malloc(sizeof(Menu));
-    menu->options = menu->thisOption = 0;
-    menu->queue = createEntryQueue();
+    menu->first = menu->selected = NULL;
     return menu;
 }
 
@@ -74,8 +45,19 @@ Menu *createMenu() {
  * @post Mais uma função ao menu
  */
 void addEntryToMenu(Menu *menu, char *message, CallbackFunct *funct) {
-    menu->options++;
-    insertEntryQueue(menu->queue, message, funct);
+    int number;
+    if (isEmptyList(menu->first)){
+        number = 1;
+    }else{
+        number = menu->first->prev->number + 1;
+    }
+
+    menu->first = insertAtEnd(menu->first, number, message, funct);
+
+    // se foi a primeira inserção
+    if (number == 1) {
+        menu->selected = menu->first;
+    }
 }
 
 /**

@@ -65,74 +65,6 @@ char getChar() {
 #endif //__gnu_linux__
 
 /**
- * @brief Create a Entry Queue object
- * 
- * @return EntryQueue* 
- * @pre Nenhuma
- * @post Nenhuma
- */
-EntryQueue* createEntryQueue() {
-    EntryQueue *newQueue = (EntryQueue *)malloc(sizeof(EntryQueue));
-    newQueue->head = newQueue->tail = NULL;
-    newQueue->size = 0;
-    return newQueue;
-}
-
-/**
- * @brief Aloca a estrutura EntryNode
- * 
- * @return EntryNode* 
- * @pre Nenhuma
- * @post Nenhuma
- */
-EntryNode* allocEntryNode() {
-    return (EntryNode *)malloc(sizeof(EntryNode));
-}
-
-/**
- * @brief Informa se a lista passada como argumento é vazia
- * 
- * @param queue Uma fila
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
-int emptyEntryQueue(EntryQueue *queue) {
-    return (queue->head == NULL);
-}
-
-/**
- * @brief Devolve o tamanho da fila
- * 
- * @param queue ponteiro para uma estrutura que contém as informações de uma fila
- * @return int 
- * @pre Nenhuma
- * @post Retorna o valor do tamanho da fila
- */
-int sizeEntryQueue(EntryQueue *queue) {
-    return queue->size;
-}
-
-/**
- * @brief Executa a opção selecionada
- * 
- * @param queue ponteiro para uma estrutura que contém as 
- * informações de uma fila
- * @param option inteiro com a opcao escolhida
- * @param dataFile ponteiro para um arquivo binário com os dados da arvore
- * @return int 
- * @pre Nenhuma
- * @post retorna funct da opção
- */
-int executeEntry(EntryQueue *queue, int option, FILE *dataFile) {
-    int i, ret;
-    EntryNode *node = queue->head;
-    for(i = 0; i < option; i++)
-        node = node->prox;
-    return (*(node->funct))(dataFile);
-}
-
-/**
  * @brief Realiza o controle de um menu previamente criado
  * 
  * @param menu ponteiro para uma estrutura que contém as 
@@ -150,19 +82,13 @@ int controlMenu(Menu *menu, FILE *dataFile) {
         printMenu(menu);
         c = getChar();
         if (c == UP) {
-            if(menu->thisOption > 0)
-                menu->thisOption--;    
-            else
-                menu->thisOption = menu->options - 1;
+            menu->selected = moveTo(menu->selected, 1, MOVE_BACKWARD);
         }else if (c == DOWN) {
-            if(menu->thisOption < menu->options - 1)
-                menu->thisOption++;    
-            else
-                menu->thisOption = 0;
+            menu->selected = moveTo(menu->selected, 1, MOVE_FOWARD);
         }else if(isdigit(c)) {
             int option = c - '1';
-            if (option >= 0 && option < menu->options) {
-                menu->thisOption = option;
+            if (isInLimits(menu->first, option)) {
+                menu->selected = moveTo(menu->first, option, MOVE_FOWARD);
             }else {
                 printLine();
                 printAlignedCenter("Digito fora dos limites");
@@ -170,8 +96,9 @@ int controlMenu(Menu *menu, FILE *dataFile) {
                 printWaitMenu();
             }
         }else if(c == ENTER) {
-            if(executeEntry(menu->queue, menu->thisOption, dataFile) == 0)
-                return 1;
+            //if(executeEntry(menu->queue, menu->thisOption, dataFile) == 0)
+                //return 1;
+            if (menu->selected->funct(dataFile) == 0) return 1;
         }else{
             printLine();
             printAlignedRight("Entrada do teclado incorreta");

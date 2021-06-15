@@ -22,19 +22,8 @@
  * @pre Nenhuma
  * @post Retorna o valor do tamanho da fila reduzido
  */
-int removeEntryQueue(EntryQueue *queue);
+int removeList(List *queue);
 
-/**
- * @brief Insere um novo elemento na fila
- * 
- * @param queue ponteiro para uma estrutura que contém as 
- * informações de uma fila
- * @param message informação impressa no menu, resume o que a função faz
- * @param funct função a ser executada ao selecionar o item
- * @pre Nenhuma
- * @post Nenhuma
- */
-void insertEntryQueue(EntryQueue *queue, char *message, CallbackFunct *funct);
 
 /**
  * @brief Create a Menu object

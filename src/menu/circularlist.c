@@ -9,6 +9,14 @@
 
 #include "circularlist.h"
 
+/**
+ * @brief 
+ * 
+ * @param l 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int isEmptyList(List *l) {
     return l == NULL;
 }
@@ -17,9 +25,13 @@ List* allocNode() {
     return (List*)malloc(sizeof(List));
 }
 
-List *insertAtEnd(List *head, int data) {
+List *insertAtEnd(List *head, int number, char *message, CallbackFunct *funct) {
+    printf("Adicionando elemento %d\n", number);
     List *new_node = allocNode();
-    new_node->info = data;
+    new_node->number = number;
+    new_node->funct = funct;
+    strcpy(new_node->entryMessage, message);
+
     if (isEmptyList(head)) {
         new_node->prev = new_node->next = new_node;
         return new_node;
@@ -33,10 +45,38 @@ List *insertAtEnd(List *head, int data) {
     return head;
 }
 
+/**
+ * @brief Verifica se o número passado como argumento
+ * está dentro dos limites da lista
+ * 
+ * @param head ponteiro para o inicio da lista
+ * @param number número a ser analisado
+ * @return int booleano
+ * 
+ * Verdadeiro quando o número está dentro dos limites;
+ * Falso quando o número está fora dos limites;
+ * @pre Lista carregada
+ * @post Nenhuma
+ */
+int isInLimits(List *head, int number) {
+    return number > 0 && number <= head->prev->number;
+}
+
+List *moveTo(List *item, int qnt, int side) {
+    if (side == MOVE_FOWARD) {
+        while(qnt--) item = item->next;
+    }
+    else {
+        while(qnt--) item = item->prev;
+    }
+}
+
 void printList(List *head) {
+    /*
     List *p = head;
     for(; p->next != head; p = p->next) {
         printf("%d, ", p->info);
     }
     printf("%d\n", p->info);
+    */
 }

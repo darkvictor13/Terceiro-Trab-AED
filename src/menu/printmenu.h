@@ -10,6 +10,7 @@
  */
 
 #include "definemenu.h"
+#include "circularlist.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -93,18 +94,17 @@ void printMenu(Menu *menu);
  * @pre Nenhuma
  * @post Nenhuma
  */
-void printOption(const char* message, int selected);
+void printOption(List *item, int selected);
 
 /**
- * @brief Printa todas as opçoes 
+ * @brief Imprime todas as opções da Lista de opções dentro do Menu
  * 
- * @param start ponteiro para uma estrutura que contém as informações do nó de entrada 
- * @param end ponteiro para uma estrutura que contém as informações do nó de entrada 
- * @param i inteiro utilizado para passar pela fila
- * @pre Nenhuma
- * @post Nenhuma
+ * @param first Cabeça da Lista
+ * @param selected Item selecionado do menu
+ * @pre Lista de Menu carregada
+ * @post Todas as opções do Menu impressas na tela
  */
-void printEntryQueueTail(EntryNode *start, EntryNode *end, int i);
+void printListOptions(List *first, List *selected);
 
 /**
  * @brief Imprime um menu para pausar o programa
