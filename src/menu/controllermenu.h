@@ -37,16 +37,6 @@
 char getChar();
 
 /**
- * @brief Create a Entry Queue object
- * 
- * @return List* 
- * @pre Nenhuma
- * @post Nenhuma
- */
-List* createList();
-
-
-/**
  * @brief Realiza o controle de um menu previamente criado
  * 
  * @param menu ponteiro para uma estrutura que contém as 

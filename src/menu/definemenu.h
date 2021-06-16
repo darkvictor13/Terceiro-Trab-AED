@@ -50,7 +50,7 @@
  * @brief Define a quantidade de caracteres antes da mensagem
  * somado aos 2 "pipes" (|)
  */
-#define SELECT_SIZE 8
+#define SELECT_SIZE 10
 
 /**
  * @brief Define o tamanho de uma linha do menu

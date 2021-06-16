@@ -38,16 +38,6 @@ int isInLimits(List *head, int number);
 
 void printList(List *head);
 
-/**
- * @brief Imprime todas as opções da Lista de opções dentro do Menu
- * 
- * @param first Cabeça da Lista
- * @param selected Item selecionado do menu
- * @pre Lista de Menu carregada
- * @post Todas as opções do Menu impressas na tela
- */
-void printListOptions(List *first, List *selected);
-
 List *moveTo(List *item, int qnt, int side);
 
 #endif

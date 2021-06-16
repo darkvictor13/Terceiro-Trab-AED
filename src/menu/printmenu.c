@@ -148,12 +148,12 @@ void printListOptions(List *first, List *selected) {
  * @post Nenhuma
  */
 void printOption(List *item, int selected) {
-    printf("|%2d ", item->number);
+    putchar('|');
     if(selected)
-        printf("->");
+        printf(" ->");
     else
-        printf("  ");
-    printf(" %s", item->entryMessage);
+        printf("   ");
+    printf("%2d - %s", item->number, item->entryMessage);
     printExtended(' ', SIZE_LINE - (strlen(item->entryMessage) + SELECT_SIZE)); // 6 caracteres antes da mensagem e 1 depois
     printf("|\n");
 }
