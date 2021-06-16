@@ -63,7 +63,7 @@ void printAlignedCenter(const char *message) {
     printExtended(' ', space);
     printf("%s", message);
     printExtended(' ', space);
-    if ((sizeRead % 2))
+    if (!(sizeRead % 2))
         printf(" ");
     printf("|\n");
 }
@@ -148,7 +148,7 @@ void printListOptions(List *first, List *selected) {
  * @post Nenhuma
  */
 void printOption(List *item, int selected) {
-    printf("|%d ", item->number);
+    printf("|%2d ", item->number);
     if(selected)
         printf("->");
     else

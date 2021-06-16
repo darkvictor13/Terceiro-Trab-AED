@@ -59,7 +59,7 @@ List *insertAtEnd(List *head, int number, char *message, CallbackFunct *funct) {
  * @post Nenhuma
  */
 int isInLimits(List *head, int number) {
-    return number > 0 && number <= head->prev->number;
+    return number >= 0 && number < head->prev->number;
 }
 
 List *moveTo(List *item, int qnt, int side) {
