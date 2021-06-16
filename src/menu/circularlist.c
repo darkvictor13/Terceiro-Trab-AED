@@ -64,11 +64,19 @@ int isInLimits(List *head, int number) {
 
 List *moveTo(List *item, int qnt, int side) {
     if (side == MOVE_FOWARD) {
-        while(qnt--) item = item->next;
+        while(qnt--) {
+            item = item->next;
+        }
+        return item;
+    }else if (side == MOVE_BACKWARD) {
+        while(qnt--) {
+            item = item->prev;
+        }
+        return item;
+    }else {
+        printf("Entrada invalida\n");
     }
-    else {
-        while(qnt--) item = item->prev;
-    }
+    return item;
 }
 
 void printList(List *head) {
