@@ -1,37 +1,17 @@
-#include "menu/interfacemenu.h"
-#include "menu/circularlist.h"
-#include "menu/printmenu.h"
+#include "controllers/main_menu_controller.h"
 
-void headerPrincipal() {
-    printLine();
-    printAlignedCenter("Principal");
-    printLine();
-}
-
-void footerPrincipal() {
-    printLine();
-    printAlignedRight("fim");
-    printLine();
-}
-
-int teste(FILE *f) {
-    printAlignedCenter("Fiz Nada");
-    printWaitMenu();
-    return 1;
-}
-
-int main () {
-    Menu *m = createMenu();
-    printAlignedCenter("Ola");
-    printAlignedCenter("Oi");
-    setHeader(m, headerPrincipal);
-    setFooter(m, footerPrincipal);
-    addEntryToMenu(m, "Alguma coisa", teste);
-    addEntryToMenu(m, "Alguma coisa", teste);
-    addEntryToMenu(m, "Alguma coisa", teste);
-    addEntryToMenu(m, "Alguma coisa", teste);
-    addEntryToMenu(m, "Alguma coisa", teste);
-    controlMenu(m, NULL);
-    free(m);
+int main(int argc, char *argv[]) {
+    char filePath[] = "./data.bin";
+    FILE *dataFile = fopen(filePath, "r+b");
+    if(dataFile == NULL) {
+        //dataFile = makeDataFile(filePath);
+    }else{
+        //setbuf(dataFile, NULL);
+    }
+    if(argc == 2) {
+        //loadInputFile(argv[1], dataFile);
+    }
+    mainMenuController(dataFile);
+    fclose(dataFile);
     return 0;
 }
