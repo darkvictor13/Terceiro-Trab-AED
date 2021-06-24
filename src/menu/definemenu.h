@@ -72,7 +72,7 @@
 /**
  * @brief Ponteiro para uma função chamada pelo menu
  */
-typedef int CallbackFunct(FILE *dataFile);
+typedef int CallbackFunct(FILE *indexFile, FILE *dataFile);
 
 /**
  * @brief Ponteiro para uma função que imprime um header

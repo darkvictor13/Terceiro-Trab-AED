@@ -1,3 +1,11 @@
+/**
+ * @file main.c
+ * @author Victor Emanuel Almeida
+ * @brief 
+ * @version 0.1
+ * @date 24/06/2021
+ */
+
 #include "controllers/main_menu_controller.h"
 
 int main(int argc, char *argv[]) {
@@ -12,6 +20,6 @@ int main(int argc, char *argv[]) {
         //loadInputFile(argv[1], dataFile);
     }
     mainMenuController(dataFile);
-    fclose(dataFile);
+    //fclose(dataFile);
     return 0;
 }
