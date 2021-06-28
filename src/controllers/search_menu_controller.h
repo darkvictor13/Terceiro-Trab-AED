@@ -1,84 +1,25 @@
 #ifndef SEARCH_MENU_CONTROLLER
 #define SEARCH_MENU_CONTROLLER
 
-#include "../menu/interfacemenu.h"
+#include "../menu/controller_menu.h"
+#include "../menu/print_menu.h"
 
-/**
- * @brief 
- * 
- * @pre Nenhuma
- * @post Nenhuma
- */
 void searchMenuHeader();
 
-/**
- * @brief 
- * 
- * @pre Nenhuma
- * @post Nenhuma
- */
 void searchMenuFooter();
 
-/**
- * @brief Insere operações de busca no menu
- * 
- * @param dataFile ponteiro para um arquivo binário com os dados da arvore
- * @return int 
- * @pre Nenhuma
- * @post Menu com funções de busca
- */
-int searchMenuController(FILE *dataFile);
+int searchMenuController(ArgList head);
 
-int actionSearchProductByName(FILE *dataFile);
+int actionSearchProductByName(ArgList head);
 
-/**
- * @brief Busca produto pelo código
- * 
- * @param dataFile ponteiro para um arquivo binário com os dados da arvore
- * @return int 
- * @pre Nenhuma
- * @post produto encontrado pelo código
- */
-int actionSearchProductByCode(FILE *dataFile);
+int actionSearchProductByCode(ArgList head);
 
-/**
- * @brief Imprime arvore binaria de produtos
- * 
- * @param dataFile ponteiro para um arquivo binário com os dados da arvore
- * @return int 
- * @pre Nenhuma
- * @post Lista de produtos no console
- */
-int actionListProducts(FILE *dataFile);
+int actionListProducts(ArgList head);
 
-/**
- * @brief Imprime arvore binaria em niveis
- * 
- * @param dataFile ponteiro para um arquivo binário com os dados da arvore
- * @return int 
- * @pre Nenhuma
- * @post Arvore em niveis no console
- */
-int actionPrintTree(FILE *dataFile);
+int actionPrintTree(ArgList head);
 
-/**
- * @brief Imprime espaços em branco
- * 
- * @param dataFile ponteiro para um arquivo binário com os dados da arvore
- * @return int 
- * @pre Nenhuma
- * @post Espaços no console
- */
-int actionPrintFreeSpaces(FILE *dataFile);
+int actionPrintFreeSpaces(ArgList head);
 
-/**
- * @brief Volta ao menu anterior
- * 
- * @param dataFile 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
-int actionSearchReturn(FILE *dataFile);
+int actionSearchReturn(ArgList head);
 
 #endif

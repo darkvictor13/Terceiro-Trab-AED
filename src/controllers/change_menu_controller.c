@@ -30,7 +30,7 @@ void changeMenuFooter() {
  * @pre Nenhuma
  * @post Menu alterado
  */
-int changeMenuController(FILE *dataFile) {
+int changeMenuController(ArgList head) {
     Menu *changeMenu = createMenu();
     setHeader(changeMenu, changeMenuHeader);
     setFooter(changeMenu, changeMenuFooter);
@@ -38,7 +38,7 @@ int changeMenuController(FILE *dataFile) {
     addEntryToMenu(changeMenu, "Alterar preco.", actionChangeValue);
     addEntryToMenu(changeMenu, "Alterar localizacao.", actionChangeLocal);
     addEntryToMenu(changeMenu, "Voltar.", actionChangeReturn);
-    controlMenu(changeMenu, dataFile);
+    controlMenu(changeMenu, head);
     return 1;
 }
 
@@ -50,7 +50,7 @@ int changeMenuController(FILE *dataFile) {
  * @pre Nenhuma
  * @post produto atualizado
  */
-int actionChangeNumber(FILE *dataFile) {
+int actionChangeNumber(ArgList head) {
     /*int code, position;
     printf("\tIndique o codigo do produto: ");
     scanf("%d", &code);
@@ -76,7 +76,7 @@ int actionChangeNumber(FILE *dataFile) {
  * @pre Nenhuma
  * @post preço atualizado
  */
-int actionChangeValue(FILE *dataFile) {
+int actionChangeValue(ArgList head) {
     /*int code, position;
     printf("\tIndique o codigo do produto: ");
     scanf("%d", &code);
@@ -102,7 +102,7 @@ int actionChangeValue(FILE *dataFile) {
  * @pre Nenhuma
  * @post local alterado
  */
-int actionChangeLocal(FILE *dataFile) {
+int actionChangeLocal(ArgList head) {
     /*int code, position;
     printf("\tIndique o codigo do produto: ");
     scanf("%d%*c", &code);
@@ -128,6 +128,6 @@ int actionChangeLocal(FILE *dataFile) {
  * @pre Nenhuma
  * @post 
  */
-int actionChangeReturn(FILE *dataFile) {
+int actionChangeReturn(ArgList head) {
     return 0;
 }

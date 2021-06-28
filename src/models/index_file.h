@@ -15,24 +15,6 @@
 #define ORDER 5
 
 /**
- * @brief Offsets para acessar determinados campos do cabeçalho
- */
-enum offsetHeadIndex {
-	OFFSET_ROOT_INDEX = offsetof(IndexHead, regRoot),
-	OFFSET_LAST_INDEX = offsetof(IndexHead, regLast),
-	OFFSET_FREE_INDEX = offsetof(IndexHead, regFree)
-};
-
-/**
- * @brief Offsets para acessar determinados campos do nó do Product
- */
-enum offsetRegistryIndex {
-    OFFSET_REGISTRY_CODE = offsetof(Registry, key),
-    OFFSET_REGISTRY_RIGHT = offsetof(Registry, registers),
-    OFFSET_REGISTRY_LEFT = offsetof(Registry, children)
-};
-
-/**
  * @brief Estrutura de cabeçalho de um arquivo
  */
 typedef struct {
@@ -40,6 +22,15 @@ typedef struct {
     int regLast;
     int regFree;
 }IndexHead;
+
+/**
+ * @brief Offsets para acessar determinados campos do cabeçalho
+ */
+enum offsetHeadIndex {
+	OFFSET_ROOT_INDEX = offsetof(IndexHead, regRoot),
+	OFFSET_LAST_INDEX = offsetof(IndexHead, regLast),
+	OFFSET_FREE_INDEX = offsetof(IndexHead, regFree)
+};
 
 /**
  * @brief Estrutura que representa um único nó
@@ -50,6 +41,15 @@ typedef struct {
 	int registers[ORDER];
 	int children[ORDER];
 }Registry;
+
+/**
+ * @brief Offsets para acessar determinados campos do nó do Product
+ */
+enum offsetRegistryIndex {
+    OFFSET_REGISTRY_CODE = offsetof(Registry, key),
+    OFFSET_REGISTRY_RIGHT = offsetof(Registry, registers),
+    OFFSET_REGISTRY_LEFT = offsetof(Registry, children)
+};
 
 /**
  * @brief Verifica se a arvore está vazia

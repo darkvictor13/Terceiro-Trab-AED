@@ -1,14 +1,3 @@
-/**
- * @file search_menu_controller.c
- * @author Victor Emanuel Almeida (victoralmeida2001@hotmail.com)
- * @brief 
- * @version 0.1
- * @date 31/05/2021
- * 
- * @copyright Copyright (c) 2021
- * 
- */
-
 #include "search_menu_controller.h"
 
 void searchMenuHeader() {
@@ -23,15 +12,7 @@ void searchMenuFooter() {
     printLine();
 }
 
-/**
- * @brief Insere operações de busca no menu
- * 
- * @param dataFile ponteiro para um arquivo binário com os dados da arvore
- * @return int 
- * @pre Nenhuma
- * @post Menu com funções de busca
- */
-int searchMenuController(FILE *dataFile) {
+int searchMenuController(ArgList head) {
     Menu *searchMenu = createMenu();
     setHeader(searchMenu, searchMenuHeader);
     setFooter(searchMenu, searchMenuFooter);
@@ -41,19 +22,11 @@ int searchMenuController(FILE *dataFile) {
     addEntryToMenu(searchMenu, "Mostrar arvore.", actionPrintTree);
     addEntryToMenu(searchMenu, "Mostrar espacos livres.", actionPrintFreeSpaces);
     addEntryToMenu(searchMenu, "Voltar.", actionSearchReturn);
-    controlMenu(searchMenu, dataFile);
+    controlMenu(searchMenu, head);
     return 1;
 }
 
-/**
- * @brief 
- * 
- * @param dataFile ponteiro para um arquivo binário com os dados da arvore
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
-int actionSearchProductByName(FILE *dataFile) {
+int actionSearchProductByName(ArgList head) {
     /*char name[MAX_NAME];
     printf("Insira o nome do produto: ");
     scanf("%[^\n]%*c", name);
@@ -62,15 +35,7 @@ int actionSearchProductByName(FILE *dataFile) {
     return 1;
 }
 
-/**
- * @brief Busca produto pelo código
- * 
- * @param dataFile ponteiro para um arquivo binário com os dados da arvore
- * @return int 
- * @pre Nenhuma
- * @post produto encontrado pelo código
- */
-int actionSearchProductByCode(FILE *dataFile) {
+int actionSearchProductByCode(ArgList head) {
     /*int code, position;
     printf("\tInsira o codigo do produto: ");
     scanf("%d%*c", &code);
@@ -83,59 +48,27 @@ int actionSearchProductByCode(FILE *dataFile) {
     return 1;
 }
 
-/**
- * @brief Imprime arvore binaria de produtos
- * 
- * @param dataFile ponteiro para um arquivo binário com os dados da arvore
- * @return int 
- * @pre Nenhuma
- * @post Lista de produtos no console
- */
-int actionListProducts(FILE *dataFile) {
+int actionListProducts(ArgList head) {
     /*printHead("Imprimindo a Arvore em ordem crescente");
     printInOrder(dataFile);*/
     printWaitMenu();
     return 1;
 }
 
-/**
- * @brief Imprime arvore binaria em niveis
- * 
- * @param dataFile ponteiro para um arquivo binário com os dados da arvore
- * @return int 
- * @pre Nenhuma
- * @post Arvore em niveis no console
- */
-int actionPrintTree(FILE *dataFile) {
+int actionPrintTree(ArgList head) {
     /*printHead("Imprimindo a Arvore em niveis");
     printByLevel(dataFile);*/
     printWaitMenu();
     return 1;
 }
 
-/**
- * @brief Imprime espaços em branco
- * 
- * @param dataFile ponteiro para um arquivo binário com os dados da arvore
- * @return int 
- * @pre Nenhuma
- * @post Espaços no console
- */
-int actionPrintFreeSpaces(FILE *dataFile) {
+int actionPrintFreeSpaces(ArgList head) {
     /*printHead("Espacos livres");
     printFree(dataFile);*/
     printWaitMenu();
     return 1;
 }
 
-/**
- * @brief Volta ao menu anterior
- * 
- * @param dataFile 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
-int actionSearchReturn(FILE *dataFile) {
+int actionSearchReturn(ArgList head) {
     return 0;
 }
