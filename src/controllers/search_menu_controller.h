@@ -1,6 +1,7 @@
-#ifndef SEARCH_MENU_CONTROLLER
-#define SEARCH_MENU_CONTROLLER
+#ifndef SEARCH_MENU_CONTROLLER_H
+#define SEARCH_MENU_CONTROLLER_H
 
+#include "../interfaces/input_file.h"
 #include "../menu/controller_menu.h"
 #include "../menu/print_menu.h"
 
@@ -9,8 +10,6 @@ void searchMenuHeader();
 void searchMenuFooter();
 
 int searchMenuController(ArgList head);
-
-int actionSearchProductByName(ArgList head);
 
 int actionSearchProductByCode(ArgList head);
 

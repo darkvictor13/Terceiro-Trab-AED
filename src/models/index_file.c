@@ -1,79 +1,41 @@
-/**
- * @file index_file.c
- * @author Victor Emanuel Almeida (victoralmeida2001@hotmail.com)
- * @brief 
- * @version 0.1
- * @date 24/06/2021
- */
-
 #include "index_file.h"
 
-/**
- * @brief Verifica se a arvore está vazia
- * 
- * @param dataFile 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
-int isEmpty(FILE *dataFile) {
-    return readIndexHeadField(OFFSET_ROOT_INDEX, dataFile) == -1;
+int isEmptyIndex(FILE *indexFile) {
+    return readIndexHeadField(OFFSET_ROOT_INDEX, indexFile) == -1;
 }
 
-/**
- * @brief Escreve o cabeçalho do arquivo
- * 
- * @param head 
- * @param dataFile 
- * @pre Nenhuma
- * @post Nenhuma
- */
-void writeIndexHead(IndexHead *head, FILE *dataFile) {
-    fseek(dataFile, 0, SEEK_SET);
-    fwrite(head, sizeof(IndexHead), 1, dataFile);
+void writeIndexHead(IndexHead *head, FILE *indexFile) {
+    fseek(indexFile, OFFSET_HEAD_INDEX, SEEK_SET);
+    fwrite(head, sizeof(IndexHead), 1, indexFile);
 }
 
-/**
- * @brief Lê o cabeçalho do arquivo
- * 
- * @param dataFile 
- * @return IndexHead* 
- * @pre Nenhuma
- * @post Nenhuma
- */
-IndexHead *readIndexHead(FILE *dataFile) {
-    IndexHead *head = (IndexHead*) malloc(sizeof(IndexHead));
-    fseek(dataFile, 0, SEEK_SET);
-    fread(head, sizeof(IndexHead), 1, dataFile);
+IndexHead *readIndexHead(FILE *indexFile) {
+    IndexHead *head = (IndexHead*)malloc(sizeof(IndexHead));
+    fseek(indexFile, OFFSET_HEAD_INDEX, SEEK_SET);
+    fread(head, sizeof(IndexHead), 1, indexFile);
     return head;
 }
 
-/**
- * @brief Escreve o um campo do cabeçalho do arquivo
- * 
- * @param value 
- * @param offset Offset para o campo do cabeçalho
- * @param dataFile 
- * @pre Nenhuma
- * @post Nenhuma
- */
-void writeIndexHeadField(int value, int offset, FILE *dataFile) {
-    fseek(dataFile, sizeof(int) * offset, SEEK_SET);
-    fwrite(&value, sizeof(int), 1, dataFile);
+void writeIndexHeadField(int value, int offset, FILE *indexFile) {
+    fseek(indexFile, offset, SEEK_SET);
+    fwrite(&value, sizeof(int), 1, indexFile);
 }
 
-/**
- * @brief Lê o um campo do cabeçalho do arquivo
- * 
- * @param offset Offset para o campo do cabeçalho
- * @param dataFile 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
-int readIndexHeadField(int offset, FILE *dataFile) {
+int readIndexHeadField(int offset, FILE *indexFile) {
     int value;
-    fseek(dataFile, sizeof(int) * offset, SEEK_SET);
-    fread(&value, sizeof(int), 1, dataFile);
+    fseek(indexFile, offset, SEEK_SET);
+    fread(&value, sizeof(int), 1, indexFile);
     return value;
+}
+
+void writeIndexRegistry(Registry *registry, int position, FILE *indexFile) {
+    fseek(indexFile, sizeof(IndexHead) + sizeof(Registry) * position, SEEK_SET);
+    fwrite(registry, sizeof(Registry), 1, indexFile);
+}
+
+Registry *readIndexRegistry(int position, FILE *indexFile) {
+    Registry *registry = (Registry*)malloc(sizeof(Registry));
+    fseek(indexFile, sizeof(IndexHead) + sizeof(Registry) * position, SEEK_SET);
+    fread(registry, sizeof(Registry), 1, indexFile);
+    return registry;
 }

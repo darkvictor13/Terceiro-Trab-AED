@@ -1,6 +1,6 @@
 #include "input_file.h"
 
-void loadInputFile(char *inputPath, FILE *dataFile) {
+void loadInputFile(char *inputPath, BTree *bTree) {
     /*FILE *inputFile = fopen(inputPath, "r");
     if (inputFile == NULL) {
         printf("Arquivo nao encontrado.\n");
@@ -22,13 +22,7 @@ void loadInputFile(char *inputPath, FILE *dataFile) {
     fclose(inputFile);*/
 }
 
-void formatLine(char *line) {
-    /*for(; *line; line++)
-        if(*line == ',')
-            *line = '.';*/
-}
-
-void insertFornLine(char *line, FILE *dataFile) {
+void insertFornLine(char *line, BTree *bTree) {
     /*Product *product = (Product*)malloc(sizeof(Product));
     sscanf(line, "%*c;%d;%[^;];%d;%f;%[^\n]",
         &(product->code),
@@ -42,7 +36,7 @@ void insertFornLine(char *line, FILE *dataFile) {
     free(product);*/
 }
 
-void modifyFornLine(char *line, FILE *dataFile) {
+void modifyFornLine(char *line, BTree *bTree) {
     /*Node *node;
     int code, position;
     char *buffer = (char*)malloc(sizeof(char)*MAX_ENTRY_LINE);
@@ -58,6 +52,12 @@ void modifyFornLine(char *line, FILE *dataFile) {
     );
     writeNode(dataFile, node, position);
     free(node);*/
+}
+
+void removeFromLine(char *line, BTree *bTree) {
+    /*int code;
+    sscanf(line, "%*c;%d", &code);
+    removeProduct(dataFile, code);*/
 }
 
 void getFromLine(char *line, int *number, float *value, char *local) {
@@ -88,10 +88,10 @@ char *getInside(char *line) {
     return buffer;*/
 }
 
-void removeFromLine(char *line, FILE *dataFile) {
-    /*int code;
-    sscanf(line, "%*c;%d", &code);
-    removeProduct(dataFile, code);*/
+void formatLine(char *line) {
+    /*for(; *line; line++)
+        if(*line == ',')
+            *line = '.';*/
 }
 
 char *trim(char *line) {

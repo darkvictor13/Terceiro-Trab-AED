@@ -1,6 +1,7 @@
-#ifndef MAIN_MENU_CONTROLLER
-#define MAIN_MENU_CONTROLLER
+#ifndef MAIN_MENU_CONTROLLER_H
+#define MAIN_MENU_CONTROLLER_H
 
+#include "../interfaces/input_file.h"
 #include "../menu/controller_menu.h"
 #include "../menu/print_menu.h"
 #include "search_menu_controller.h"

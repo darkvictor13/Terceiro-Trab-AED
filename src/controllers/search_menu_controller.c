@@ -16,7 +16,6 @@ int searchMenuController(ArgList head) {
     Menu *searchMenu = createMenu();
     setHeader(searchMenu, searchMenuHeader);
     setFooter(searchMenu, searchMenuFooter);
-    //addEntryToMenu(searchMenu, "Buscar produto por nome.", actionSearchProductByName);
     addEntryToMenu(searchMenu, "Buscar produto por codigo.", actionSearchProductByCode);
     addEntryToMenu(searchMenu, "Listar produtos.", actionListProducts);
     addEntryToMenu(searchMenu, "Mostrar arvore.", actionPrintTree);
@@ -26,45 +25,36 @@ int searchMenuController(ArgList head) {
     return 1;
 }
 
-int actionSearchProductByName(ArgList head) {
-    /*char name[MAX_NAME];
-    printf("Insira o nome do produto: ");
-    scanf("%[^\n]%*c", name);
-    searchProductByName(dataFile, name);*/
-    printWaitMenu();
-    return 1;
-}
-
 int actionSearchProductByCode(ArgList head) {
-    /*int code, position;
+    int code, position;
     printf("\tInsira o codigo do produto: ");
     scanf("%d%*c", &code);
-    if((position = searchProductByCode(dataFile, code)) != -1) {
-        Product *product = readNodeProduct(dataFile, position);
+    if((position = searchBTreeByCode(head->arg, code)) != -1) {
+        Product *product = getBTreeProduct(head->arg, position);
         printProduct(product);
         free(product);
-    }*/
+    }
     printWaitMenu();
     return 1;
 }
 
 int actionListProducts(ArgList head) {
-    /*printHead("Imprimindo a Arvore em ordem crescente");
-    printInOrder(dataFile);*/
+    printHead("Imprimindo a Arvore em ordem crescente");
+    printBTreeInOrder(head->arg);
     printWaitMenu();
     return 1;
 }
 
 int actionPrintTree(ArgList head) {
-    /*printHead("Imprimindo a Arvore em niveis");
-    printByLevel(dataFile);*/
+    printHead("Imprimindo a Arvore em niveis");
+    printBTreeByLevel(head->arg);
     printWaitMenu();
     return 1;
 }
 
 int actionPrintFreeSpaces(ArgList head) {
-    /*printHead("Espacos livres");
-    printFree(dataFile);*/
+    printHead("Espacos livres");
+    printBTreeFree(head->arg);
     printWaitMenu();
     return 1;
 }

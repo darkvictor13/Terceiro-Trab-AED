@@ -1,19 +1,9 @@
-/**
- * @file input_file.h
- * @author Victor Emanuel Almeida (victoralmeida2001@hotmail.com)
- * @brief 
- * @version 0.1
- * @date 30/05/2021
- * 
- * @copyright Copyright (c) 2021
- * 
- */
-#ifndef INPUT_FILE
-#define INPUT_FILE
+#ifndef INPUT_FILE_H
+#define INPUT_FILE_H
 
 #include <ctype.h>
 #include <stdio.h>
-
+#include "../models/b_tree.h"
 #include "../models/product.h"
 #include "../menu/print_menu.h"
 
@@ -25,20 +15,20 @@ enum inputFileOperations {
     INPUT_FILE_REMOVE = 'R',
 };
 
-void loadInputFile(char *inputPath, FILE *dataFile);
+void loadInputFile(char *inputPath, BTree *bTree);
 
-void formatLine(char *line);
+void insertFornLine(char *line, BTree *bTree);
 
-void insertFornLine(char *line, FILE *dataFile);
+void modifyFornLine(char *line, BTree *bTree);
 
-void modifyFornLine(char *line, FILE *dataFile);
-
-void removeFromLine(char *line, FILE *dataFile);
-
-char *trim(char *line);
+void removeFromLine(char *line, BTree *bTree);
 
 void getFromLine(char *line, int *number, float *value, char *local);
 
 char *getInside(char *line);
+
+void formatLine(char *line);
+
+char *trim(char *line);
 
 #endif

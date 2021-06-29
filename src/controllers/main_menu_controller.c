@@ -27,9 +27,9 @@ int mainMenuController(ArgList head) {
 }
 
 int actionInsert(ArgList head) {
-    /*Product *product = scanProduct();
-    insertProduct(dataFile, product);
-    free(product);*/
+    Product *product = scanProduct();
+    insertBTree(head->arg, product);
+    free(product);
     printWaitMenu();
     return 1;
 }
@@ -45,22 +45,22 @@ int actionChange(ArgList head) {
 }
 
 int actionLoad(ArgList head) {
-    /*char inputPath[FILE_PATH_NAME];
+    char inputPath[FILE_PATH_NAME];
     printf("\tNome de arquivo de entrada: ");
     scanf("%s", inputPath);
-    loadInputFile(inputPath, dataFile);*/
+    loadInputFile(inputPath, head->arg);
     printWaitMenu();
     return 1;
 }
 
 int actionRemove(ArgList head) {
-    /*int code;
+    int code;
     printf("\tCodigo do produto: ");
     scanf("%d%*c", &code);
-    if(removeProduct(dataFile, code) != -1)
+    if(removeBTree(head->arg, code) != -1)
         printf("Produto removido com sucesso.\n");
     else
-        printf("Produto nao encontrado.\n");*/
+        printf("Produto nao encontrado.\n");
     printWaitMenu();
     return 1;
 }

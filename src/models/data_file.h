@@ -1,14 +1,33 @@
-/**
- * @file data_file.h
- * @author Victor Emanuel Almeida
- * @brief 
- * @version 0.1
- * @date 24/06/2021
- */
+#ifndef DATA_FILE_H
+#define DATA_FILE_H
 
-#ifndef DATA_FILE
-#define DATA_FILE
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
 
+#include "product.h"
 
+typedef struct {
+    int regLast;
+    int regFree;
+}DataHead;
+
+enum offsetHeadData {
+    OFFSET_HEAD_DATA = 0,
+	OFFSET_LAST_DATA = offsetof(DataHead, regLast),
+	OFFSET_FREE_DATA = offsetof(DataHead, regFree)
+};
+
+void writeDataHead(DataHead *dataHead, FILE *dataFile);
+
+DataHead *readDataHead(FILE *dataFile);
+
+void writeDataHeadField(int value, int offset, FILE *dataFile);
+
+int readDataHeadField(int offset, FILE *dataFile);
+
+void writeDataRegistry(Product *product, int position, FILE *dataFile);
+
+Product* readDataRegistry(int position, FILE *dataFile);
 
 #endif

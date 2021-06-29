@@ -9,23 +9,22 @@ ArgList allocArgList() {
 }
 
 ArgList addArgList(ArgList head, void *arg) {
-    if(isEmptyArgList(head->next)) {
-        head->next = allocArgList();
-        head->next->arg = arg;
-    }else{
-        addArgList(head->next, arg);
-    }
-    return head;
+    ArgList newHead = allocArgList();
+    newHead->next = head;
+    newHead->arg = arg;
+    return newHead;
 }
 
 void freeArgList(ArgList head) {
-    if(!isEmptyArgList(head->next))
+    if(!isEmptyArgList(head)) {
         freeArgList(head->next);
-    free(head);
+        free(head);
+    }
 }
 
 void printArgList(ArgList head) {
-    printf("->| ");
-    if(!isEmptyArgList(head->next))
+    if(!isEmptyArgList(head)) {
         printArgList(head->next);
+        printf("->| ");
+    }
 }

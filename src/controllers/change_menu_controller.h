@@ -1,6 +1,7 @@
-#ifndef CHANGE_MENU_CONTROLLER
-#define CHANGE_MENU_CONTROLLER
+#ifndef CHANGE_MENU_CONTROLLER_H
+#define CHANGE_MENU_CONTROLLER_H
 
+#include "../interfaces/input_file.h"
 #include "../menu/controller_menu.h"
 #include "../menu/print_menu.h"
 

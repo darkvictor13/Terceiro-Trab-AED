@@ -1,34 +1,5 @@
-/**
- * @file produto.c
- * @author Victor Emanuel Almeida (victoralmeida2001@hotmail.com)
- * @brief Arquivo responsável por implementar as operações sobre um único produto do estoque
- * @version 0.1
- * @date 03/05/2021
- */
-
 #include "product.h"
 
-/**
- * @brief Reseta a string
- * 
- * @param str ponteiro para char
- * @param size tamanho da string
- * @pre Nenhuma
- * @post string vazia
- */
-void reset(char *str, int size) {
-    int i;
-    for(i = 0; i < size; i++)
-        str[i] = '\0';
-}
-
-/**
- * @brief Aloca estrutura Produto
- * 
- * @return Product* 
- * @pre Nenhuma
- * @post Espaço para um produto alocado
- */
 Product *allocProduct() {
     Product *product = (Product *)malloc(sizeof(Product));
     product->code = 0;
@@ -39,13 +10,6 @@ Product *allocProduct() {
     return product;
 }
 
-/**
- * @brief Imprime a descrição do produto
- * 
- * @param product ponteiro para uma estrutura com os dados do produto
- * @pre Nenhuma
- * @post Produto descrito no console
- */
 void printProduct(Product *product) {
     printLine();
     printf("\n\tNome: ");
@@ -59,27 +23,12 @@ void printProduct(Product *product) {
     printLine();
 }
 
-/**
- * @brief Imprime algumas informações do prodduto
- * 
- * @param product ponteiro para uma estrutura com os dados do produto
- * @pre Nenhuma
- * @post Nenhuma
- */
 void printBasicProduct(Product *product) {
-    // 10 digitos maximos de um int, 19 caracteres a mais da string
     char buffer[19 + 10 + MAX_NAME + 1];
     sprintf(buffer, "    %10d -> %s ", product->code, product->name);
     printAlignedLeft(buffer);
 }
 
-/**
- * @brief Lê o produto do teclado
- * 
- * @return Product* 
- * @pre Nenhuma
- * @post Produto lido do teclado
- */
 Product* scanProduct() {
     Product* product = (Product *)malloc(sizeof(Product));
     printf("\n\tNome: ");
@@ -94,4 +43,10 @@ Product* scanProduct() {
     scanf("%[^\n]%*c", product->local);
     printf("\n");
     return product;
+}
+
+void reset(char *str, int size) {
+    int i;
+    for(i = 0; i < size; i++)
+        str[i] = '\0';
 }
