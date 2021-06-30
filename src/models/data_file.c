@@ -35,3 +35,57 @@ Product *readDataRegistry(int position, FILE *dataFile) {
     fread(product, sizeof(Product), 1, dataFile);
     return product;
 }
+
+void writeDataRegistryField(int value, int offset, int position, FILE *dataFile) {
+    fseek(dataFile, sizeof(DataHead) + sizeof(Product) * position + offset, SEEK_SET);
+    fwrite(&value, sizeof(int), 1, dataFile);
+}
+
+int readDataRegistryField(int offset, int position, FILE *dataFile) {
+    int value;
+    fseek(dataFile, sizeof(DataHead) + sizeof(Product) * position + offset, SEEK_SET);
+    fread(&value, sizeof(int), 1, dataFile);
+    return value;
+}
+
+void clearDataRegistry(int position, FILE *dataFile) {
+    Product *product = (Product*)malloc(sizeof(Product));
+    memset(product, 0, sizeof(Product));
+    writeDataRegistry(product, position, dataFile);
+}
+
+int insertDataRegistry(Product *product, FILE *dataFile) {
+    int free = readDataHeadField(OFFSET_FREE_DATA, dataFile);
+    if(free == -1) {
+        int last;
+        writeDataRegistry(
+            product,
+            (last = readDataHeadField(OFFSET_LAST_DATA, dataFile)),
+            dataFile
+        );
+        writeDataHeadField(last + 1, OFFSET_LAST_DATA, dataFile);
+        return last;
+    }else{
+        writeDataHeadField(
+            readDataRegistryField(OFFSET_PRODUCT_CODE, free, dataFile),
+            OFFSET_FREE_DATA,
+            dataFile
+        );
+        writeDataRegistry(product, free, dataFile);
+        return free;
+    }
+}
+
+void removeDataRegistry(int position, FILE *dataFile) {
+    clearDataRegistry(position, dataFile);
+    writeDataRegistryField(
+        readDataHeadField(
+            OFFSET_FREE_DATA,
+            dataFile
+        ),
+        OFFSET_PRODUCT_CODE,
+        position,
+        dataFile
+    );
+    writeDataHeadField(position, OFFSET_FREE_DATA, dataFile);
+}

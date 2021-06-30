@@ -39,3 +39,57 @@ Registry *readIndexRegistry(int position, FILE *indexFile) {
     fread(registry, sizeof(Registry), 1, indexFile);
     return registry;
 }
+
+void writeIndexRegistryField(int value, int offset, int position, FILE *indexFile) {
+    fseek(indexFile, sizeof(IndexHead) + sizeof(Registry) * position + offset, SEEK_SET);
+    fwrite(&value, sizeof(int), 1, indexFile);
+}
+
+int readIndexRegistryField(int offset, int position, FILE *indexFile) {
+    int value;
+    fseek(indexFile, sizeof(IndexHead) + sizeof(Registry) * position + offset, SEEK_SET);
+    fread(&value, sizeof(int), 1, indexFile);
+    return value;
+}
+
+void clearIndexRegistry(int position, FILE *indexFile) {
+    Registry *registry = (Registry*)malloc(sizeof(Registry));
+    memset(registry, 0, sizeof(Registry));
+    writeIndexRegistry(registry, position, indexFile);
+}
+
+int insertIndexRegistry(Registry *registry, FILE *indexFile) {
+    int free = readIndexHeadField(OFFSET_FREE_INDEX, indexFile);
+    if(free == -1) {
+        int last;
+        writeIndexRegistry(
+            registry,
+            (last = readIndexHeadField(OFFSET_LAST_INDEX, indexFile)),
+            indexFile
+        );
+        writeIndexHeadField(last + 1, OFFSET_LAST_INDEX, indexFile);
+        return last;
+    }else{
+        writeIndexHeadField(
+            readIndexRegistryField(OFFSET_REGISTRY_KEYS, free, indexFile),
+            OFFSET_FREE_INDEX,
+            indexFile
+        );
+        writeIndexRegistry(registry, free, indexFile);
+        return free;
+    }
+}
+
+void removeIndexRegistry(int position, FILE *indexFile) {
+    clearIndexRegistry(position, indexFile);
+    writeIndexRegistryField(
+        readIndexHeadField(
+            OFFSET_FREE_INDEX,
+            indexFile
+        ),
+        OFFSET_REGISTRY_KEYS,
+        position,
+        indexFile
+    );
+    writeIndexHeadField(position, OFFSET_FREE_INDEX, indexFile);
+}

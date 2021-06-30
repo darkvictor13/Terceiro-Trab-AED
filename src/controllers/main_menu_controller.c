@@ -8,11 +8,11 @@ void mainMenuHeader() {
 
 void mainMenuFooter() {
     printLine();
-    printAlignedRight("fim");
+    printAlignedRight("");
     printLine();
 }
 
-int mainMenuController(ArgList head) {
+int mainMenuController(ArgStack head) {
     Menu *mainMenu = createMenu();
     setHeader(mainMenu, mainMenuHeader);
     setFooter(mainMenu, mainMenuFooter);
@@ -26,38 +26,38 @@ int mainMenuController(ArgList head) {
     return 1;
 }
 
-int actionInsert(ArgList head) {
+int actionInsert(ArgStack head) {
     Product *product = scanProduct();
-    insertBTree(head->arg, product);
+    insertBTree(readArgStack(head), product);
     free(product);
     printWaitMenu();
     return 1;
 }
 
-int actionSearch(ArgList head) {
+int actionSearch(ArgStack head) {
     searchMenuController(head);
     return 1;
 }
 
-int actionChange(ArgList head) {
+int actionChange(ArgStack head) {
     changeMenuController(head);
     return 1;
 }
 
-int actionLoad(ArgList head) {
+int actionLoad(ArgStack head) {
     char inputPath[FILE_PATH_NAME];
     printf("\tNome de arquivo de entrada: ");
     scanf("%s", inputPath);
-    loadInputFile(inputPath, head->arg);
+    loadInputFile(inputPath, readArgStack(head));
     printWaitMenu();
     return 1;
 }
 
-int actionRemove(ArgList head) {
+int actionRemove(ArgStack head) {
     int code;
     printf("\tCodigo do produto: ");
     scanf("%d%*c", &code);
-    if(removeBTree(head->arg, code) != -1)
+    if(removeBTree(readArgStack(head), code) != -1)
         printf("Produto removido com sucesso.\n");
     else
         printf("Produto nao encontrado.\n");
@@ -65,7 +65,7 @@ int actionRemove(ArgList head) {
     return 1;
 }
 
-int actionClose(ArgList head) {
+int actionClose(ArgStack head) {
     printEndMessage();
     return 0;
 }

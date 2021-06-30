@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 
 #define ORDER 5
@@ -27,9 +28,9 @@ typedef struct {
 }Registry;
 
 enum offsetRegistryIndex {
-    OFFSET_REGISTRY_CODE = offsetof(Registry, key),
-    OFFSET_REGISTRY_RIGHT = offsetof(Registry, registers),
-    OFFSET_REGISTRY_LEFT = offsetof(Registry, children)
+    OFFSET_REGISTRY_KEYS = offsetof(Registry, key),
+    OFFSET_REGISTRY_REGS = offsetof(Registry, registers),
+    OFFSET_REGISTRY_CHILDS = offsetof(Registry, children)
 };
 
 int isEmptyIndex(FILE *indexFile);
@@ -45,5 +46,15 @@ int readIndexHeadField(int offset, FILE *indexFile);
 void writeIndexRegistry(Registry *registry, int position, FILE *indexFile);
 
 Registry* readIndexRegistry(int position, FILE *indexFile);
+
+void writeIndexRegistryField(int value, int offset, int position, FILE *indexFile);
+
+int readIndexRegistryField(int offset, int position, FILE *indexFile);
+
+void clearIndexRegistry(int position, FILE *indexFile);
+
+int insertIndexRegistry(Registry *registry, FILE *indexFile);
+
+void removeIndexRegistry(int position, FILE *indexFile);
 
 #endif

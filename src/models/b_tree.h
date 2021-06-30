@@ -22,6 +22,8 @@ int insertBTree(BTree *bTree, Product *product);
 
 Product *getBTreeProduct(BTree *bTree, int position);
 
+void updateBTreeProduct(BTree *bTree, int position, Product *product);
+
 int removeBTree(BTree *bTree, int code);
 
 int searchBTreeByCode(BTree *bTree, int code);

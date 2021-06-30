@@ -2,7 +2,7 @@
 
 void changeMenuHeader() {
     printLine();
-    printAlignedCenter("");
+    printAlignedCenter("Menu de alteracoes");
     printLine();
 }
 
@@ -12,7 +12,7 @@ void changeMenuFooter() {
     printLine();
 }
 
-int changeMenuController(ArgList head) {
+int changeMenuController(ArgStack head) {
     Menu *changeMenu = createMenu();
     setHeader(changeMenu, changeMenuHeader);
     setFooter(changeMenu, changeMenuFooter);
@@ -24,16 +24,17 @@ int changeMenuController(ArgList head) {
     return 1;
 }
 
-int actionChangeNumber(ArgList head) {
+int actionChangeNumber(ArgStack head) {
     int code, position;
     printf("\tIndique o codigo do produto: ");
     scanf("%d", &code);
-    if((position = searchBTreeByCode(head->arg, code)) != -1) {
-        Product *product = getBTreeProduct(head->arg, position);
+    if((position = searchBTreeByCode(readArgStack(head), code)) != -1) {
+        Product *product = getBTreeProduct(readArgStack(head), position);
         printf("\tIndique o numero de produtos em estoque: ");
         scanf("%d%*c", &(product->number));
-        //if(confirm())
-            //updateProduct(((BTree*)head->arg)->dataFile, position, product);
+        confirmMenuController(head);
+        if(popArgStack(head))
+            updateBTreeProduct(readArgStack(head), position, product);
         free(product);
     }else{
         printf("Produto nao encontrado.\n");
@@ -42,16 +43,17 @@ int actionChangeNumber(ArgList head) {
     return 1;
 }
 
-int actionChangeValue(ArgList head) {
+int actionChangeValue(ArgStack head) {
     int code, position;
     printf("\tIndique o codigo do produto: ");
     scanf("%d", &code);
-    if((position = searchBTreeByCode(head->arg, code)) != -1) {
-        Product *product = getBTreeProduct(head->arg, position);
+    if((position = searchBTreeByCode(readArgStack(head), code)) != -1) {
+        Product *product = getBTreeProduct(readArgStack(head), position);
         printf("Indique o novo valor do produto: ");
         scanf("%f%*c", &(product->value));
-        //if(confirm())
-            //updateProduct(dataFile, position, product);
+        confirmMenuController(head);
+        if(popArgStack(head))
+            updateBTreeProduct(readArgStack(head), position, product);
         free(product);
     }else{
         printf("Produto nao encontrado.\n");
@@ -60,16 +62,17 @@ int actionChangeValue(ArgList head) {
     return 1;
 }
 
-int actionChangeLocal(ArgList head) {
+int actionChangeLocal(ArgStack head) {
     int code, position;
     printf("\tIndique o codigo do produto: ");
     scanf("%d%*c", &code);
-    if((position = searchBTreeByCode(head->arg, code)) != -1) {
-        Product *product = getBTreeProduct(head->arg, position);
+    if((position = searchBTreeByCode(readArgStack(head), code)) != -1) {
+        Product *product = getBTreeProduct(readArgStack(head), position);
         printf("Indique o novo local do produto: ");
         scanf("%[^\n]%*c", product->local);
-        //if(confirm())
-            //updateProduct(dataFile, position, product);
+        confirmMenuController(head);
+        if(popArgStack(head))
+            updateBTreeProduct(readArgStack(head), position, product);
         free(product);
     }else{
         printf("Produto nao encontrado.\n");
@@ -78,6 +81,6 @@ int actionChangeLocal(ArgList head) {
     return 1;
 }
 
-int actionChangeReturn(ArgList head) {
+int actionChangeReturn(ArgStack head) {
     return 0;
 }

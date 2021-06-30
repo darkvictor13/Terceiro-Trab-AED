@@ -5,7 +5,7 @@
 #include "entry_list.h"
 #include "print_menu.h"
 
-int controlMenu(Menu *menu, ArgList head);
+int controlMenu(Menu *menu, ArgStack head);
 
 int removeList(EntryList *queue);
 

@@ -2,7 +2,7 @@
 
 void searchMenuHeader() {
     printLine();
-    printAlignedCenter("");
+    printAlignedCenter("Menu de busca");
     printLine();
 }
 
@@ -12,7 +12,7 @@ void searchMenuFooter() {
     printLine();
 }
 
-int searchMenuController(ArgList head) {
+int searchMenuController(ArgStack head) {
     Menu *searchMenu = createMenu();
     setHeader(searchMenu, searchMenuHeader);
     setFooter(searchMenu, searchMenuFooter);
@@ -25,12 +25,12 @@ int searchMenuController(ArgList head) {
     return 1;
 }
 
-int actionSearchProductByCode(ArgList head) {
+int actionSearchProductByCode(ArgStack head) {
     int code, position;
     printf("\tInsira o codigo do produto: ");
     scanf("%d%*c", &code);
-    if((position = searchBTreeByCode(head->arg, code)) != -1) {
-        Product *product = getBTreeProduct(head->arg, position);
+    if((position = searchBTreeByCode(readArgStack(head), code)) != -1) {
+        Product *product = getBTreeProduct(readArgStack(head), position);
         printProduct(product);
         free(product);
     }
@@ -38,27 +38,27 @@ int actionSearchProductByCode(ArgList head) {
     return 1;
 }
 
-int actionListProducts(ArgList head) {
+int actionListProducts(ArgStack head) {
     printHead("Imprimindo a Arvore em ordem crescente");
-    printBTreeInOrder(head->arg);
+    printBTreeInOrder(readArgStack(head));
     printWaitMenu();
     return 1;
 }
 
-int actionPrintTree(ArgList head) {
+int actionPrintTree(ArgStack head) {
     printHead("Imprimindo a Arvore em niveis");
-    printBTreeByLevel(head->arg);
+    printBTreeByLevel(readArgStack(head));
     printWaitMenu();
     return 1;
 }
 
-int actionPrintFreeSpaces(ArgList head) {
+int actionPrintFreeSpaces(ArgStack head) {
     printHead("Espacos livres");
-    printBTreeFree(head->arg);
+    printBTreeFree(readArgStack(head));
     printWaitMenu();
     return 1;
 }
 
-int actionSearchReturn(ArgList head) {
+int actionSearchReturn(ArgStack head) {
     return 0;
 }

@@ -4,6 +4,7 @@
 #include "../interfaces/input_file.h"
 #include "../menu/controller_menu.h"
 #include "../menu/print_menu.h"
+#include "../menu/arg_list.h"
 #include "search_menu_controller.h"
 #include "change_menu_controller.h"
 
@@ -11,18 +12,18 @@ void mainMenuHeader();
 
 void mainMenuFooter();
 
-int mainMenuController(ArgList head);
+int mainMenuController(ArgStack head);
 
-int actionInsert(ArgList head);
+int actionInsert(ArgStack head);
 
-int actionSearch(ArgList head);
+int actionSearch(ArgStack head);
 
-int actionChange(ArgList head);
+int actionChange(ArgStack head);
 
-int actionLoad(ArgList head);
+int actionLoad(ArgStack head);
 
-int actionRemove(ArgList head);
+int actionRemove(ArgStack head);
 
-int actionClose(ArgList head);
+int actionClose(ArgStack head);
 
 #endif

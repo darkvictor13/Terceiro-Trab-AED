@@ -18,6 +18,14 @@ enum offsetHeadData {
 	OFFSET_FREE_DATA = offsetof(DataHead, regFree)
 };
 
+enum offsetProductData {
+    OFFSET_PRODUCT_CODE = offsetof(Product, code),
+    OFFSET_PRODUCT_NAME = offsetof(Product, name),
+    OFFSET_PRODUCT_NUMBER = offsetof(Product, number),
+    OFFSET_PRODUCT_VALUE = offsetof(Product, value),
+    OFFSET_PRODUCT_LOCAL = offsetof(Product, local)
+};
+
 void writeDataHead(DataHead *dataHead, FILE *dataFile);
 
 DataHead *readDataHead(FILE *dataFile);
@@ -29,5 +37,15 @@ int readDataHeadField(int offset, FILE *dataFile);
 void writeDataRegistry(Product *product, int position, FILE *dataFile);
 
 Product* readDataRegistry(int position, FILE *dataFile);
+
+void writeDataRegistryField(int value, int offset, int position, FILE *dataFile);
+
+int readDataRegistryField(int offset, int position, FILE *dataFile);
+
+void clearDataRegistry(int position, FILE *dataFile);
+
+int insertDataRegistry(Product *product, FILE *dataFile);
+
+void removeDataRegistry(int position, FILE *dataFile);
 
 #endif

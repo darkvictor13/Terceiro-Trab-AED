@@ -1,30 +1,56 @@
 #include "arg_list.h"
 
-int isEmptyArgList(ArgList head) {
-    return head == NULL;
+int isEmptyArgStack(ArgStack head) {
+    return head->top == NULL;
 }
 
-ArgList allocArgList() {
-    return (ArgList)malloc(sizeof(Arg));
+ArgStack createStack() {
+    ArgStack newStack = (ArgStack)malloc(sizeof(ArgStackHead));
+    newStack->top = NULL;
+    return newStack;
 }
 
-ArgList addArgList(ArgList head, void *arg) {
-    ArgList newHead = allocArgList();
-    newHead->next = head;
-    newHead->arg = arg;
-    return newHead;
-}
-
-void freeArgList(ArgList head) {
-    if(!isEmptyArgList(head)) {
-        freeArgList(head->next);
-        free(head);
+void *readArgStack(ArgStack head) {
+    void *arg = NULL;
+    if(!isEmptyArgStack(head)) {
+        arg = (void*)malloc(sizeof(void));
+        arg = head->top->arg;
     }
+    return arg;
 }
 
-void printArgList(ArgList head) {
-    if(!isEmptyArgList(head)) {
-        printArgList(head->next);
-        printf("->| ");
+void pushArgStack(ArgStack head, void *arg) {
+    ArgNode* newArgNode = (ArgNode*)malloc(sizeof(ArgNode));
+    newArgNode->arg = arg;
+    newArgNode->next = head->top;
+    head->top = newArgNode;
+
+}
+
+void *popArgStack(ArgStack head) {
+    void *arg = NULL;
+    if(!isEmptyArgStack(head)) {
+        arg = (void*)malloc(sizeof(void));
+        ArgNode *auxArgNode = head->top;
+        arg = head->top->arg;
+        head->top = head->top->next;
+        free(auxArgNode);
     }
+    return arg;
+}
+
+void freeArgStack(ArgStack head) {
+    
+}
+
+void freeArgStackRec(ArgNode *head) {
+    
+}
+
+void printArgStack(ArgStack head) {
+    
+}
+
+void printArgStackRec(ArgNode *head) {
+    
 }

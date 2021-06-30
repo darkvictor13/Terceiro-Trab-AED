@@ -4,21 +4,22 @@
 #include "../interfaces/input_file.h"
 #include "../menu/controller_menu.h"
 #include "../menu/print_menu.h"
+#include "../menu/arg_list.h"
 
 void searchMenuHeader();
 
 void searchMenuFooter();
 
-int searchMenuController(ArgList head);
+int searchMenuController(ArgStack head);
 
-int actionSearchProductByCode(ArgList head);
+int actionSearchProductByCode(ArgStack head);
 
-int actionListProducts(ArgList head);
+int actionListProducts(ArgStack head);
 
-int actionPrintTree(ArgList head);
+int actionPrintTree(ArgStack head);
 
-int actionPrintFreeSpaces(ArgList head);
+int actionPrintFreeSpaces(ArgStack head);
 
-int actionSearchReturn(ArgList head);
+int actionSearchReturn(ArgStack head);
 
 #endif

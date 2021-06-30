@@ -29,7 +29,7 @@ void setFooter(Menu *menu, FooterFunct footer) {
     menu->footer = footer;
 }
 
-int controlMenu(Menu *menu, ArgList head) {
+int controlMenu(Menu *menu, ArgStack head) {
     char c;
     while(1) {
         system(CLEAR);

@@ -9,9 +9,10 @@ int main(int argc, char *argv[]) {
     BTree *bTree = openBTreeFiles(indexFilePath, dataFilePath);
     //if(argc == 2)
     //    loadInputFile(argv[1], bTree);
-    ArgList argList = addArgList(NULL, bTree);
-    mainMenuController(argList);
+    ArgStack argStack = createStack();
+    pushArgStack(argStack, bTree);
+    mainMenuController(argStack);
     closeBTreeFiles(bTree);
-    freeArgList(argList);
+    freeArgStack(argStack);
     return 0;
 }

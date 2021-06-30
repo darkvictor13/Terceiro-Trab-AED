@@ -3,14 +3,22 @@
 
 #include "menu_defines.h"
 
-int isEmptyArgList(ArgList head);
+int isEmptyArgStack(ArgStack head);
 
-ArgList allocArgList();
+ArgStack createStack();
 
-ArgList addArgList(ArgList head, void *arg);
+void *readArgStack(ArgStack head);
 
-void freeArgList(ArgList head);
+void pushArgStack(ArgStack head, void *arg);
 
-void printArgList(ArgList head);
+void *popArgStack(ArgStack head);
+
+void freeArgStack(ArgStack head);
+
+void freeArgStackRec(ArgNode *head);
+
+void printArgStack(ArgStack head);
+
+void printArgStackRec(ArgNode *head);
 
 #endif

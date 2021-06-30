@@ -38,11 +38,15 @@ void closeBTreeFiles(BTree *bTree) {
 }
 
 int insertBTree(BTree *bTree, Product *product) {
-
+    
 }
 
 Product *getBTreeProduct(BTree *bTree, int position) {
     return readDataRegistry(position, bTree->dataFile);
+}
+
+void updateBTreeProduct(BTree *bTree, int position, Product *product) {
+    writeDataRegistry(product, position, bTree->dataFile);
 }
 
 int removeBTree(BTree *bTree, int code) {

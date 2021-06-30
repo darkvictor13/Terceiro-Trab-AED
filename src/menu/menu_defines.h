@@ -35,11 +35,15 @@ enum {
 typedef struct argNode {
     void *arg;
     struct argNode *next;
-}Arg;
+}ArgNode;
 
-typedef Arg* ArgList;
+typedef struct {
+    struct argNode *top;
+}ArgStackHead;
 
-typedef int CallbackFunct(ArgList head);
+typedef ArgStackHead* ArgStack;
+
+typedef int CallbackFunct(ArgStack head);
 typedef void HeaderFunct();
 typedef void FooterFunct();
 
