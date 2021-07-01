@@ -17,9 +17,9 @@ enum inputFileOperations {
 
 void loadInputFile(char *inputPath, BTree *bTree);
 
-void insertFornLine(char *line, BTree *bTree);
+void insertFromLine(char *line, BTree *bTree);
 
-void modifyFornLine(char *line, BTree *bTree);
+void modifyFromLine(char *line, BTree *bTree);
 
 void removeFromLine(char *line, BTree *bTree);
 

@@ -1,7 +1,7 @@
 #include "input_file.h"
 
 void loadInputFile(char *inputPath, BTree *bTree) {
-    /*FILE *inputFile = fopen(inputPath, "r");
+    FILE *inputFile = fopen(inputPath, "r");
     if (inputFile == NULL) {
         printf("Arquivo nao encontrado.\n");
         return;
@@ -11,19 +11,19 @@ void loadInputFile(char *inputPath, BTree *bTree) {
         line = trim(line);
         formatLine(line);
         switch(line[0]) {
-            case INPUT_FILE_INSERT: insertFornLine(line, dataFile);
+            case INPUT_FILE_INSERT: insertFromLine(line, bTree);
                 break;
-            case INPUT_FILE_MODIFY: modifyFornLine(line, dataFile);
+            case INPUT_FILE_MODIFY: modifyFromLine(line, bTree);
                 break;
-            case INPUT_FILE_REMOVE: removeFromLine(line, dataFile);
+            case INPUT_FILE_REMOVE: removeFromLine(line, bTree);
                 break;
         }
     }
-    fclose(inputFile);*/
+    fclose(inputFile);
 }
 
-void insertFornLine(char *line, BTree *bTree) {
-    /*Product *product = (Product*)malloc(sizeof(Product));
+void insertFormLine(char *line, BTree *bTree) {
+    Product *product = (Product*)malloc(sizeof(Product));
     sscanf(line, "%*c;%d;%[^;];%d;%f;%[^\n]",
         &(product->code),
         product->name,
@@ -31,37 +31,37 @@ void insertFornLine(char *line, BTree *bTree) {
         &(product->value),
         product->local
     );
-    if(searchProductByCode(dataFile, product->code) == -1)
-        insertProduct(dataFile, product);
-    free(product);*/
+    if(searchBTreeByCode(bTree, product->code) == -1)
+        insertBTree(bTree, product);
+    free(product);
 }
 
-void modifyFornLine(char *line, BTree *bTree) {
-    /*Node *node;
+void modifyFromLine(char *line, BTree *bTree) {
+    Product *product;
     int code, position;
     char *buffer = (char*)malloc(sizeof(char)*MAX_ENTRY_LINE);
     sscanf(line, "%*c;%d;%[^\n]", &code, line);
-    if((position = searchProductByCode(dataFile, code)) == -1)
+    if((position = searchBTreeByCode(bTree, code)) == -1)
         return;
-    node = readNode(dataFile, position);
+    product = readDataRegistry(position, bTree->dataFile);
     getFromLine(
         line,
-        &node->product.number,
-        &node->product.value,
-        node->product.local
+        &product->number,
+        &product->value,
+        product->local
     );
-    writeNode(dataFile, node, position);
-    free(node);*/
+    writeDataRegistry(product, position, bTree->dataFile);
+    free(product);
 }
 
 void removeFromLine(char *line, BTree *bTree) {
-    /*int code;
+    int code;
     sscanf(line, "%*c;%d", &code);
-    removeProduct(dataFile, code);*/
+    removeBTree(bTree, code);
 }
 
 void getFromLine(char *line, int *number, float *value, char *local) {
-    /*char *buffer = getInside(line);
+    char *buffer = getInside(line);
     if (buffer[0] != '\0')
         sscanf(buffer, "%d", number);
     line += (strlen(buffer) + 1);
@@ -74,28 +74,28 @@ void getFromLine(char *line, int *number, float *value, char *local) {
     free(buffer);
 
     if (line[0] != '\0')
-        strcpy(local, line);*/
+        strcpy(local, line);
 }
 
 char *getInside(char *line) {
-    /*char *buffer = (char *)malloc(sizeof(char) * MAX_ENTRY_LINE);
+    char *buffer = (char *)malloc(sizeof(char) * MAX_ENTRY_LINE);
     int i = 0;
     while(line[i] != ';' && line[i] != '\n' && line[i] != '\0') {
         buffer[i] = line[i];
         i++;
     }
     buffer[i] = '\0';
-    return buffer;*/
+    return buffer;
 }
 
 void formatLine(char *line) {
-    /*for(; *line; line++)
+    for(; *line; line++)
         if(*line == ',')
-            *line = '.';*/
+            *line = '.';
 }
 
 char *trim(char *line) {
-    /*char *newLine = (char*)malloc(sizeof(char)*MAX_ENTRY_LINE);
+    char *newLine = (char*)malloc(sizeof(char)*MAX_ENTRY_LINE);
     int i_new;
     int i_old = 0;
     while(isspace(line[i_old])) {
@@ -112,5 +112,5 @@ char *trim(char *line) {
     }
     newLine[i_new] = 0;
     free(line);
-    return newLine;*/
+    return newLine;
 }
