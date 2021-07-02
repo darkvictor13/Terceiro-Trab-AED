@@ -33,8 +33,9 @@ int actionSearchProductByCode(ArgStack head) {
         Product *product = getBTreeProduct(readArgStack(head), position);
         printProduct(product);
         free(product);
+    }else{
+        printWaitMenuWhitMessage("Produto nao encontrado.");
     }
-    printWaitMenu();
     return 1;
 }
 

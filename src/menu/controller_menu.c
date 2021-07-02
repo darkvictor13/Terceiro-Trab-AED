@@ -30,30 +30,30 @@ void setFooter(Menu *menu, FooterFunct footer) {
 }
 
 int controlMenu(Menu *menu, ArgStack head) {
-    char c;
+    char inputChar;
     while(1) {
         system(CLEAR);
         printMenu(menu);
-        c = getChar();
-        if (c == UP) {
+        inputChar = getChar();
+        if (inputChar == UP) {
             menu->selected = moveEntryList(menu->selected, 1, MOVE_BACKWARD);
-        }else if (c == DOWN) {
+        }else if (inputChar == DOWN) {
             menu->selected = moveEntryList(menu->selected, 1, MOVE_FOWARD);
-        }else if(isdigit(c)) {
-            int option = c - '1';
+        }else if(isdigit(inputChar)) {
+            int option = inputChar - '1';
             if (isInLimits(menu->first, option)) {
                 menu->selected = moveEntryList(menu->first, option, MOVE_FOWARD);
             }else {
                 printLine();
-                printAlignedCenter("Digito fora dos limites");
+                printAlignedCenter("Digito fora dos limites.");
                 printLine();
                 printWaitMenu();
             }
-        }else if(c == ENTER) {
+        }else if(inputChar == ENTER) {
             if (menu->selected->funct(head) == 0) return 1;
         }else{
             printLine();
-            printAlignedRight("Entrada do teclado incorreta");
+            printAlignedRight("Entrada do teclado incorreta.");
             printLine();
             printWaitMenu();
         }

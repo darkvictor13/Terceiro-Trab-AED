@@ -22,7 +22,7 @@ void loadInputFile(char *inputPath, BTree *bTree) {
     fclose(inputFile);
 }
 
-void insertFormLine(char *line, BTree *bTree) {
+void insertFromLine(char *line, BTree *bTree) {
     Product *product = (Product*)malloc(sizeof(Product));
     sscanf(line, "%*c;%d;%[^;];%d;%f;%[^\n]",
         &(product->code),

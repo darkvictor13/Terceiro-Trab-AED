@@ -57,11 +57,14 @@ int actionRemove(ArgStack head) {
     int code;
     printf("\tCodigo do produto: ");
     scanf("%d%*c", &code);
-    if(removeBTree(readArgStack(head), code) != -1)
-        printf("Produto removido com sucesso.\n");
-    else
-        printf("Produto nao encontrado.\n");
-    printWaitMenu();
+    confirmMenuController(head);
+    if(popArgStack(head)) {
+        if(removeBTree(readArgStack(head), code) != -1)
+            printWaitMenuWhitMessage("Produto removido com sucesso.");
+        else
+            printWaitMenuWhitMessage("Produto nao encontrado.");
+    }
+    
     return 1;
 }
 

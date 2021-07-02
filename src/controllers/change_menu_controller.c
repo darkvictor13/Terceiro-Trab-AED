@@ -33,11 +33,13 @@ int actionChangeNumber(ArgStack head) {
         printf("\tIndique o numero de produtos em estoque: ");
         scanf("%d%*c", &(product->number));
         confirmMenuController(head);
-        if(popArgStack(head))
+        if(popArgStack(head)) {
             updateBTreeProduct(readArgStack(head), position, product);
+            printWaitMenuWhitMessage("Mudanca realizada com sucesso.");
+        }
         free(product);
     }else{
-        printf("Produto nao encontrado.\n");
+        printWaitMenuWhitMessage("Produto nao encontrado.");
     }
     printWaitMenu();
     return 1;
@@ -52,13 +54,14 @@ int actionChangeValue(ArgStack head) {
         printf("Indique o novo valor do produto: ");
         scanf("%f%*c", &(product->value));
         confirmMenuController(head);
-        if(popArgStack(head))
+        if(popArgStack(head)) {
             updateBTreeProduct(readArgStack(head), position, product);
+            printWaitMenuWhitMessage("Mudanca realizada com sucesso.");
+        }
         free(product);
     }else{
-        printf("Produto nao encontrado.\n");
+        printWaitMenuWhitMessage("Produto nao encontrado.");
     }
-    printWaitMenu();
     return 1;
 }
 
@@ -71,13 +74,14 @@ int actionChangeLocal(ArgStack head) {
         printf("Indique o novo local do produto: ");
         scanf("%[^\n]%*c", product->local);
         confirmMenuController(head);
-        if(popArgStack(head))
+        if(popArgStack(head)) {
             updateBTreeProduct(readArgStack(head), position, product);
+            printWaitMenuWhitMessage("Mudanca realizada com sucesso.");
+        }
         free(product);
     }else{
-        printf("Produto nao encontrado.\n");
+        printWaitMenuWhitMessage("Produto nao encontrado.");
     }
-    printWaitMenu();
     return 1;
 }
 

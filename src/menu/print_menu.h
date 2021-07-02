@@ -26,6 +26,8 @@ void printListOptions(EntryList first, EntryList selected);
 
 void printWaitMenu();
 
+void printWaitMenuWhitMessage(const char *message);
+
 void printEndMessage();
 
 #endif
