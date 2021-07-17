@@ -15,13 +15,13 @@ enum inputFileOperations {
     INPUT_FILE_REMOVE = 'R',
 };
 
-void loadInputFile(char *inputPath, BTree *bTree);
+void loadInputFile(char *inputPath, BTree bTree);
 
-void insertFromLine(char *line, BTree *bTree);
+void insertFromLine(char *line, BTree bTree);
 
-void modifyFromLine(char *line, BTree *bTree);
+void modifyFromLine(char *line, BTree bTree);
 
-void removeFromLine(char *line, BTree *bTree);
+void removeFromLine(char *line, BTree bTree);
 
 void getFromLine(char *line, int *number, float *value, char *local);
 

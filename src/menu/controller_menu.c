@@ -35,12 +35,16 @@ int controlMenu(Menu *menu, ArgStack head) {
         system(CLEAR);
         printMenu(menu);
         inputChar = getChar();
-        if (inputChar == UP) {
+        if(inputChar == ENTER) {
+            if (menu->selected->funct(head) == 0) return 1;
+        }else if (inputChar == UP) {
             menu->selected = moveEntryList(menu->selected, 1, MOVE_BACKWARD);
         }else if (inputChar == DOWN) {
             menu->selected = moveEntryList(menu->selected, 1, MOVE_FOWARD);
         }else if(isdigit(inputChar)) {
             int option = inputChar - '1';
+            if(option == menu->selected->number - 1)
+                if (menu->selected->funct(head) == 0) return 1;
             if (isInLimits(menu->first, option)) {
                 menu->selected = moveEntryList(menu->first, option, MOVE_FOWARD);
             }else {
@@ -49,8 +53,8 @@ int controlMenu(Menu *menu, ArgStack head) {
                 printLine();
                 printWaitMenu();
             }
-        }else if(inputChar == ENTER) {
-            if (menu->selected->funct(head) == 0) return 1;
+        }else if(inputChar == ESC) {
+            return 1;
         }else{
             printLine();
             printAlignedRight("Entrada do teclado incorreta.");

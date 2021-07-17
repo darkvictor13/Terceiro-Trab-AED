@@ -1,6 +1,6 @@
 #include "input_file.h"
 
-void loadInputFile(char *inputPath, BTree *bTree) {
+void loadInputFile(char *inputPath, BTree bTree) {
     FILE *inputFile = fopen(inputPath, "r");
     if (inputFile == NULL) {
         printf("Arquivo nao encontrado.\n");
@@ -22,7 +22,7 @@ void loadInputFile(char *inputPath, BTree *bTree) {
     fclose(inputFile);
 }
 
-void insertFromLine(char *line, BTree *bTree) {
+void insertFromLine(char *line, BTree bTree) {
     Product *product = (Product*)malloc(sizeof(Product));
     sscanf(line, "%*c;%d;%[^;];%d;%f;%[^\n]",
         &(product->code),
@@ -31,17 +31,18 @@ void insertFromLine(char *line, BTree *bTree) {
         &(product->value),
         product->local
     );
-    if(searchBTreeByCode(bTree, product->code) == -1)
+    int position;
+    if(searchBTreeByCode(bTree, product->code, &position))
         insertBTree(bTree, product);
     free(product);
 }
 
-void modifyFromLine(char *line, BTree *bTree) {
+void modifyFromLine(char *line, BTree bTree) {
     Product *product;
     int code, position;
     char *buffer = (char*)malloc(sizeof(char)*MAX_ENTRY_LINE);
     sscanf(line, "%*c;%d;%[^\n]", &code, line);
-    if((position = searchBTreeByCode(bTree, code)) == -1)
+    if(searchBTreeByCode(bTree, code, &position))
         return;
     product = readDataRegistry(position, bTree->dataFile);
     getFromLine(
@@ -54,7 +55,7 @@ void modifyFromLine(char *line, BTree *bTree) {
     free(product);
 }
 
-void removeFromLine(char *line, BTree *bTree) {
+void removeFromLine(char *line, BTree bTree) {
     int code;
     sscanf(line, "%*c;%d", &code);
     removeBTree(bTree, code);

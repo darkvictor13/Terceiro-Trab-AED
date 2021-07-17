@@ -26,6 +26,8 @@ enum offsetProductData {
     OFFSET_PRODUCT_LOCAL = offsetof(Product, local)
 };
 
+FILE *makeDataFile(char *dataFilePath);
+
 void writeDataHead(DataHead *dataHead, FILE *dataFile);
 
 DataHead *readDataHead(FILE *dataFile);

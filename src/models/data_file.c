@@ -1,5 +1,14 @@
 #include "data_file.h"
 
+FILE *makeDataFile(char *dataFilePath) {
+    FILE *dataFile = fopen(dataFilePath, "w+b");
+    DataHead head;
+    head.regLast = 0;
+    head.regFree = -1;
+    writeDataHead(&head, dataFile);
+    return dataFile;
+}
+
 void writeDataHead(DataHead *head, FILE *dataFile) {
     fseek(dataFile, OFFSET_HEAD_DATA, SEEK_SET);
     fwrite(head, sizeof(DataHead), 1, dataFile);

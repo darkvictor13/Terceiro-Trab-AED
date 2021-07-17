@@ -28,7 +28,7 @@ int actionChangeNumber(ArgStack head) {
     int code, position;
     printf("\tIndique o codigo do produto: ");
     scanf("%d", &code);
-    if((position = searchBTreeByCode(readArgStack(head), code)) != -1) {
+    if(searchBTreeByCode(readArgStack(head), code, &position)) {
         Product *product = getBTreeProduct(readArgStack(head), position);
         printf("\tIndique o numero de produtos em estoque: ");
         scanf("%d%*c", &(product->number));
@@ -49,7 +49,7 @@ int actionChangeValue(ArgStack head) {
     int code, position;
     printf("\tIndique o codigo do produto: ");
     scanf("%d", &code);
-    if((position = searchBTreeByCode(readArgStack(head), code)) != -1) {
+    if(searchBTreeByCode(readArgStack(head), code, &position)) {
         Product *product = getBTreeProduct(readArgStack(head), position);
         printf("Indique o novo valor do produto: ");
         scanf("%f%*c", &(product->value));
@@ -69,7 +69,7 @@ int actionChangeLocal(ArgStack head) {
     int code, position;
     printf("\tIndique o codigo do produto: ");
     scanf("%d%*c", &code);
-    if((position = searchBTreeByCode(readArgStack(head), code)) != -1) {
+    if(searchBTreeByCode(readArgStack(head), code, &position)) {
         Product *product = getBTreeProduct(readArgStack(head), position);
         printf("Indique o novo local do produto: ");
         scanf("%[^\n]%*c", product->local);

@@ -29,7 +29,7 @@ int actionSearchProductByCode(ArgStack head) {
     int code, position;
     printf("\tInsira o codigo do produto: ");
     scanf("%d%*c", &code);
-    if((position = searchBTreeByCode(readArgStack(head), code)) != -1) {
+    if(searchBTreeByCode(readArgStack(head), code, &position)) {
         Product *product = getBTreeProduct(readArgStack(head), position);
         printProduct(product);
         free(product);
@@ -41,7 +41,9 @@ int actionSearchProductByCode(ArgStack head) {
 
 int actionListProducts(ArgStack head) {
     printHead("Imprimindo a Arvore em ordem crescente");
+    printf("\n");
     printBTreeInOrder(readArgStack(head));
+    printf("\n\n");
     printWaitMenu();
     return 1;
 }

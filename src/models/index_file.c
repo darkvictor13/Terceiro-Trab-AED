@@ -4,6 +4,15 @@ int isEmptyIndex(FILE *indexFile) {
     return readIndexHeadField(OFFSET_ROOT_INDEX, indexFile) == -1;
 }
 
+FILE *makeIndexFile(char *indexFilePath) {
+    FILE *indexFile = fopen(indexFilePath, "w+b");
+    IndexHead head;
+    head.regRoot = head.regFree = -1;
+    head.regLast = 0;
+    writeIndexHead(&head, indexFile);
+    return indexFile;
+}
+
 void writeIndexHead(IndexHead *head, FILE *indexFile) {
     fseek(indexFile, OFFSET_HEAD_INDEX, SEEK_SET);
     fwrite(head, sizeof(IndexHead), 1, indexFile);

@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdio.h>
 
-#define ORDER 5
+#define ORDER 3
 
 typedef struct {
     int regRoot;
@@ -22,18 +22,28 @@ enum offsetHeadIndex {
 };
 
 typedef struct {
+    int key;
+    int position;
+    int leftChild;
+    int rightChild;
+}RegistryField;
+
+typedef struct {
+    int numberOfKeys;
 	int key[ORDER];
-	int registers[ORDER];
-	int children[ORDER];
+	int position[ORDER];
+	int children[ORDER + 1];
 }Registry;
 
 enum offsetRegistryIndex {
     OFFSET_REGISTRY_KEYS = offsetof(Registry, key),
-    OFFSET_REGISTRY_REGS = offsetof(Registry, registers),
+    OFFSET_REGISTRY_POS = offsetof(Registry, position),
     OFFSET_REGISTRY_CHILDS = offsetof(Registry, children)
 };
 
 int isEmptyIndex(FILE *indexFile);
+
+FILE *makeIndexFile(char *indexFilePath);
 
 void writeIndexHead(IndexHead *indexHead, FILE *indexFile);
 

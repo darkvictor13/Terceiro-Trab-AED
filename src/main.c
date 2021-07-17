@@ -6,7 +6,7 @@
 int main(int argc, char *argv[]) {
     char indexFilePath[] = "./index.bin";
     char dataFilePath[] = "./data.bin";
-    BTree *bTree = openBTreeFiles(indexFilePath, dataFilePath);
+    BTree bTree = openBTreeFiles(indexFilePath, dataFilePath);
     //if(argc == 2)
     //    loadInputFile(argv[1], bTree);
     ArgStack argStack = createStack();

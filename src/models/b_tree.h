@@ -5,39 +5,64 @@
 #include "data_file.h"
 #include "product.h"
 
+#define OPEN_MODE "r+b"
+
+typedef enum {
+    FALSE,
+    TRUE
+}Bool;
+
 typedef struct {
     FILE *indexFile;
     FILE *dataFile;
-}BTree;
+}NodeBTree;
 
-BTree *openBTreeFiles(char *indexFilePath, char *dataFilePath);
+typedef NodeBTree* BTree;
 
-FILE *makeIndexFile(char *indexFilePath);
+BTree openBTreeFiles(char *indexFilePath, char *dataFilePath);
 
-FILE *makeDataFile(char *dataFilePath);
+void closeBTreeFiles(BTree bTree);
 
-void closeBTreeFiles(BTree *bTree);
+Registry *createRegistry(int key, int position, int leftChild, int rightChild);
 
-int insertBTree(BTree *bTree, Product *product);
+Bool isEmptyBTree(BTree bTree);
 
-Product *getBTreeProduct(BTree *bTree, int position);
+Bool isLeafBTree(Registry *registry);
 
-void updateBTreeProduct(BTree *bTree, int position, Product *product);
+Bool isRegistryFull(Registry *registry);
 
-int removeBTree(BTree *bTree, int code);
+Bool searchBTreeByCodeRec(BTree bTree, int registryPosition, int code, int *position);
 
-int searchBTreeByCode(BTree *bTree, int code);
+Bool searchBTreeByCode(BTree bTree, int code, int *position);
 
-void printBTreeInOrder(BTree *bTree);
+Bool searchPositionBTRee(Registry *registry, int key, int *position);
 
-void printBTreeInOrderRec(BTree *bTree);
+void simpleAddBTree(Registry *registry, RegistryField *registryField);
 
-void printBTreeByLevel(BTree *bTree);
+RegistryField *splitAddBTree(BTree bTree, Registry *registry, int position, RegistryField *registryField);
 
-void printBTreeByLevelRec(BTree *bTree);
+RegistryField *insertBTreeRec(BTree bTree, int position, Product *product);
 
-void printBTreeFree(BTree *bTree);
+void insertBTree(BTree bTree, Product *product);
 
-void printBTreeFreeRec(BTree *bTree);
+Product *getBTreeProduct(BTree bTree, int position);
+
+void updateBTreeProduct(BTree bTree, int position, Product *product);
+
+Bool removeBTreeRec(BTree bTree, int code);
+
+Bool removeBTree(BTree bTree, int code);
+
+void printBTreeInOrderRec(BTree bTree, int position);
+
+void printBTreeInOrder(BTree bTree);
+
+void printBTreeByLevelRec(BTree bTree);
+
+void printBTreeByLevel(BTree bTree);
+
+void printBTreeFreeRec(BTree bTree);
+
+void printBTreeFree(BTree bTree);
 
 #endif

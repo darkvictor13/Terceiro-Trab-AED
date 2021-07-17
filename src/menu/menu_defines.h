@@ -26,6 +26,7 @@
 
 #define UP 'w'
 #define DOWN 's'
+#define ESC 27
 
 enum {
     MOVE_BACKWARD,
