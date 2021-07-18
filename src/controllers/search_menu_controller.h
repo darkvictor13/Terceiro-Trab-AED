@@ -2,6 +2,7 @@
 #define SEARCH_MENU_CONTROLLER_H
 
 #include "../interfaces/input_file.h"
+#include "../models/b_tree_prints.h"
 #include "../menu/controller_menu.h"
 #include "../menu/print_menu.h"
 #include "../menu/arg_list.h"
@@ -18,7 +19,13 @@ int actionListProducts(ArgStack head);
 
 int actionPrintTree(ArgStack head);
 
-int actionPrintFreeSpaces(ArgStack head);
+int actionPrintRegistryList(ArgStack head);
+
+int actionPrintProductList(ArgStack head);
+
+int actionPrintFreeIndexSpaces(ArgStack head);
+
+int actionPrintFreeDataSpaces(ArgStack head);
 
 int actionSearchReturn(ArgStack head);
 

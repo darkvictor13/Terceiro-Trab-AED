@@ -1,9 +1,11 @@
 #ifndef B_TREE_H
 #define B_TREE_H
 
+#include "../menu/canvas.h"
 #include "index_file.h"
 #include "data_file.h"
 #include "product.h"
+#include "queue.h"
 
 #define OPEN_MODE "r+b"
 
@@ -52,17 +54,5 @@ void updateBTreeProduct(BTree bTree, int position, Product *product);
 Bool removeBTreeRec(BTree bTree, int code);
 
 Bool removeBTree(BTree bTree, int code);
-
-void printBTreeInOrderRec(BTree bTree, int position);
-
-void printBTreeInOrder(BTree bTree);
-
-void printBTreeByLevelRec(BTree bTree);
-
-void printBTreeByLevel(BTree bTree);
-
-void printBTreeFreeRec(BTree bTree);
-
-void printBTreeFree(BTree bTree);
 
 #endif

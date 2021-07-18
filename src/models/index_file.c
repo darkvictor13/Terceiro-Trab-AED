@@ -80,7 +80,7 @@ int insertIndexRegistry(Registry *registry, FILE *indexFile) {
         return last;
     }else{
         writeIndexHeadField(
-            readIndexRegistryField(OFFSET_REGISTRY_KEYS, free, indexFile),
+            readIndexRegistryField(OFFSET_REGISTRY_NUM, free, indexFile),
             OFFSET_FREE_INDEX,
             indexFile
         );
@@ -96,7 +96,7 @@ void removeIndexRegistry(int position, FILE *indexFile) {
             OFFSET_FREE_INDEX,
             indexFile
         ),
-        OFFSET_REGISTRY_KEYS,
+        OFFSET_REGISTRY_NUM,
         position,
         indexFile
     );
