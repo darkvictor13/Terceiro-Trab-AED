@@ -16,16 +16,65 @@
 #include "entry_list.h"
 #include "print_menu.h"
 
-int controlMenu(Menu *menu, ArgStack head);
+/**
+ * @brief 
+ * 
+ * @param queue 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
+int removeEntryQueue(EntryList *queue);
 
-int removeList(EntryList *queue);
-
+/**
+ * @brief Create a Menu object
+ * 
+ * @return Menu* 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Menu *createMenu();
 
+/**
+ * @brief 
+ * 
+ * @param menu 
+ * @param message 
+ * @param funct 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void addEntryToMenu(Menu *menu, char *message, CallbackFunct *funct);
 
+/**
+ * @brief Set the Header object
+ * 
+ * @param menu 
+ * @param header 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void setHeader(Menu *menu, HeaderFunct header);
 
+/**
+ * @brief Set the Footer object
+ * 
+ * @param menu 
+ * @param footer 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void setFooter(Menu *menu, FooterFunct footer);
+
+/**
+ * @brief 
+ * 
+ * @param menu 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
+int controlMenu(Menu *menu, ArgStack head);
 
 #endif

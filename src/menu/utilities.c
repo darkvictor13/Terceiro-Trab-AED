@@ -13,6 +13,13 @@
 
 #ifdef __gnu_linux__
 
+/**
+ * @brief
+ * 
+ * @return char 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 char getChar() {
     char character = 0;
     struct termios old = {0};
@@ -35,6 +42,13 @@ char getChar() {
 
 #else
 
+/**
+ * @brief
+ * 
+ * @return char 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 char getChar() {
     DWORD mode, cc;
     HANDLE h = GetStdHandle( STD_INPUT_HANDLE );

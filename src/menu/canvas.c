@@ -11,14 +11,40 @@
 
 #include "canvas.h"
 
+/**
+ * @brief Get the Canvas Position object
+ * 
+ * @param canvas 
+ * @param x 
+ * @param y 
+ * @return char* 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 char *getCanvasPosition(Canvas canvas, int x, int y) {
     return (canvas->matrix + sizeof(char) * (canvas->width + 1) * y + sizeof(char) * x);
 }
 
+/**
+ * @brief 
+ * 
+ * @param width 
+ * @param high 
+ * @return char* 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 char *allocCanvasMatrix(int width, int high) {
     return (char*)malloc(sizeof(char) * (width + 1) * high);
 }
 
+/**
+ * @brief 
+ * 
+ * @param canvas 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void clearCanvasMatrix(Canvas canvas) {
     long unsigned int n = (canvas->width + 1) * canvas->high * sizeof(char);
     memset(canvas->matrix, ' ', n);
@@ -31,6 +57,15 @@ void clearCanvasMatrix(Canvas canvas) {
     }
 }
 
+/**
+ * @brief Create a Canvas object
+ * 
+ * @param width 
+ * @param high 
+ * @return Canvas 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Canvas createCanvas(int width, int high) {
     Canvas canvas = (Canvas)malloc(sizeof(CanvasStruct));
     canvas->matrix = allocCanvasMatrix(width, high);
@@ -40,11 +75,31 @@ Canvas createCanvas(int width, int high) {
     return canvas;
 }
 
+/**
+ * @brief 
+ * 
+ * @param canvas 
+ * @param x 
+ * @param y 
+ * @param width 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printCanvasHorizontalLine(Canvas canvas, int x, int y, int width) {
     char *line = canvas->matrix + sizeof(char) * (canvas->width + 1) * y + sizeof(char) * x;
     memset(line, '-', width);
 }
 
+/**
+ * @brief 
+ * 
+ * @param canvas 
+ * @param x 
+ * @param y 
+ * @param high 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printCanvasVerticalLine(Canvas canvas, int x, int y, int high) {
     unsigned long int step = sizeof(char) * (canvas->width + 1);
     char *line = canvas->matrix + (step * y)+ sizeof(char) * x;
@@ -55,6 +110,17 @@ void printCanvasVerticalLine(Canvas canvas, int x, int y, int high) {
     }
 }
 
+/**
+ * @brief 
+ * 
+ * @param canvas 
+ * @param x 
+ * @param y 
+ * @param width 
+ * @param high 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printCanvasBox(Canvas canvas, int x, int y, int width, int high) {
     printCanvasHorizontalLine(canvas, x, y, width);
     printCanvasHorizontalLine(canvas, x, y + high - 1, width);
@@ -62,11 +128,31 @@ void printCanvasBox(Canvas canvas, int x, int y, int width, int high) {
     printCanvasVerticalLine(canvas, x + width, y, high);
 }
 
+/**
+ * @brief 
+ * 
+ * @param canvas 
+ * @param text 
+ * @param x 
+ * @param y 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printCanvasText(Canvas canvas, char *text, int x, int y) {
     char *line = canvas->matrix + sizeof(char) * (canvas->width + 1) * y + sizeof(char) * x;
     memcpy(line, text, strlen(text));
 }
 
+/**
+ * @brief 
+ * 
+ * @param canvas 
+ * @param num 
+ * @param x 
+ * @param y 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printCanvasNumber(Canvas canvas, int num, int x, int y) {
     char *line = canvas->matrix + sizeof(char) * (canvas->width + 1) * y + sizeof(char) * x;
     char buffer[MAX_NUM];
@@ -74,6 +160,13 @@ void printCanvasNumber(Canvas canvas, int num, int x, int y) {
     memcpy(line, buffer, strlen(buffer));
 }
 
+/**
+ * @brief 
+ * 
+ * @param canvas 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printCanvas(Canvas canvas) {
     unsigned long int step = sizeof(char) * (canvas->width + 1);
     char *line = canvas->matrix;
@@ -84,6 +177,13 @@ void printCanvas(Canvas canvas) {
     }
 }
 
+/**
+ * @brief 
+ * 
+ * @param canvas 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void freeCanvas(Canvas canvas) {
     free(canvas->matrix);
     free(canvas);

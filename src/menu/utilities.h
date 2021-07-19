@@ -27,6 +27,13 @@
 
 #endif //__gnu_linux__
 
+/**
+ * @brief 
+ * 
+ * @return char 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 char getChar();
 
 #endif

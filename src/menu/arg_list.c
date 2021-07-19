@@ -11,16 +11,39 @@
 
 #include "arg_list.h"
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int isEmptyArgStack(ArgStack head) {
     return head->top == NULL;
 }
 
+/**
+ * @brief Create a Stack object
+ * 
+ * @return ArgStack 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 ArgStack createStack() {
     ArgStack newStack = (ArgStack)malloc(sizeof(ArgStackHead));
     newStack->top = NULL;
     return newStack;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return void* 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void *readArgStack(ArgStack head) {
     void *arg = NULL;
     if(!isEmptyArgStack(head)) {
@@ -30,6 +53,14 @@ void *readArgStack(ArgStack head) {
     return arg;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @param arg 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void pushArgStack(ArgStack head, void *arg) {
     ArgNode* newArgNode = (ArgNode*)malloc(sizeof(ArgNode));
     newArgNode->arg = arg;
@@ -38,6 +69,14 @@ void pushArgStack(ArgStack head, void *arg) {
 
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return void* 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void *popArgStack(ArgStack head) {
     void *arg = NULL;
     if(!isEmptyArgStack(head)) {
@@ -50,18 +89,46 @@ void *popArgStack(ArgStack head) {
     return arg;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void freeArgStack(ArgStack head) {
     
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void freeArgStackRec(ArgNode *head) {
     
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printArgStack(ArgStack head) {
     
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printArgStackRec(ArgNode *head) {
     
 }

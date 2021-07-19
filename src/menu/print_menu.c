@@ -11,6 +11,13 @@
 
 #include "print_menu.h"
 
+/**
+ * @brief 
+ * 
+ * @param message 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printHead(const char *message) {
     system(CLEAR);
     printLine();
@@ -18,6 +25,13 @@ void printHead(const char *message) {
     printLine();
 }
 
+/**
+ * @brief 
+ * 
+ * @param message 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printString(const char* message) {
     if(message == NULL || message[0] == '\0')
         printf("vazio");
@@ -25,12 +39,26 @@ void printString(const char* message) {
         printf("%s", message);
 }
 
+/**
+ * @brief 
+ * 
+ * @param message 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printAlignedLeft(const char *message) {
     printf("|%s", message);
     printExtended(' ', SIZE_LINE - (strlen(message) + 2));
     printf("|\n");
 }
 
+/**
+ * @brief 
+ * 
+ * @param message 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printAlignedCenter(const char *message) {
     int sizeRead = (strlen(message) + 2);
     int space = (SIZE_LINE - sizeRead) / 2;
@@ -43,23 +71,51 @@ void printAlignedCenter(const char *message) {
     printf("|\n");
 }
 
+/**
+ * @brief 
+ * 
+ * @param message 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printAlignedRight(const char *message) {
     printf("|");
     printExtended(' ', (SIZE_LINE - (strlen(message) + 2)));
     printf("%s|\n", message);
 }
 
+/**
+ * @brief 
+ * 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printLine() {
     printf("|");
     printExtended('-', SIZE_LINE - 2);
     printf("|\n");
 }
 
+/**
+ * @brief 
+ * 
+ * @param c 
+ * @param number 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printExtended(char c, int number) {
     for(int i = 0; i < number; i++)
         putchar(c);
 }
 
+/**
+ * @brief 
+ * 
+ * @param menu 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printMenu(Menu *menu) {
     menu->header();
     if(isEmptyEntryList(menu->first))
@@ -70,6 +126,14 @@ void printMenu(Menu *menu) {
     menu->footer();
 }
 
+/**
+ * @brief 
+ * 
+ * @param first 
+ * @param selected 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printListOptions(EntryList first, EntryList selected) {
     EntryList p = first;
     for (; p->next != first; p = p->next) {
@@ -78,6 +142,14 @@ void printListOptions(EntryList first, EntryList selected) {
     printOption(p, p == selected);
 }
 
+/**
+ * @brief 
+ * 
+ * @param item 
+ * @param selected 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printOption(EntryList item, int selected) {
     putchar('|');
     if(selected)
@@ -89,6 +161,12 @@ void printOption(EntryList item, int selected) {
     printf("|\n");
 }
 
+/**
+ * @brief 
+ * 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printWaitMenu() {
     printLine();
     printf("|%*s|\n", SIZE_LINE - 2, "");
@@ -100,6 +178,13 @@ void printWaitMenu() {
     getchar();
 }
 
+/**
+ * @brief 
+ * 
+ * @param message 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printWaitMenuWhitMessage(const char *message) {
     printLine();
     printf("|%*s|\n", SIZE_LINE - 2, "");
@@ -114,6 +199,12 @@ void printWaitMenuWhitMessage(const char *message) {
     getchar();
 }
 
+/**
+ * @brief 
+ * 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printEndMessage() {
     system(CLEAR);
     printLine();
