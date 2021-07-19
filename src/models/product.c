@@ -14,7 +14,7 @@ void printProduct(Product *product) {
     printLine();
     printf("\n\tNome: ");
     printString(product->name);
-    printf("\n\tCode: %d.\n", product->code);
+    printf(".\n\tCode: %d.\n", product->code);
     printf("\tNumber: %d.\n", product->number);
     printf("\tValue: %.2f.\n", product->value);
     printf("\tLocal: ");

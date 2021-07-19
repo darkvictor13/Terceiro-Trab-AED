@@ -41,16 +41,25 @@ Bool isRegistryFull(Registry *registry) {
     return (registry->numberOfKeys == ORDER - 1);
 }
 
+Bool isRegistryUnderFlow(Registry *registry) {
+    return (registry->numberOfKeys < ORDER / 2);
+}
+
+Bool canRegistryBorrow(Registry *registry) {
+    return (registry->numberOfKeys > ORDER / 2);
+}
+
 Bool searchBTreeByCodeRec(BTree bTree, int registryPosition, int key, int *position) {
     Registry *registry = readIndexRegistry(registryPosition, bTree->indexFile);
     if(searchPositionBTRee(registry, key, position)) {
+        (*position) = registry->position[(*position)];
         free(registry);
         return TRUE;
     }else if(isLeafBTree(registry)) {
         free(registry);
         return FALSE;
     }
-    registryPosition = registry->position[(*position)];
+    registryPosition = registry->children[(*position)];
     free(registry);
     return searchBTreeByCodeRec(bTree, registryPosition, key, position);
 }
@@ -99,6 +108,12 @@ void simpleAddBTree(Registry *registry, RegistryField *registryField) {
     registry->key[position] = registryField->key;
     registry->position[position] = registryField->position;
     registry->children[position + 1] = registryField->leftChild;
+    if(registryField->rightChild == -1) {
+        registry->children[position + 1] = registryField->leftChild;
+    }else{
+        registry->children[position] = registryField->leftChild;
+        registry->children[position + 1] = registryField->rightChild;
+    }
     registry->numberOfKeys++;
 }
 
@@ -147,8 +162,9 @@ RegistryField *insertBTreeRec(BTree bTree, int position, Product *product) {
             return NULL;
         }
     }else{
-        searchPositionBTRee(registry, product->code, &position);
-        int registryPosition = registry->position[position];
+        int registryPosition;
+        searchPositionBTRee(registry, product->code, &registryPosition);
+        registryPosition = registry->children[registryPosition];
         RegistryField *promotedRegistry = insertBTreeRec(bTree, registryPosition, product);
         if(promotedRegistry != NULL) {
             if(isRegistryFull(registry)) {
@@ -203,10 +219,76 @@ void updateBTreeProduct(BTree bTree, int position, Product *product) {
     writeDataRegistry(product, position, bTree->dataFile);
 }
 
-Bool removeBTreeRec(BTree bTree, int code) {
+void simpleRemoveBTree(Registry *registry, int position) {
+    registry->numberOfKeys--;
+    int i;
+    for(i = position; i < registry->numberOfKeys; i++) {
+        registry->key[i] = registry->key[i + 1];
+        registry->position[i] = registry->position[i + 1];
+        registry->children[i + 1] = registry->children[i + 2];
+    }
+    registry->key[i] = registry->position[i] = registry->children[i + 1] = 0;
+}
 
+Bool removeBTreeRec(BTree bTree, int *position, int code) {
+    Registry *registry = readIndexRegistry((*position), bTree->indexFile);
+    int positionInRegistry;
+    if(isLeafBTree(registry)) {
+        if(searchPositionBTRee(registry, code, &positionInRegistry)) {
+            removeDataRegistry(registry->position[positionInRegistry], bTree->dataFile);
+            simpleRemoveBTree(registry, positionInRegistry);
+            writeIndexRegistry(registry, (*position), bTree->indexFile);
+            if(!isRegistryUnderFlow(registry))
+                position = NULL;
+            free(registry);
+            return TRUE;
+        }else{
+            free(registry);
+            return FALSE;
+        }
+    }
+    int returnedRegistry; // colocar aqui o registro a buscar e remover dentro dele
+    Bool hasFound;
+    if(searchPositionBTRee(registry, code, &positionInRegistry)) {
+        Registry *rightChild = readIndexRegistry(registry->children[positionInRegistry + 1], bTree->indexFile);
+        registry->key[positionInRegistry] = rightChild->key[0];
+        registry->position[positionInRegistry] = rightChild->position[0];
+        free(rightChild);
+        hasFound = removeBTreeRec(bTree, &returnedRegistry, registry->key[positionInRegistry]);
+    }else{
+        hasFound = removeBTreeRec(bTree, &returnedRegistry, code);
+    }
+    if(&returnedRegistry != NULL) {
+        Registry *brother;
+        if(canRegistryBorrow(brother)/*tem filho a direita*/) {
+            // empresta
+            // add o pai do centro
+            // trnasfere o children
+            // move menor em filho direita para pai
+            // re escreve os 3
+        }else{
+            // concatena
+            // insere pai em filho com underflow
+            // junta filhos do pai descido
+            // re escreve 2 e elimina o que esvaciou
+        }
+        // se nao deu faz o mesmo para o filho da esquerda
+    }
+    free(registry);
+    // retorna o enderoco a guardar pelo pai
+    // (*position) = 
+    return hasFound;
 }
 
 Bool removeBTree(BTree bTree, int code) {
-
+    if(isEmptyBTree(bTree))
+        return FALSE;
+    int indexRoot = readIndexHeadField(OFFSET_HEAD_INDEX, bTree->indexFile);
+    int newIndexRoot = NULL;
+    if(removeBTreeRec(bTree, &newIndexRoot, code)) {
+        if(newIndexRoot != NULL)
+            writeIndexHeadField(newIndexRoot, OFFSET_HEAD_INDEX, bTree->indexFile);
+        return TRUE;
+    }
+    return FALSE;
 }

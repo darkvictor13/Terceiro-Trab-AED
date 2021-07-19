@@ -17,10 +17,10 @@ int searchMenuController(ArgStack head) {
     setHeader(searchMenu, searchMenuHeader);
     setFooter(searchMenu, searchMenuFooter);
     addEntryToMenu(searchMenu, "Buscar produto por codigo.", actionSearchProductByCode);
-    addEntryToMenu(searchMenu, "Listar produtos.", actionListProducts);
-    addEntryToMenu(searchMenu, "Mostrar arvore.", actionPrintTree);
-    addEntryToMenu(searchMenu, "Lista de registros.", actionPrintRegistryList);
-    addEntryToMenu(searchMenu, "Lista de produtos.", actionPrintProductList);
+    addEntryToMenu(searchMenu, "Listar produtos em orden.", actionListProducts);
+    addEntryToMenu(searchMenu, "Mostrar arvore por niveis.", actionPrintTree);
+    addEntryToMenu(searchMenu, "Lista de registros em arquivo.", actionPrintRegistryList);
+    addEntryToMenu(searchMenu, "Lista de produtos em arquivo.", actionPrintProductList);
     addEntryToMenu(searchMenu, "Mostrar espacos livres em arvore.", actionPrintFreeIndexSpaces);
     addEntryToMenu(searchMenu, "Mostrar espacos livres em produtos.", actionPrintFreeDataSpaces);
     addEntryToMenu(searchMenu, "Voltar.", actionSearchReturn);
@@ -77,7 +77,7 @@ int actionPrintFreeIndexSpaces(ArgStack head) {
     printHead("Listas de registros livres no arquivo da arvore.");
     printf("\n");
     printBTreeFreeIndex(readArgStack(head));
-    printf("\n");
+    printf("\n\n");
     printWaitMenu();
     return 1;
 }
@@ -86,7 +86,7 @@ int actionPrintFreeDataSpaces(ArgStack head) {
     printHead("Listas de registros livres no arquivo de produtos.");
     printf("\n");
     printBTreeFreeData(readArgStack(head));
-    printf("\n");
+    printf("\n\n");
     printWaitMenu();
     return 1;
 }

@@ -46,25 +46,25 @@ int actionChange(ArgStack head) {
 
 int actionLoad(ArgStack head) {
     char inputPath[FILE_PATH_NAME];
-    printf("\tNome de arquivo de entrada: ");
-    scanf("%s", inputPath);
+    printf("\n\tNome de arquivo de entrada: ");
+    scanf("%s%*c", inputPath);
+    printf("\n");
     loadInputFile(inputPath, readArgStack(head));
-    printWaitMenu();
     return 1;
 }
 
 int actionRemove(ArgStack head) {
     int code;
-    printf("\tCodigo do produto: ");
+    printf("\n\tCodigo do produto: ");
     scanf("%d%*c", &code);
+    printf("\n");
     confirmMenuController(head);
     if(popArgStack(head)) {
-        if(removeBTree(readArgStack(head), code) != -1)
+        if(removeBTree(readArgStack(head), code))
             printWaitMenuWhitMessage("Produto removido com sucesso.");
         else
             printWaitMenuWhitMessage("Produto nao encontrado.");
     }
-    
     return 1;
 }
 

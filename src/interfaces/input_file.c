@@ -3,7 +3,7 @@
 void loadInputFile(char *inputPath, BTree bTree) {
     FILE *inputFile = fopen(inputPath, "r");
     if (inputFile == NULL) {
-        printf("Arquivo nao encontrado.\n");
+        printWaitMenuWhitMessage("Arquivo de entrada nao encontrado.");
         return;
     }
     char *line = (char*)malloc(sizeof(char)*MAX_ENTRY_LINE);
@@ -19,6 +19,8 @@ void loadInputFile(char *inputPath, BTree bTree) {
                 break;
         }
     }
+    printWaitMenuWhitMessage("Arquivo carregado com sucesso.");
+    free(line);
     fclose(inputFile);
 }
 
@@ -32,7 +34,7 @@ void insertFromLine(char *line, BTree bTree) {
         product->local
     );
     int position;
-    if(searchBTreeByCode(bTree, product->code, &position))
+    if(!searchBTreeByCode(bTree, product->code, &position))
         insertBTree(bTree, product);
     free(product);
 }
@@ -42,7 +44,7 @@ void modifyFromLine(char *line, BTree bTree) {
     int code, position;
     char *buffer = (char*)malloc(sizeof(char)*MAX_ENTRY_LINE);
     sscanf(line, "%*c;%d;%[^\n]", &code, line);
-    if(searchBTreeByCode(bTree, code, &position))
+    if(!searchBTreeByCode(bTree, code, &position))
         return;
     product = readDataRegistry(position, bTree->dataFile);
     getFromLine(

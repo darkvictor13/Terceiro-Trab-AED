@@ -26,12 +26,14 @@ int changeMenuController(ArgStack head) {
 
 int actionChangeNumber(ArgStack head) {
     int code, position;
-    printf("\tIndique o codigo do produto: ");
-    scanf("%d", &code);
+    printf("\n\tIndique o codigo do produto: ");
+    scanf("%d%*c", &code);
+    printf("\n");
     if(searchBTreeByCode(readArgStack(head), code, &position)) {
         Product *product = getBTreeProduct(readArgStack(head), position);
         printf("\tIndique o numero de produtos em estoque: ");
         scanf("%d%*c", &(product->number));
+        printf("\n");
         confirmMenuController(head);
         if(popArgStack(head)) {
             updateBTreeProduct(readArgStack(head), position, product);
@@ -41,18 +43,19 @@ int actionChangeNumber(ArgStack head) {
     }else{
         printWaitMenuWhitMessage("Produto nao encontrado.");
     }
-    printWaitMenu();
     return 1;
 }
 
 int actionChangeValue(ArgStack head) {
     int code, position;
-    printf("\tIndique o codigo do produto: ");
-    scanf("%d", &code);
+    printf("\n\tIndique o codigo do produto: ");
+    scanf("%d%*c", &code);
+    printf("\n");
     if(searchBTreeByCode(readArgStack(head), code, &position)) {
         Product *product = getBTreeProduct(readArgStack(head), position);
-        printf("Indique o novo valor do produto: ");
+        printf("\tIndique o novo valor do produto: ");
         scanf("%f%*c", &(product->value));
+        printf("\n");
         confirmMenuController(head);
         if(popArgStack(head)) {
             updateBTreeProduct(readArgStack(head), position, product);
@@ -67,12 +70,14 @@ int actionChangeValue(ArgStack head) {
 
 int actionChangeLocal(ArgStack head) {
     int code, position;
-    printf("\tIndique o codigo do produto: ");
+    printf("\n\tIndique o codigo do produto: ");
     scanf("%d%*c", &code);
+    printf("\n");
     if(searchBTreeByCode(readArgStack(head), code, &position)) {
         Product *product = getBTreeProduct(readArgStack(head), position);
-        printf("Indique o novo local do produto: ");
+        printf("\tIndique o novo local do produto: ");
         scanf("%[^\n]%*c", product->local);
+        printf("\n");
         confirmMenuController(head);
         if(popArgStack(head)) {
             updateBTreeProduct(readArgStack(head), position, product);

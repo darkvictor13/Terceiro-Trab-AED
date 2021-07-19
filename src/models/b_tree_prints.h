@@ -17,6 +17,8 @@ void printBTreeRegistryList(BTree bTree);
 
 void printBTreeProductList(BTree bTree);
 
+void printBTreeFreeIndexRec(BTree bTree, int position);
+
 void printBTreeFreeIndex(BTree bTree);
 
 void printBTreeFreeDataRec(BTree bTree, int position);

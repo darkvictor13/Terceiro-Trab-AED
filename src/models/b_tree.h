@@ -33,6 +33,10 @@ Bool isLeafBTree(Registry *registry);
 
 Bool isRegistryFull(Registry *registry);
 
+Bool isRegistryUnderFlow(Registry *registry);
+
+Bool canRegistryBorrow(Registry *registry);
+
 Bool searchBTreeByCodeRec(BTree bTree, int registryPosition, int code, int *position);
 
 Bool searchBTreeByCode(BTree bTree, int code, int *position);
@@ -51,7 +55,9 @@ Product *getBTreeProduct(BTree bTree, int position);
 
 void updateBTreeProduct(BTree bTree, int position, Product *product);
 
-Bool removeBTreeRec(BTree bTree, int code);
+void simpleRemoveBTree(Registry *registry, int position);
+
+Bool removeBTreeRec(BTree bTree, int *position, int code);
 
 Bool removeBTree(BTree bTree, int code);
 
