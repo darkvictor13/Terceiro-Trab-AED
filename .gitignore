@@ -54,3 +54,4 @@ dkms.conf
 # Nossos
 build/main.x
 .vscode
+*.bin
