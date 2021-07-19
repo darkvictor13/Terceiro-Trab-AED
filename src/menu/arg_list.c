@@ -1,3 +1,14 @@
+/**
+ * @file arg_list.c
+ * @author Marco-Guerra
+ * @brief 
+ * @version 0.1
+ * @date 19/07/2021
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
+
 #include "arg_list.h"
 
 int isEmptyArgStack(ArgStack head) {

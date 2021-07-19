@@ -1,3 +1,14 @@
+/**
+ * @file b_tree.c
+ * @author Marco-Guerra
+ * @brief 
+ * @version 0.1
+ * @date 19/07/2021
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
+
 #include "b_tree.h"
 
 BTree openBTreeFiles(char *indexFilePath, char *dataFilePath) {
@@ -284,9 +295,9 @@ Bool removeBTree(BTree bTree, int code) {
     if(isEmptyBTree(bTree))
         return FALSE;
     int indexRoot = readIndexHeadField(OFFSET_HEAD_INDEX, bTree->indexFile);
-    int newIndexRoot = NULL;
+    int newIndexRoot;
     if(removeBTreeRec(bTree, &newIndexRoot, code)) {
-        if(newIndexRoot != NULL)
+        if(&newIndexRoot != NULL)
             writeIndexHeadField(newIndexRoot, OFFSET_HEAD_INDEX, bTree->indexFile);
         return TRUE;
     }
