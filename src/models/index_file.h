@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdio.h>
 
-#define ORDER 3
+#define ORDER 5 // greater than or equal to 5
 
 typedef struct {
     int regRoot;
@@ -30,12 +30,13 @@ typedef struct {
 
 typedef struct {
     int numberOfKeys;
-	int key[ORDER];
-	int position[ORDER];
-	int children[ORDER + 1];
+	int key[ORDER - 1];
+	int position[ORDER - 1];
+	int children[ORDER];
 }Registry;
 
 enum offsetRegistryIndex {
+    OFFSET_REGISTRY_NUM = offsetof(Registry, numberOfKeys),
     OFFSET_REGISTRY_KEYS = offsetof(Registry, key),
     OFFSET_REGISTRY_POS = offsetof(Registry, position),
     OFFSET_REGISTRY_CHILDS = offsetof(Registry, children)

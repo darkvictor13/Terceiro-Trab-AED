@@ -19,7 +19,10 @@ int searchMenuController(ArgStack head) {
     addEntryToMenu(searchMenu, "Buscar produto por codigo.", actionSearchProductByCode);
     addEntryToMenu(searchMenu, "Listar produtos.", actionListProducts);
     addEntryToMenu(searchMenu, "Mostrar arvore.", actionPrintTree);
-    addEntryToMenu(searchMenu, "Mostrar espacos livres.", actionPrintFreeSpaces);
+    addEntryToMenu(searchMenu, "Lista de registros.", actionPrintRegistryList);
+    addEntryToMenu(searchMenu, "Lista de produtos.", actionPrintProductList);
+    addEntryToMenu(searchMenu, "Mostrar espacos livres em arvore.", actionPrintFreeIndexSpaces);
+    addEntryToMenu(searchMenu, "Mostrar espacos livres em produtos.", actionPrintFreeDataSpaces);
     addEntryToMenu(searchMenu, "Voltar.", actionSearchReturn);
     controlMenu(searchMenu, head);
     return 1;
@@ -32,6 +35,7 @@ int actionSearchProductByCode(ArgStack head) {
     if(searchBTreeByCode(readArgStack(head), code, &position)) {
         Product *product = getBTreeProduct(readArgStack(head), position);
         printProduct(product);
+        printWaitMenu();
         free(product);
     }else{
         printWaitMenuWhitMessage("Produto nao encontrado.");
@@ -40,7 +44,7 @@ int actionSearchProductByCode(ArgStack head) {
 }
 
 int actionListProducts(ArgStack head) {
-    printHead("Imprimindo a Arvore em ordem crescente");
+    printHead("Imprimindo a Arvore em ordem crescente.");
     printf("\n");
     printBTreeInOrder(readArgStack(head));
     printf("\n\n");
@@ -49,15 +53,40 @@ int actionListProducts(ArgStack head) {
 }
 
 int actionPrintTree(ArgStack head) {
-    printHead("Imprimindo a Arvore em niveis");
+    printHead("Imprimindo a Arvore em niveis.");
     printBTreeByLevel(readArgStack(head));
     printWaitMenu();
     return 1;
 }
 
-int actionPrintFreeSpaces(ArgStack head) {
-    printHead("Espacos livres");
-    printBTreeFree(readArgStack(head));
+int actionPrintRegistryList(ArgStack head) {
+    printHead("Imprimindo lista de registros.");
+    printBTreeRegistryList(readArgStack(head));
+    printWaitMenu();
+    return 1;
+}
+
+int actionPrintProductList(ArgStack head) {
+    printHead("Imprimindo lista de produtos.");
+    printBTreeProductList(readArgStack(head));
+    printWaitMenu();
+    return 1;
+}
+
+int actionPrintFreeIndexSpaces(ArgStack head) {
+    printHead("Listas de registros livres no arquivo da arvore.");
+    printf("\n");
+    printBTreeFreeIndex(readArgStack(head));
+    printf("\n");
+    printWaitMenu();
+    return 1;
+}
+
+int actionPrintFreeDataSpaces(ArgStack head) {
+    printHead("Listas de registros livres no arquivo de produtos.");
+    printf("\n");
+    printBTreeFreeData(readArgStack(head));
+    printf("\n");
     printWaitMenu();
     return 1;
 }

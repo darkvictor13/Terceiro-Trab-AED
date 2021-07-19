@@ -38,7 +38,7 @@ Bool isLeafBTree(Registry *registry) {
 }
 
 Bool isRegistryFull(Registry *registry) {
-    return (registry->numberOfKeys == ORDER);
+    return (registry->numberOfKeys == ORDER - 1);
 }
 
 Bool searchBTreeByCodeRec(BTree bTree, int registryPosition, int key, int *position) {
@@ -109,19 +109,24 @@ RegistryField *splitAddBTree(BTree bTree, Registry *registry, int position, Regi
     newRegistry->numberOfKeys = registry->numberOfKeys - middle - 1;
     registry->numberOfKeys = middle;
     promotedRegistry->key = registry->key[middle];
+    promotedRegistry->position = registry->position[middle];
     newRegistry->children[0] = registry->children[middle + 1];
     for(int i = 0; i < newRegistry->numberOfKeys; i++) {
         newRegistry->key[i] = registry->key[middle + i + 1];
+        newRegistry->position[i] = registry->position[middle + i + 1];
         newRegistry->children[i + 1] = registry->children[middle + i + 2];
+        registry->key[middle + i + 1] = registry->position[middle + i + 1] = registry->children[middle + i + 2] = 0;
     }
-    simpleAddBTree(registry, registryField);
-    free(registryField);
-    promotedRegistry->position = -1;
+    if(registryField->key < promotedRegistry->key)
+        simpleAddBTree(registry, registryField);
+    else
+        simpleAddBTree(newRegistry, registryField);
     promotedRegistry->leftChild = position;
-    writeIndexRegistry(registry, position, bTree->indexFile);
     promotedRegistry->rightChild = insertIndexRegistry(newRegistry, bTree->indexFile);
-    free(registry);
+    writeIndexRegistry(registry, position, bTree->indexFile);
+    free(registryField);
     free(newRegistry);
+    free(registry);
     return promotedRegistry;
 }
 
@@ -147,10 +152,10 @@ RegistryField *insertBTreeRec(BTree bTree, int position, Product *product) {
         RegistryField *promotedRegistry = insertBTreeRec(bTree, registryPosition, product);
         if(promotedRegistry != NULL) {
             if(isRegistryFull(registry)) {
-                promotedRegistry = splitAddBTree(bTree, registry, position, promotedRegistry);
-                return promotedRegistry;
+                return splitAddBTree(bTree, registry, position, promotedRegistry);
             }else{
                 simpleAddBTree(registry, promotedRegistry);
+                writeIndexRegistry(registry, position, bTree->indexFile);
                 free(promotedRegistry);
                 free(registry);
                 return NULL;
@@ -204,43 +209,4 @@ Bool removeBTreeRec(BTree bTree, int code) {
 
 Bool removeBTree(BTree bTree, int code) {
 
-}
-
-void printBTreeInOrderRec(BTree bTree, int position) {
-    Registry *registry = readIndexRegistry(position, bTree->indexFile);
-    if(isLeafBTree(registry)) {
-        for(int i = 0; i < registry->numberOfKeys; i++)
-            printf("   %d", registry->key[i]);
-    }else{
-        int i;
-        for(i = 0; i < registry->numberOfKeys; i++) {
-            printBTreeInOrderRec(bTree, registry->position[i]);
-            printf("   %d", registry->key[i]);
-        }
-        printBTreeInOrderRec(bTree, registry->position[i]);
-    }
-    free(registry);
-}
-
-void printBTreeInOrder(BTree bTree) {
-    int indexRoot = readIndexHeadField(OFFSET_HEAD_INDEX, bTree->indexFile);
-    if(indexRoot == -1)
-        return;
-    printBTreeInOrderRec(bTree, indexRoot);
-}
-
-void printBTreeByLevelRec(BTree bTree) {
-
-}
-
-void printBTreeByLevel(BTree bTree) {
-
-}
-
-void printBTreeFreeRec(BTree bTree) {
-
-}
-
-void printBTreeFree(BTree bTree) {
-    
 }
