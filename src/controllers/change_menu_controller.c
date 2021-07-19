@@ -11,23 +11,43 @@
 
 #include "change_menu_controller.h"
 
+/**
+ * @brief 
+ * 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void changeMenuHeader() {
     printLine();
     printAlignedCenter("Menu de alteracoes");
     printLine();
 }
 
+/**
+ * @brief 
+ * 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void changeMenuFooter() {
     printLine();
     printAlignedRight("");
     printLine();
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int changeMenuController(ArgStack head) {
     Menu *changeMenu = createMenu();
     setHeader(changeMenu, changeMenuHeader);
     setFooter(changeMenu, changeMenuFooter);
-    addEntryToMenu(changeMenu, "Alterar estoque.", actionChangeNumber);
+    addEntryToMenu(changeMenu, "Alterar quantidade em estoque.", actionChangeNumber);
     addEntryToMenu(changeMenu, "Alterar preco.", actionChangeValue);
     addEntryToMenu(changeMenu, "Alterar localizacao.", actionChangeLocal);
     addEntryToMenu(changeMenu, "Voltar.", actionChangeReturn);
@@ -35,6 +55,14 @@ int changeMenuController(ArgStack head) {
     return 1;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int actionChangeNumber(ArgStack head) {
     int code, position;
     printf("\n\tIndique o codigo do produto: ");
@@ -57,6 +85,14 @@ int actionChangeNumber(ArgStack head) {
     return 1;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int actionChangeValue(ArgStack head) {
     int code, position;
     printf("\n\tIndique o codigo do produto: ");
@@ -79,6 +115,14 @@ int actionChangeValue(ArgStack head) {
     return 1;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int actionChangeLocal(ArgStack head) {
     int code, position;
     printf("\n\tIndique o codigo do produto: ");
@@ -101,6 +145,14 @@ int actionChangeLocal(ArgStack head) {
     return 1;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int actionChangeReturn(ArgStack head) {
     return 0;
 }

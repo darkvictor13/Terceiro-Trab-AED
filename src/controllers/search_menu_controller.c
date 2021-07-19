@@ -11,24 +11,44 @@
 
 #include "search_menu_controller.h"
 
+/**
+ * @brief 
+ * 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void searchMenuHeader() {
     printLine();
     printAlignedCenter("Menu de busca");
     printLine();
 }
 
+/**
+ * @brief 
+ * 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void searchMenuFooter() {
     printLine();
     printAlignedRight("");
     printLine();
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int searchMenuController(ArgStack head) {
     Menu *searchMenu = createMenu();
     setHeader(searchMenu, searchMenuHeader);
     setFooter(searchMenu, searchMenuFooter);
     addEntryToMenu(searchMenu, "Buscar produto por codigo.", actionSearchProductByCode);
-    addEntryToMenu(searchMenu, "Listar produtos em orden.", actionListProducts);
+    addEntryToMenu(searchMenu, "Listar produtos em ordem.", actionListProducts);
     addEntryToMenu(searchMenu, "Mostrar arvore por niveis.", actionPrintTree);
     addEntryToMenu(searchMenu, "Lista de registros em arquivo.", actionPrintRegistryList);
     addEntryToMenu(searchMenu, "Lista de produtos em arquivo.", actionPrintProductList);
@@ -39,6 +59,14 @@ int searchMenuController(ArgStack head) {
     return 1;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int actionSearchProductByCode(ArgStack head) {
     int code, position;
     printf("\tInsira o codigo do produto: ");
@@ -54,6 +82,14 @@ int actionSearchProductByCode(ArgStack head) {
     return 1;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int actionListProducts(ArgStack head) {
     printHead("Imprimindo a Arvore em ordem crescente.");
     printf("\n");
@@ -63,6 +99,14 @@ int actionListProducts(ArgStack head) {
     return 1;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int actionPrintTree(ArgStack head) {
     printHead("Imprimindo a Arvore em niveis.");
     printBTreeByLevel(readArgStack(head));
@@ -70,6 +114,14 @@ int actionPrintTree(ArgStack head) {
     return 1;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int actionPrintRegistryList(ArgStack head) {
     printHead("Imprimindo lista de registros.");
     printBTreeRegistryList(readArgStack(head));
@@ -77,6 +129,14 @@ int actionPrintRegistryList(ArgStack head) {
     return 1;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int actionPrintProductList(ArgStack head) {
     printHead("Imprimindo lista de produtos.");
     printBTreeProductList(readArgStack(head));
@@ -84,6 +144,14 @@ int actionPrintProductList(ArgStack head) {
     return 1;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int actionPrintFreeIndexSpaces(ArgStack head) {
     printHead("Listas de registros livres no arquivo da arvore.");
     printf("\n");
@@ -93,6 +161,14 @@ int actionPrintFreeIndexSpaces(ArgStack head) {
     return 1;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int actionPrintFreeDataSpaces(ArgStack head) {
     printHead("Listas de registros livres no arquivo de produtos.");
     printf("\n");
@@ -102,6 +178,14 @@ int actionPrintFreeDataSpaces(ArgStack head) {
     return 1;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int actionSearchReturn(ArgStack head) {
     return 0;
 }

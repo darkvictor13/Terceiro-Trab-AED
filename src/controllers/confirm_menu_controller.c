@@ -11,18 +11,38 @@
 
 #include "confirm_menu_controller.h"
 
+/**
+ * @brief 
+ * 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void confirmMenuHeader() {
     printLine();
     printAlignedCenter("Desea realmente realizar esa acao?");
     printLine();
 }
 
+/**
+ * @brief 
+ * 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void confirmMenuFooter() {
     printLine();
     printAlignedRight("");
     printLine();
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int confirmMenuController(ArgStack head) {
     Menu *confirmMenu = createMenu();
     setHeader(confirmMenu, confirmMenuHeader);
@@ -33,11 +53,27 @@ int confirmMenuController(ArgStack head) {
     return 0;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int actionConfirmYes(ArgStack head) {
     pushArgStack(head, (void*)1);
     return 0;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int actionConfirmNo(ArgStack head) {
     pushArgStack(head, (void*)0);
     return 0;
