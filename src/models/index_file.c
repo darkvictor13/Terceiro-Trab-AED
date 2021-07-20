@@ -24,6 +24,25 @@ FILE *makeIndexFile(char *indexFilePath) {
     return indexFile;
 }
 
+Registry *createRegistry(int key, int position, int leftChild, int rightChild) {
+    Registry *registry = (Registry*)malloc(sizeof(Registry));
+    registry->key[0] = key;
+    registry->position[0] = position;
+    registry->children[0] = leftChild;
+    registry->children[1] = rightChild;
+    registry->numberOfKeys = 1;
+    return registry;
+}
+
+RegistryField *createRegistryField(int key, int position, int leftChild, int rightChild) {
+    RegistryField *registryField = (RegistryField*)malloc(sizeof(RegistryField));
+    registryField->key = key;
+    registryField->position = position;
+    registryField->leftChild = leftChild;
+    registryField->rightChild = rightChild;
+    return registryField;
+}
+
 void writeIndexHead(IndexHead *head, FILE *indexFile) {
     fseek(indexFile, OFFSET_HEAD_INDEX, SEEK_SET);
     fwrite(head, sizeof(IndexHead), 1, indexFile);

@@ -57,6 +57,10 @@ int isEmptyIndex(FILE *indexFile);
 
 FILE *makeIndexFile(char *indexFilePath);
 
+Registry *createRegistry(int key, int position, int leftChild, int rightChild);
+
+RegistryField *createRegistryField(int key, int position, int leftChild, int rightChild);
+
 void writeIndexHead(IndexHead *indexHead, FILE *indexFile);
 
 IndexHead *readIndexHead(FILE *indexFile);
