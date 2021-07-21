@@ -41,8 +41,9 @@ int searchMenuController(ArgStack head) {
 
 int actionSearchProductByCode(ArgStack head) {
     int code, position;
-    printf("\tInsira o codigo do produto: ");
+    printf("\n\tInsira o codigo do produto: ");
     scanf("%d%*c", &code);
+    printf("\n");
     if(searchBTreeByCode(readArgStack(head), code, &position)) {
         Product *product = getBTreeProduct(readArgStack(head), position);
         printProduct(product);

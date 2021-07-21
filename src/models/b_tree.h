@@ -20,6 +20,11 @@
 
 #define OPEN_MODE "r+b"
 
+enum {
+    LEND_TO_LEFT,
+    LEND_TO_RIGHT
+};
+
 typedef enum {
     FALSE,
     TRUE
@@ -68,7 +73,7 @@ void simpleRemoveBTree(Registry *registry, int position);
 
 void overwriteBTree(BTree bTree, Registry *registry, int position);
 
-void lendBTreeChildren(BTree bTree, Registry *father, int leftChildPosition);
+void lendBTreeChildren(BTree bTree, int lendTo, Registry *father, int leftChildPosition);
 
 void concatenateBTreeChildren(BTree bTree, Registry *father, int leftChildPosition);
 
