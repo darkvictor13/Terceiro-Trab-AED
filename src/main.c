@@ -14,6 +14,15 @@
 #include "models/b_tree.h"
 #include "menu/arg_list.h"
 
+/**
+ * @brief funcao principal do programa
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int main(int argc, char *argv[]) {
     char indexFilePath[] = "./index.bin";
     char dataFilePath[] = "./data.bin";

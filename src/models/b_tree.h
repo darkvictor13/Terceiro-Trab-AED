@@ -41,6 +41,8 @@ BTree openBTreeFiles(char *indexFilePath, char *dataFilePath);
 
 void closeBTreeFiles(BTree bTree);
 
+void swapIntegers(int *valueA, int *valueB);
+
 Bool isEmptyBTree(BTree bTree);
 
 Bool isLeafBTree(Registry *registry);

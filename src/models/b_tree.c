@@ -30,6 +30,12 @@ void closeBTreeFiles(BTree bTree) {
     free(bTree);
 }
 
+void swapIntegers(int *valueA, int *valueB) {
+    int aux = (*valueA);
+    (*valueA) = (*valueB);
+    (*valueB) = aux;
+}
+
 Bool isEmptyBTree(BTree bTree) {
     return isEmptyIndex(bTree->indexFile);
 }
@@ -295,6 +301,7 @@ Bool removeBTreeRec(BTree bTree, int *position, int code) {
             removeDataRegistry(registry->position[positionInRegistry], bTree->dataFile);
             overwriteBTree(bTree, registry, positionInRegistry);
             nextRegistryPosition = registry->children[positionInRegistry + 1];
+            writeIndexRegistry(registry, (*position), bTree->indexFile);
             removeBTreeRec(bTree, &nextRegistryPosition, registry->key[positionInRegistry]);
         }else{
             nextRegistryPosition = registry->children[positionInRegistry];
@@ -322,6 +329,27 @@ Bool removeBTree(BTree bTree, int code) {
     if(isEmptyBTree(bTree))
         return FALSE;
     int indexRoot = readIndexHeadField(OFFSET_HEAD_INDEX, bTree->indexFile);
+    Registry *registry = readIndexRegistry(indexRoot, bTree->indexFile);
+    if(registry->numberOfKeys == 1 && registry->key[0] == code && !isLeafBTree(registry)) {
+        int nextRegistryPosition = registry->children[1];
+        Registry *nextRegistry = readIndexRegistry(nextRegistryPosition, bTree->indexFile);
+        free(registry);
+        registry = nextRegistry;
+        while(!isLeafBTree(registry)) {
+            nextRegistryPosition = registry->children[0];
+            nextRegistry = readIndexRegistry(nextRegistryPosition, bTree->indexFile);
+            free(registry);
+            registry = nextRegistry;
+        }
+        registry = readIndexRegistry(indexRoot, bTree->indexFile);
+        registry->key[0] = nextRegistry->key[0];
+        code = nextRegistry->key[0] = registry->key[0] + 1;
+        swapIntegers(&registry->position[0], &nextRegistry->position[0]);
+        writeIndexRegistry(registry, indexRoot, bTree->indexFile);
+        writeIndexRegistry(nextRegistry, nextRegistryPosition, bTree->indexFile);
+        free(nextRegistry);
+    }
+    free(registry);
     if(removeBTreeRec(bTree, &indexRoot, code)) {
         if(indexRoot != -1 && readIndexRegistryField(OFFSET_REGISTRY_NUM, indexRoot, bTree->indexFile) == 0) {
             int newIndexRoot = readIndexRegistryField(OFFSET_REGISTRY_CHILDS, indexRoot, bTree->indexFile);

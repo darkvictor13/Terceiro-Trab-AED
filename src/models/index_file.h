@@ -17,7 +17,7 @@
 #include <string.h>
 #include <stdio.h>
 
-#define ORDER 9 // greater than or equal to 5
+#define ORDER 5 // greater than or equal to 5
 
 typedef struct {
     int regRoot;

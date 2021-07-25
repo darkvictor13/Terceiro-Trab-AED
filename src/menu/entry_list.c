@@ -46,7 +46,6 @@ EntryList allocEntryList() {
  * @post Nenhuma
  */
 EntryList addEntryList(EntryList head, int number, char *message, CallbackFunct *funct) {
-    printf("Adicionando elemento %d\n", number);
     EntryList new_node = allocEntryList();
     new_node->number = number;
     new_node->funct = funct;
@@ -90,8 +89,6 @@ EntryList moveEntryList(EntryList item, int qnt, int side) {
         while(qnt--) item = item->next;
     }else if(side == MOVE_BACKWARD) {
         while(qnt--) item = item->prev;
-    }else{
-        printf("Entrada invalida\n");
     }
     return item;
 }

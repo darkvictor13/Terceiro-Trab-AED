@@ -11,6 +11,14 @@
 
 #include "b_tree_prints.h"
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param position 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printBTreeInOrderRec(BTree bTree, int position) {
     Registry *registry = readIndexRegistry(position, bTree->indexFile);
     if(isLeafBTree(registry)) {
@@ -69,6 +77,8 @@ void printBTreeRegistry(Registry *registry, int position, Canvas canvas, int x, 
     printCanvasText(canvas, "P:", x + 1, y + 1);
     printCanvasNumber(canvas, registry->numberOfKeys, x + 9, y + 1);
     printCanvasText(canvas, "N:", x + 9, y + 1);
+    if(registry->numberOfKeys >= ORDER)
+        return;
     int i;
     for(i = 0; i < registry->numberOfKeys; i++) {
         printCanvasBox(canvas, i * 8 + 4, y + 2, 8, 3);
