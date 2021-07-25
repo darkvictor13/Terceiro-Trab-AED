@@ -13,6 +13,7 @@
 
 void loadInputFile(char *inputPath, BTree bTree) {
     FILE *inputFile = fopen(inputPath, "r");
+    system(CLEAR);
     if (inputFile == NULL) {
         printWaitMenuWhitMessage("Arquivo de entrada nao encontrado.");
         return;

@@ -36,7 +36,9 @@ void printBTreeInOrder(BTree bTree) {
 
 void printBTreeByLevel(BTree bTree) {
     if(isEmptyBTree(bTree)) {
+        printAlignedCenter("");
         printAlignedCenter("Arvore vazia.");
+        printAlignedCenter("");
         return;
     }
     int next = readIndexHeadField(OFFSET_HEAD_INDEX, bTree->indexFile);
@@ -76,15 +78,19 @@ void printBTreeRegistry(Registry *registry, int position, Canvas canvas, int x, 
         printCanvasBox(canvas, i * 8, y + 6, 8, 3);
         printCanvasNumber(canvas, registry->children[i], i * 8 + 1, y + 7);
     }
-    printCanvasBox(canvas, i * 8, y + 6, 8, 3);
-    printCanvasNumber(canvas, registry->children[i], i * 8 + 1, y + 7);
+    if(i != 0) {
+        printCanvasBox(canvas, i * 8, y + 6, 8, 3);
+        printCanvasNumber(canvas, registry->children[i], i * 8 + 1, y + 7);
+    }
 }
 
 void printBTreeRegistryList(BTree bTree) {
     int last = readIndexHeadField(OFFSET_LAST_INDEX, bTree->indexFile);
     Canvas canvas = createCanvas(ORDER * 15, last * 9);
     Registry *registry;
-    printf("\n Raiz: %d\n", readIndexHeadField(OFFSET_ROOT_INDEX, bTree->indexFile));
+    printf("\n Total: %d\n", readIndexHeadField(OFFSET_LAST_INDEX, bTree->indexFile));
+    printf(" Raiz: %d\n", readIndexHeadField(OFFSET_ROOT_INDEX, bTree->indexFile));
+    printf(" Livre: %d\n", readIndexHeadField(OFFSET_FREE_INDEX, bTree->indexFile));
     for(int i = 0; i < last; i++) {
         registry = readIndexRegistry(i, bTree->indexFile);
         printBTreeRegistry(registry, i, canvas, 0, i * 9);
@@ -98,7 +104,8 @@ void printBTreeRegistryList(BTree bTree) {
 void printBTreeProductList(BTree bTree) {
     int last = readDataHeadField(OFFSET_LAST_DATA, bTree->dataFile);
     Product *product;
-    printf("\n");
+    printf("\n Total: %d\n", readIndexHeadField(OFFSET_LAST_DATA, bTree->indexFile));
+    printf(" Livre: %d\n", readIndexHeadField(OFFSET_FREE_DATA, bTree->indexFile));
     for(int i = 0; i < last; i++) {
         product = readDataRegistry(i, bTree->dataFile);
         printProduct(product);

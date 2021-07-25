@@ -17,7 +17,7 @@
 #include <string.h>
 #include <stdio.h>
 
-#define ORDER 5 // greater than or equal to 5
+#define ORDER 9 // greater than or equal to 5
 
 typedef struct {
     int regRoot;
@@ -56,6 +56,10 @@ enum offsetRegistryIndex {
 int isEmptyIndex(FILE *indexFile);
 
 FILE *makeIndexFile(char *indexFilePath);
+
+Registry *createRegistry(int key, int position, int leftChild, int rightChild);
+
+RegistryField *createRegistryField(int key, int position, int leftChild, int rightChild);
 
 void writeIndexHead(IndexHead *indexHead, FILE *indexFile);
 

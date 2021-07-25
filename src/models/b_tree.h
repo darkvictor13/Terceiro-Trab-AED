@@ -20,6 +20,11 @@
 
 #define OPEN_MODE "r+b"
 
+enum {
+    LEND_TO_LEFT,
+    LEND_TO_RIGHT
+};
+
 typedef enum {
     FALSE,
     TRUE
@@ -36,8 +41,6 @@ BTree openBTreeFiles(char *indexFilePath, char *dataFilePath);
 
 void closeBTreeFiles(BTree bTree);
 
-Registry *createRegistry(int key, int position, int leftChild, int rightChild);
-
 Bool isEmptyBTree(BTree bTree);
 
 Bool isLeafBTree(Registry *registry);
@@ -46,7 +49,7 @@ Bool isRegistryFull(Registry *registry);
 
 Bool isRegistryUnderFlow(Registry *registry);
 
-Bool canRegistryBorrow(Registry *registry);
+Bool canRegistryBorrow(BTree bTree, int position);
 
 Bool searchBTreeByCodeRec(BTree bTree, int registryPosition, int code, int *position);
 
@@ -67,6 +70,12 @@ Product *getBTreeProduct(BTree bTree, int position);
 void updateBTreeProduct(BTree bTree, int position, Product *product);
 
 void simpleRemoveBTree(Registry *registry, int position);
+
+void overwriteBTree(BTree bTree, Registry *registry, int position);
+
+void lendBTreeChildren(BTree bTree, int lendTo, Registry *father, int leftChildPosition);
+
+void concatenateBTreeChildren(BTree bTree, Registry *father, int leftChildPosition);
 
 Bool removeBTreeRec(BTree bTree, int *position, int code);
 
