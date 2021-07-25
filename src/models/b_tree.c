@@ -243,17 +243,17 @@ void lendBTreeChildren(BTree bTree, int lendTo, Registry *father, int position) 
     );
     if(lendTo == LEND_TO_LEFT) {
         simpleAddBTree(leftChild, registryField);
-        father->key[position] = rightChild->children[0];
-        father->position[position] = rightChild->children[0];
+        father->key[position] = rightChild->key[0];
+        father->position[position] = rightChild->position[0];
         simpleRemoveBTree(rightChild, 0);
     }else{
         simpleAddBTree(rightChild, registryField);
-        father->key[position] = leftChild->children[leftChild->numberOfKeys - 1];
-        father->position[position] = leftChild->children[leftChild->numberOfKeys - 1];
+        father->key[position] = leftChild->key[leftChild->numberOfKeys - 1];
+        father->position[position] = leftChild->position[leftChild->numberOfKeys - 1];
         simpleRemoveBTree(leftChild, leftChild->numberOfKeys - 1);
     }
-    writeIndexRegistry(leftChild, position, bTree->indexFile);
-    writeIndexRegistry(leftChild, position + 1, bTree->indexFile);
+    writeIndexRegistry(leftChild, father->children[position], bTree->indexFile);
+    writeIndexRegistry(rightChild, father->children[position + 1], bTree->indexFile);
     free(registryField);
     free(leftChild);
     free(rightChild);
@@ -272,9 +272,9 @@ void concatenateBTreeChildren(BTree bTree, Registry *father, int position) {
         leftChild->numberOfKeys++;
     }
     leftChild->children[leftChild->numberOfKeys] = rightChild->children[rightChild->numberOfKeys];
-    simpleRemoveBTree(father, position);
-    writeIndexRegistry(leftChild, position, bTree->indexFile);
     removeIndexRegistry(father->children[position + 1], bTree->indexFile);
+    simpleRemoveBTree(father, position);
+    writeIndexRegistry(leftChild, father->children[position], bTree->indexFile);
     free(leftChild);
     free(rightChild);
 }
@@ -292,16 +292,20 @@ Bool removeBTreeRec(BTree bTree, int *position, int code) {
     }else{
         int nextRegistryPosition;
         if(hasFound) {
+            removeDataRegistry(registry->position[positionInRegistry], bTree->dataFile);
             overwriteBTree(bTree, registry, positionInRegistry);
-            nextRegistryPosition = registry->children[++positionInRegistry];
+            nextRegistryPosition = registry->children[positionInRegistry + 1];
             removeBTreeRec(bTree, &nextRegistryPosition, registry->key[positionInRegistry]);
-        }else
+        }else{
             nextRegistryPosition = registry->children[positionInRegistry];
             hasFound = removeBTreeRec(bTree, &nextRegistryPosition, code);
+        }
         if(hasFound && nextRegistryPosition != -1) {
-            if(positionInRegistry != 0 && canRegistryBorrow(bTree, registry->children[positionInRegistry - 1]))
-                lendBTreeChildren(bTree, LEND_TO_RIGHT, registry, positionInRegistry - 1);
-            else if(positionInRegistry != registry->numberOfKeys && canRegistryBorrow(bTree, registry->children[positionInRegistry]))
+            if(positionInRegistry == registry->numberOfKeys)
+                positionInRegistry--;
+            if(canRegistryBorrow(bTree, registry->children[positionInRegistry]))
+                lendBTreeChildren(bTree, LEND_TO_RIGHT, registry, positionInRegistry);
+            else if(canRegistryBorrow(bTree, registry->children[positionInRegistry + 1]))
                 lendBTreeChildren(bTree, LEND_TO_LEFT, registry, positionInRegistry);
             else
                 concatenateBTreeChildren(bTree, registry, positionInRegistry);
