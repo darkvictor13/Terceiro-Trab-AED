@@ -54,7 +54,7 @@
 
 %% Definindo o Autor e o título
 \newcommand{\prof}{Rômulo César Silva}
-\newcommand{\materia}{Algoritimos e Estruturas de dados}
+\newcommand{\materia}{Algorítimos e Estruturas de dados}
 
 \author{Marco A. Guerra Pedroso\and Milena Lucas Dos Santos\and Victor Emanuel Almeida}
 \title{3$^{\underbar{o}}$ Trabalho de \materia}
@@ -121,7 +121,14 @@
 \section{Instruções para execução do programa}\label{Instruções para execução do programa}
 
 \subsection{Compilando o programa}\label{Compilando o proograma}
-Todos os arquivos de implementação estão na pasta ``./src'', sendo assim para realizar o processo de compilação em um sistema operacional que possui o compilador \textbf{GCC}, basta utilizar o comando ``\textbf{gcc ../src/controllers/*.c~../src/interfaces/*.c~../src/models/*.c~../src/menu/*.c~../src/main.c}''
+Todos os arquivos de implementação estão na pasta ``src'' e subdivididos nas pastas:
+\begin{itemize}
+    \item controllers;
+    \item interfaces;
+    \item models;
+    \item menu;
+\end{itemize}
+Sendo assim para realizar o processo de compilação em um sistema operacional que possui o compilador \textbf{GCC}, basta utilizar o comando ``\textbf{gcc ../src/controllers/*.c~../src/interfaces/*.c~../src/models/*.c~../src/menu/*.c~../src/main.c}''
 
 \subsection{Arquivos para compilação e execução}\label{Arquivos para compilação e execução}
 Dentro da raiz do projeto existe uma pasta chamada build onde se encontram:
@@ -140,10 +147,10 @@ Dentro da raiz do projeto existe uma pasta chamada build onde se encontram:
 \subsection{Caracteres detectados pelo Menu}\label{Caracteres detectados pelo Menu}
 Durante a execução do menu, o mesmo aceita os seguintes entradas de dados:
 \begin{itemize}
-    \item ENTER\@: o caractere faz com que execute a função escolhida;
-    \item ESC\@: o caractere faz com que volte ao menu anterior ou encerra o programa caso esteja no menu principal;
-    \item UP\@: o caractere faz com que o item selecionado receba seu anterior, dentro de uma lista encadeada circular, ou seja o anterior do primeiro é o último;
-    \item DOWN\@: o caractere faz com que o item selecionado receba seu próximo, dentro de uma lista encadeada circular, ou seja o próximo do último é o primeiro;
+    \item \textbf{ENTER}\@: o caractere faz com que execute a função escolhida;
+    \item \textbf{ESC}\@: o caractere faz com que volte ao menu anterior ou encerra o programa caso esteja no menu principal;
+        \item \textbf{UP}\@: o caractere \textbf{`W'} faz com que o item selecionado receba seu anterior, dentro de uma lista encadeada circular, ou seja o anterior do primeiro é o último;
+        \item \textbf{DOWN}\@: o caractere \textbf{`S'} faz com que o item selecionado receba seu próximo, dentro de uma lista encadeada circular, ou seja o próximo do último é o primeiro;
     \item 1--9 (dígitos): Quando a entrada é um dígito, o item selecionado se torna aquele com o número entrado, e quando essa entrada for igual a opção selecionada é equivalente a tecla ``ENTER'' supracitada. Por exemplo caso o usuário aperte ``44'', o programa executará a função ``Carregar lista de produtos.''.
 \end{itemize}
 
