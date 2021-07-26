@@ -12,7 +12,7 @@
 #include "change_menu_controller.h"
 
 /**
- * @brief 
+ * @brief imprime o cabecalho do menu de alteracoes
  * 
  * @pre Nenhuma
  * @post Nenhuma
@@ -24,7 +24,7 @@ void changeMenuHeader() {
 }
 
 /**
- * @brief 
+ * @brief imprime o rodape do menu de alteracoes
  * 
  * @pre Nenhuma
  * @post Nenhuma
@@ -36,10 +36,10 @@ void changeMenuFooter() {
 }
 
 /**
- * @brief 
+ * @brief cria um menu de alteracoes e da inicio ao mesmo
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -56,10 +56,10 @@ int changeMenuController(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu de alteracoes para alterar o numero de elementos em estoque
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -86,10 +86,10 @@ int actionChangeNumber(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu de alteracoes para alterar o valor do elemento em estoque
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -116,10 +116,10 @@ int actionChangeValue(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu de alteracoes para alterar o local onde sen encontra o produtos
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -146,10 +146,10 @@ int actionChangeLocal(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entradda do menu de alteracoes para voltar ao menu anterior
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */

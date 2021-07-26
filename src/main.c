@@ -17,8 +17,8 @@
 /**
  * @brief funcao principal do programa
  * 
- * @param argc 
- * @param argv 
+ * @param argc numero de argumentos
+ * @param argv vetor de argumentos
  * @return int 
  * @pre Nenhuma
  * @post Nenhuma

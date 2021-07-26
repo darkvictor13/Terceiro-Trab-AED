@@ -12,7 +12,7 @@
 #include "main_menu_controller.h"
 
 /**
- * @brief 
+ * @brief imprime o cabecalho do menu principal
  * 
  * @pre Nenhuma
  * @post Nenhuma
@@ -24,7 +24,7 @@ void mainMenuHeader() {
 }
 
 /**
- * @brief 
+ * @brief imprime o rodape do menu principal
  * 
  * @pre Nenhuma
  * @post Nenhuma
@@ -36,10 +36,10 @@ void mainMenuFooter() {
 }
 
 /**
- * @brief 
+ * @brief cria o menu principal e da inicio ao mesmo
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -58,10 +58,10 @@ int mainMenuController(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu principal para acessar ao menu de insercao
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -74,10 +74,10 @@ int actionInsert(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu principal para acessar ao menu de busca
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -87,10 +87,10 @@ int actionSearch(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu principal para acessar ao menu de alteracoes
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -100,10 +100,10 @@ int actionChange(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu principal para carregar um arquivo de dados de entrada
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -117,10 +117,10 @@ int actionLoad(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu principal para remover um elemento da arvore de elementos
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -140,10 +140,10 @@ int actionRemove(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu principal para encerrar o programa
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */

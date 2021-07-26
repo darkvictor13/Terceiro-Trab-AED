@@ -11,6 +11,14 @@
 
 #include "data_file.h"
 
+/**
+ * @brief 
+ * 
+ * @param dataFilePath 
+ * @return FILE* 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 FILE *makeDataFile(char *dataFilePath) {
     FILE *dataFile = fopen(dataFilePath, "w+b");
     DataHead head;
@@ -20,11 +28,27 @@ FILE *makeDataFile(char *dataFilePath) {
     return dataFile;
 }
 
+/**
+ * @brief 
+ * 
+ * @param head 
+ * @param dataFile 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void writeDataHead(DataHead *head, FILE *dataFile) {
     fseek(dataFile, OFFSET_HEAD_DATA, SEEK_SET);
     fwrite(head, sizeof(DataHead), 1, dataFile);
 }
 
+/**
+ * @brief 
+ * 
+ * @param dataFile 
+ * @return DataHead* 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 DataHead *readDataHead(FILE *dataFile) {
     DataHead *head = (DataHead*)malloc(sizeof(DataHead));
     fseek(dataFile, OFFSET_HEAD_DATA, SEEK_SET);
@@ -32,11 +56,29 @@ DataHead *readDataHead(FILE *dataFile) {
     return head;
 }
 
+/**
+ * @brief 
+ * 
+ * @param value 
+ * @param offset 
+ * @param dataFile 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void writeDataHeadField(int value, int offset, FILE *dataFile) {
     fseek(dataFile, offset, SEEK_SET);
     fwrite(&value, sizeof(int), 1, dataFile);
 }
 
+/**
+ * @brief 
+ * 
+ * @param offset 
+ * @param dataFile 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int readDataHeadField(int offset, FILE *dataFile) {
     int value;
     fseek(dataFile, offset, SEEK_SET);
@@ -44,11 +86,29 @@ int readDataHeadField(int offset, FILE *dataFile) {
     return value;
 }
 
+/**
+ * @brief 
+ * 
+ * @param product 
+ * @param position 
+ * @param dataFile 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void writeDataRegistry(Product *product, int position, FILE *dataFile) {
     fseek(dataFile, sizeof(DataHead) + sizeof(Product) * position, SEEK_SET);
     fwrite(product, sizeof(Product), 1, dataFile);
 }
 
+/**
+ * @brief 
+ * 
+ * @param position 
+ * @param dataFile 
+ * @return Product* 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Product *readDataRegistry(int position, FILE *dataFile) {
     Product *product = (Product*)malloc(sizeof(Product));
     fseek(dataFile, sizeof(DataHead) + sizeof(Product) * position, SEEK_SET);
@@ -56,11 +116,31 @@ Product *readDataRegistry(int position, FILE *dataFile) {
     return product;
 }
 
+/**
+ * @brief 
+ * 
+ * @param value 
+ * @param offset 
+ * @param position 
+ * @param dataFile 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void writeDataRegistryField(int value, int offset, int position, FILE *dataFile) {
     fseek(dataFile, sizeof(DataHead) + sizeof(Product) * position + offset, SEEK_SET);
     fwrite(&value, sizeof(int), 1, dataFile);
 }
 
+/**
+ * @brief 
+ * 
+ * @param offset 
+ * @param position 
+ * @param dataFile 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int readDataRegistryField(int offset, int position, FILE *dataFile) {
     int value;
     fseek(dataFile, sizeof(DataHead) + sizeof(Product) * position + offset, SEEK_SET);
@@ -68,12 +148,29 @@ int readDataRegistryField(int offset, int position, FILE *dataFile) {
     return value;
 }
 
+/**
+ * @brief 
+ * 
+ * @param position 
+ * @param dataFile 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void clearDataRegistry(int position, FILE *dataFile) {
     Product *product = (Product*)malloc(sizeof(Product));
     memset(product, 0, sizeof(Product));
     writeDataRegistry(product, position, dataFile);
 }
 
+/**
+ * @brief 
+ * 
+ * @param product 
+ * @param dataFile 
+ * @return int 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 int insertDataRegistry(Product *product, FILE *dataFile) {
     int free = readDataHeadField(OFFSET_FREE_DATA, dataFile);
     if(free == -1) {
@@ -96,6 +193,14 @@ int insertDataRegistry(Product *product, FILE *dataFile) {
     }
 }
 
+/**
+ * @brief 
+ * 
+ * @param position 
+ * @param dataFile 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void removeDataRegistry(int position, FILE *dataFile) {
     clearDataRegistry(position, dataFile);
     writeDataRegistryField(

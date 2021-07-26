@@ -12,7 +12,7 @@
 #include "search_menu_controller.h"
 
 /**
- * @brief 
+ * @brief imprime o cabecalho do menu de busca
  * 
  * @pre Nenhuma
  * @post Nenhuma
@@ -24,7 +24,7 @@ void searchMenuHeader() {
 }
 
 /**
- * @brief 
+ * @brief imprime o rodape do menu de busca
  * 
  * @pre Nenhuma
  * @post Nenhuma
@@ -36,10 +36,10 @@ void searchMenuFooter() {
 }
 
 /**
- * @brief 
+ * @brief cria o menu de busca e da inicio ao mesmo
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -60,10 +60,10 @@ int searchMenuController(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu principal para realizar a busca de um produto por codigo
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -84,10 +84,10 @@ int actionSearchProductByCode(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu principal para listar os produtos em ordem crescente
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -101,10 +101,10 @@ int actionListProducts(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu principal para imprimir a arvore b por niveis
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -116,10 +116,10 @@ int actionPrintTree(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu principal para imprimir os dados contidos no arquivo que representa a arvore b
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -131,10 +131,10 @@ int actionPrintRegistryList(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu principal para imprimir os dados contidos no arquivo de dados
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -146,10 +146,10 @@ int actionPrintProductList(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu principal para imprimir a lista de espacos livres no arquivo que representa a arvore b
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -163,10 +163,10 @@ int actionPrintFreeIndexSpaces(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu principal para imprimir a lista de espacos livres no arquivo de dados de produtos
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -180,10 +180,10 @@ int actionPrintFreeDataSpaces(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief entrada do menu principal para retornar ao menu anterior
  * 
- * @param head 
- * @return int 
+ * @param head lista de argumentos do menu
+ * @return int sinaliza ao menu anterior se este deve permanecer ativo ou nao
  * @pre Nenhuma
  * @post Nenhuma
  */

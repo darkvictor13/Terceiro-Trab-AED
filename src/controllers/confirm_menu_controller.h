@@ -16,50 +16,14 @@
 #include "../menu/print_menu.h"
 #include "../menu/arg_list.h"
 
-/**
- * @brief 
- * 
- * @pre Nenhuma
- * @post Nenhuma
- */
 void confirmMenuHeader();
 
-/**
- * @brief 
- * 
- * @pre Nenhuma
- * @post Nenhuma
- */
 void confirmMenuFooter();
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int confirmMenuController(ArgStack head);
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int actionConfirmYes(ArgStack head);
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int actionConfirmNo(ArgStack head);
 
 #endif

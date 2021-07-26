@@ -28,50 +28,14 @@ typedef struct {
     char local[MAX_LOCAL];
 }Product;
 
-/**
- * @brief 
- * 
- * @return Product* 
- * @pre Nenhuma
- * @post Nenhuma
- */
 Product *allocProduct();
 
-/**
- * @brief 
- * 
- * @param product 
- * @pre Nenhuma
- * @post Nenhuma
- */
 void printProduct(Product *product);
 
-/**
- * @brief 
- * 
- * @param product 
- * @pre Nenhuma
- * @post Nenhuma
- */
 void printBasicProduct(Product *product);
 
-/**
- * @brief 
- * 
- * @return Product* 
- * @pre Nenhuma
- * @post Nenhuma
- */
 Product* scanProduct();
 
-/**
- * @brief 
- * 
- * @param str 
- * @param size 
- * @pre Nenhuma
- * @post Nenhuma
- */
 void reset(char *str, int size);
 
 #endif

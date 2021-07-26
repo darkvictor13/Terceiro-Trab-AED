@@ -1,6 +1,6 @@
 #include "../src/models/b_tree.h"
 
-#define SIZE 1000
+#define SIZE 33
 
 /**
  * @brief verifica se um valor se encontra num vetor
@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
     int removed = 0;
     for(int i = 0; i < SIZE; i++) {
         while(exist(numbers, i, numbers[i] = rand() % (SIZE * 10)));
-        //printf("  %d", numbers[i]);
+        printf("  %d", numbers[i]);
     }
     printf("Total: %d\n", SIZE);
     for(int i = 0; i < SIZE; i++) {
@@ -55,10 +55,12 @@ int main(int argc, char *argv[]) {
             finded++;
     }
     printf("Finded: %d %s\n", finded, (finded == SIZE)? "[OK]" : "[ERROR]");
-    for(int i = 0; i < SIZE; i++) {
+    /*for(int i = 0; i < SIZE; i++) {
         if(removeBTree(bTree, numbers[i]))
             removed++;
-    }
+        else
+            printf(" %d", numbers[i]);
+    }*/
     printf("Removed: %d %s\n", removed, (removed == SIZE)? "[OK]" : "[ERROR]");
     closeBTreeFiles(bTree);
     return 0;

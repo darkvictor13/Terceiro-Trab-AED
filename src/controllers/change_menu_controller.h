@@ -18,70 +18,18 @@
 #include "../menu/print_menu.h"
 #include "../menu/arg_list.h"
 
-/**
- * @brief 
- * 
- * @pre Nenhuma
- * @post Nenhuma
- */
 void changeMenuHeader();
 
-/**
- * @brief 
- * 
- * @pre Nenhuma
- * @post Nenhuma
- */
 void changeMenuFooter();
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int changeMenuController(ArgStack head);
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int actionChangeNumber(ArgStack head);
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int actionChangeValue(ArgStack head);
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int actionChangeLocal(ArgStack head);
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int actionChangeReturn(ArgStack head);
 
 #endif

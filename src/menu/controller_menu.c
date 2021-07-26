@@ -57,7 +57,7 @@ void addEntryToMenu(Menu *menu, char *message, CallbackFunct *funct) {
 }
 
 /**
- * @brief Set the Header object
+ * @brief 
  * 
  * @param menu 
  * @param header 
@@ -69,7 +69,7 @@ void setHeader(Menu *menu, HeaderFunct header) {
 }
 
 /**
- * @brief Set the Footer object
+ * @brief 
  * 
  * @param menu 
  * @param footer 

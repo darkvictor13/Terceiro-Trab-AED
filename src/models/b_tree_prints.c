@@ -35,6 +35,13 @@ void printBTreeInOrderRec(BTree bTree, int position) {
     free(registry);
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printBTreeInOrder(BTree bTree) {
     int indexRoot = readIndexHeadField(OFFSET_HEAD_INDEX, bTree->indexFile);
     if(indexRoot == -1)
@@ -42,6 +49,13 @@ void printBTreeInOrder(BTree bTree) {
     printBTreeInOrderRec(bTree, indexRoot);
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printBTreeByLevel(BTree bTree) {
     if(isEmptyBTree(bTree)) {
         printAlignedCenter("");
@@ -72,6 +86,17 @@ void printBTreeByLevel(BTree bTree) {
     printf("\n\n");
 }
 
+/**
+ * @brief 
+ * 
+ * @param registry 
+ * @param position 
+ * @param canvas 
+ * @param x 
+ * @param y 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printBTreeRegistry(Registry *registry, int position, Canvas canvas, int x, int y) {
     printCanvasNumber(canvas, position, x + 1, y + 1);
     printCanvasText(canvas, "P:", x + 1, y + 1);
@@ -94,6 +119,13 @@ void printBTreeRegistry(Registry *registry, int position, Canvas canvas, int x, 
     }
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printBTreeRegistryList(BTree bTree) {
     int last = readIndexHeadField(OFFSET_LAST_INDEX, bTree->indexFile);
     Canvas canvas = createCanvas(ORDER * 15, last * 9);
@@ -111,6 +143,13 @@ void printBTreeRegistryList(BTree bTree) {
     freeCanvas(canvas);
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printBTreeProductList(BTree bTree) {
     int last = readDataHeadField(OFFSET_LAST_DATA, bTree->dataFile);
     Product *product;
@@ -124,6 +163,14 @@ void printBTreeProductList(BTree bTree) {
     printf("\n");
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param position 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printBTreeFreeIndexRec(BTree bTree, int position) {
     if(position == -1)
         return;
@@ -134,6 +181,13 @@ void printBTreeFreeIndexRec(BTree bTree, int position) {
     );
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printBTreeFreeIndex(BTree bTree) {
     printBTreeFreeIndexRec(
         bTree,
@@ -141,6 +195,14 @@ void printBTreeFreeIndex(BTree bTree) {
     );
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param position 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printBTreeFreeDataRec(BTree bTree, int position) {
     if(position == -1)
         return;
@@ -151,6 +213,13 @@ void printBTreeFreeDataRec(BTree bTree, int position) {
     );
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void printBTreeFreeData(BTree bTree) {
     printBTreeFreeDataRec(
         bTree,

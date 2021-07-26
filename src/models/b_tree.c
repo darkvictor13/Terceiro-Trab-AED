@@ -11,6 +11,15 @@
 
 #include "b_tree.h"
 
+/**
+ * @brief 
+ * 
+ * @param indexFilePath 
+ * @param dataFilePath 
+ * @return BTree 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 BTree openBTreeFiles(char *indexFilePath, char *dataFilePath) {
     BTree bTree = (BTree)malloc(sizeof(NodeBTree));
     bTree->indexFile = fopen(indexFilePath, OPEN_MODE);
@@ -24,38 +33,105 @@ BTree openBTreeFiles(char *indexFilePath, char *dataFilePath) {
     return bTree;
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void closeBTreeFiles(BTree bTree) {
     fclose(bTree->indexFile);
     fclose(bTree->dataFile);
     free(bTree);
 }
 
+/**
+ * @brief 
+ * 
+ * @param valueA 
+ * @param valueB 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void swapIntegers(int *valueA, int *valueB) {
     int aux = (*valueA);
     (*valueA) = (*valueB);
     (*valueB) = aux;
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @return Bool 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Bool isEmptyBTree(BTree bTree) {
     return isEmptyIndex(bTree->indexFile);
 }
 
+/**
+ * @brief 
+ * 
+ * @param registry 
+ * @return Bool 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Bool isLeafBTree(Registry *registry) {
     return (registry->children[0] == -1);
 }
 
+/**
+ * @brief 
+ * 
+ * @param registry 
+ * @return Bool 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Bool isRegistryFull(Registry *registry) {
     return (registry->numberOfKeys == ORDER - 1);
 }
 
+/**
+ * @brief 
+ * 
+ * @param registry 
+ * @return Bool 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Bool isRegistryUnderFlow(Registry *registry) {
     return (registry->numberOfKeys < ORDER / 2);
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param position 
+ * @return Bool 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Bool canRegistryBorrow(BTree bTree, int position) {
     return (readIndexRegistryField(OFFSET_REGISTRY_NUM, position, bTree->indexFile) > ORDER / 2);
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param registryPosition 
+ * @param key 
+ * @param position 
+ * @return Bool 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Bool searchBTreeByCodeRec(BTree bTree, int registryPosition, int key, int *position) {
     Registry *registry = readIndexRegistry(registryPosition, bTree->indexFile);
     if(searchPositionBTRee(registry, key, position)) {
@@ -71,6 +147,16 @@ Bool searchBTreeByCodeRec(BTree bTree, int registryPosition, int key, int *posit
     return searchBTreeByCodeRec(bTree, registryPosition, key, position);
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param key 
+ * @param position 
+ * @return Bool 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Bool searchBTreeByCode(BTree bTree, int key, int *position) {
     int indexRoot = readIndexHeadField(OFFSET_HEAD_INDEX, bTree->indexFile);
     if(indexRoot == -1)
@@ -79,6 +165,16 @@ Bool searchBTreeByCode(BTree bTree, int key, int *position) {
 }
 
 #if(ORDER < 10)
+/**
+ * @brief 
+ * 
+ * @param registry 
+ * @param key 
+ * @param position 
+ * @return Bool 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Bool searchPositionBTRee(Registry *registry, int key, int *position) {
     for((*position) = 0; (*position) < registry->numberOfKeys; (*position)++)
         if(key == registry->key[(*position)])
@@ -88,6 +184,16 @@ Bool searchPositionBTRee(Registry *registry, int key, int *position) {
     return FALSE;
 }
 #else
+/**
+ * @brief 
+ * 
+ * @param registry 
+ * @param key 
+ * @param position 
+ * @return Bool 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Bool searchPositionBTRee(Registry *registry, int key, int *position) {
     int first = -1, middle;
     (*position) = registry->numberOfKeys;
@@ -104,6 +210,14 @@ Bool searchPositionBTRee(Registry *registry, int key, int *position) {
 }
 #endif
 
+/**
+ * @brief 
+ * 
+ * @param registry 
+ * @param registryField 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void simpleAddBTree(Registry *registry, RegistryField *registryField) {
     int position;
     searchPositionBTRee(registry, registryField->key, &position);
@@ -124,6 +238,17 @@ void simpleAddBTree(Registry *registry, RegistryField *registryField) {
     registry->numberOfKeys++;
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param registry 
+ * @param position 
+ * @param registryField 
+ * @return RegistryField* 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 RegistryField *splitAddBTree(BTree bTree, Registry *registry, int position, RegistryField *registryField) {
     Registry *newRegistry = (Registry*)malloc(sizeof(Registry));
     int middle = registry->numberOfKeys / 2;
@@ -150,8 +275,19 @@ RegistryField *splitAddBTree(BTree bTree, Registry *registry, int position, Regi
     return promotedRegistry;
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param position 
+ * @param product 
+ * @return RegistryField* 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 RegistryField *insertBTreeRec(BTree bTree, int position, Product *product) {
     Registry *registry = readIndexRegistry(position, bTree->indexFile);
+    RegistryField *returnedRegistryField;
     if(isLeafBTree(registry)) {
         RegistryField *registryField = createRegistryField(product->code, insertDataRegistry(product, bTree->dataFile), -1, -1);
         if(isRegistryFull(registry)) {
@@ -181,6 +317,14 @@ RegistryField *insertBTreeRec(BTree bTree, int position, Product *product) {
     }
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param product 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void insertBTree(BTree bTree, Product *product) {
     if(isEmptyBTree(bTree)) {
         int position = insertDataRegistry(product, bTree->dataFile);
@@ -212,14 +356,40 @@ void insertBTree(BTree bTree, Product *product) {
     }
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param position 
+ * @return Product* 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Product *getBTreeProduct(BTree bTree, int position) {
     return readDataRegistry(position, bTree->dataFile);
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param position 
+ * @param product 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void updateBTreeProduct(BTree bTree, int position, Product *product) {
     writeDataRegistry(product, position, bTree->dataFile);
 }
 
+/**
+ * @brief 
+ * 
+ * @param registry 
+ * @param position 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void simpleRemoveBTree(Registry *registry, int position) {
     registry->numberOfKeys--;
     int i;
@@ -231,6 +401,15 @@ void simpleRemoveBTree(Registry *registry, int position) {
     registry->key[i] = registry->position[i] = registry->children[i + 1] = 0;
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param registry 
+ * @param position 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void overwriteBTree(BTree bTree, Registry *registry, int position) {
     Registry *rightChild = readIndexRegistry(registry->children[position + 1], bTree->indexFile);
     registry->key[position] = rightChild->key[0];
@@ -238,6 +417,16 @@ void overwriteBTree(BTree bTree, Registry *registry, int position) {
     free(rightChild);
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param lendTo 
+ * @param father 
+ * @param position 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void lendBTreeChildren(BTree bTree, int lendTo, Registry *father, int position) {
     Registry *leftChild = readIndexRegistry(father->children[position], bTree->indexFile);
     Registry *rightChild = readIndexRegistry(father->children[position + 1], bTree->indexFile);
@@ -265,6 +454,15 @@ void lendBTreeChildren(BTree bTree, int lendTo, Registry *father, int position) 
     free(rightChild);
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param father 
+ * @param position 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 void concatenateBTreeChildren(BTree bTree, Registry *father, int position) {
     Registry *leftChild = readIndexRegistry(father->children[position], bTree->indexFile);
     Registry *rightChild = readIndexRegistry(father->children[position + 1], bTree->indexFile);
@@ -285,6 +483,16 @@ void concatenateBTreeChildren(BTree bTree, Registry *father, int position) {
     free(rightChild);
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param position 
+ * @param code 
+ * @return Bool 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Bool removeBTreeRec(BTree bTree, int *position, int code) {
     Registry *registry = readIndexRegistry((*position), bTree->indexFile);
     int positionInRegistry;
@@ -325,6 +533,15 @@ Bool removeBTreeRec(BTree bTree, int *position, int code) {
     return hasFound;
 }
 
+/**
+ * @brief 
+ * 
+ * @param bTree 
+ * @param code 
+ * @return Bool 
+ * @pre Nenhuma
+ * @post Nenhuma
+ */
 Bool removeBTree(BTree bTree, int code) {
     if(isEmptyBTree(bTree))
         return FALSE;

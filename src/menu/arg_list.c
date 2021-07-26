@@ -12,9 +12,9 @@
 #include "arg_list.h"
 
 /**
- * @brief 
+ * @brief indica se uma lista de argumentos se encontra vacia ou nao
  * 
- * @param head 
+ * @param head cabeca da lista de argumentos
  * @return int 
  * @pre Nenhuma
  * @post Nenhuma
@@ -24,7 +24,7 @@ int isEmptyArgStack(ArgStack head) {
 }
 
 /**
- * @brief Create a Stack object
+ * @brief crria uma nova lista de argumentos
  * 
  * @return ArgStack 
  * @pre Nenhuma
@@ -37,9 +37,9 @@ ArgStack createStack() {
 }
 
 /**
- * @brief 
+ * @brief le um elemento da lista de argumentos sem remove-lo
  * 
- * @param head 
+ * @param head cabeca da lista de argumentos
  * @return void* 
  * @pre Nenhuma
  * @post Nenhuma
@@ -54,10 +54,10 @@ void *readArgStack(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief realiza a insercao de um novo elemento na lista de argumentos do programa
  * 
- * @param head 
- * @param arg 
+ * @param head cabeca da lista de argumentos
+ * @param arg argumento a ser inserido na lista de argumentos
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -70,10 +70,10 @@ void pushArgStack(ArgStack head, void *arg) {
 }
 
 /**
- * @brief 
+ * @brief realiza a leitura de um elemento na lista de argumentos e o remove dela
  * 
- * @param head 
- * @return void* 
+ * @param head cabeca da lista de argumentos
+ * @return void* o argumento que foi extraido da lista
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -90,45 +90,27 @@ void *popArgStack(ArgStack head) {
 }
 
 /**
- * @brief 
+ * @brief realiza a liberacao do espaco de uma lista de argumentos
  * 
- * @param head 
+ * @param head cabeca da lista de argumentos
  * @pre Nenhuma
  * @post Nenhuma
  */
 void freeArgStack(ArgStack head) {
-    
+    if(!isEmptyArgStack(head))
+        freeArgStackRec(head->top);
 }
 
 /**
- * @brief 
+ * @brief realiza a liberacao recursiva do espaco dos nodos de uma lista de argumentos
  * 
- * @param head 
+ * @param head cabeca da lista de argumentos
  * @pre Nenhuma
  * @post Nenhuma
  */
 void freeArgStackRec(ArgNode *head) {
-    
-}
-
-/**
- * @brief 
- * 
- * @param head 
- * @pre Nenhuma
- * @post Nenhuma
- */
-void printArgStack(ArgStack head) {
-    
-}
-
-/**
- * @brief 
- * 
- * @param head 
- * @pre Nenhuma
- * @post Nenhuma
- */
-void printArgStackRec(ArgNode *head) {
-    
+    if(head == NULL)
+        return;
+    freeArgStackRec(head->next);
+    free(head);
 }

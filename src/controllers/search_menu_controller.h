@@ -18,110 +18,26 @@
 #include "../menu/print_menu.h"
 #include "../menu/arg_list.h"
 
-/**
- * @brief 
- * 
- * @pre Nenhuma
- * @post Nenhuma
- */
 void searchMenuHeader();
 
-/**
- * @brief 
- * 
- * @pre Nenhuma
- * @post Nenhuma
- */
 void searchMenuFooter();
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int searchMenuController(ArgStack head);
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int actionSearchProductByCode(ArgStack head);
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int actionListProducts(ArgStack head);
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int actionPrintTree(ArgStack head);
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int actionPrintRegistryList(ArgStack head);
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int actionPrintProductList(ArgStack head);
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int actionPrintFreeIndexSpaces(ArgStack head);
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int actionPrintFreeDataSpaces(ArgStack head);
 
-/**
- * @brief 
- * 
- * @param head 
- * @return int 
- * @pre Nenhuma
- * @post Nenhuma
- */
 int actionSearchReturn(ArgStack head);
 
 #endif
