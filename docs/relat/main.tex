@@ -58,7 +58,7 @@
 
 \author{Marco A. Guerra Pedroso\and Milena Lucas Dos Santos\and Victor Emanuel Almeida}
 \title{3$^{\underbar{o}}$ Trabalho de \materia}
-\date{18 de julho de 2021}
+\date{24 de julho de 2021}
 
 %% zera a pagina
 \fancyfoot[C]{}
@@ -121,42 +121,81 @@
 \section{Instruções para execução do programa}\label{Instruções para execução do programa}
 
 \subsection{Compilando o programa}\label{Compilando o proograma}
-Todos os arquivos de implementação estão na pasta ``src'' e subdivididos nas pastas:
+Todos os arquivos de implementação estão na pasta \textbf{``src''} e subdivididos nas pastas:
 \begin{itemize}
     \item controllers;
     \item interfaces;
     \item models;
     \item menu;
 \end{itemize}
-Sendo assim para realizar o processo de compilação em um sistema operacional que possui o compilador \textbf{GCC}, basta utilizar o comando ``\textbf{gcc ../src/controllers/*.c~../src/interfaces/*.c~../src/models/*.c~../src/menu/*.c~../src/main.c}''
+Sendo assim para realizar o processo de compilação em um sistema operacional que possui o compilador \textbf{GCC}, basta utilizar o comando:
+
+\begin{lstlisting}[language=]
+gcc ../src/controllers/*.c \
+    ../src/interfaces/*.c \
+    ../src/models/*.c \
+    ../src/menu/*.c \
+    ../src/main.c
+\end{lstlisting}
 
 \subsection{Arquivos para compilação e execução}\label{Arquivos para compilação e execução}
 Dentro da raiz do projeto existe uma pasta chamada build onde se encontram:
 \begin{itemize}
-    \item Um arquivo de entrada;
+    \item Dois arquivo de entrada;
     \item O script de compilação do programa (funciona apenas no Linux);
-    \item Após a primeira execução 2 arquivos de dados:
+    \item Após a primeira execução 2 arquivos de dados serão criados, respectivamente:
         \begin{itemize}
-            \item index.bin: armazena os índices dos elementos da arvore;
-            \item data.bin: armazena todos os dados de cada produto;
+            \item \textbf{index.bin}: armazena os índices dos elementos da arvore;
+        \item \textbf{data.bin}: armazena todos os dados de cada produto;
         \end{itemize}
 \end{itemize}
 
 É importante que uma vez gerado o executável o mesmo seja colocado dentro da pasta build, facilitando o caminho para o arquivo de entrada e deixando os binários gerados separados do código fonte.
 
 \subsection{Caracteres detectados pelo Menu}\label{Caracteres detectados pelo Menu}
-Durante a execução do menu, o mesmo aceita os seguintes entradas de dados:
+Durante a execução do menu, o mesmo aceita as seguintes entradas do teclado:
 \begin{itemize}
-    \item \textbf{ENTER}\@: o caractere faz com que execute a função escolhida;
-    \item \textbf{ESC}\@: o caractere faz com que volte ao menu anterior ou encerra o programa caso esteja no menu principal;
-        \item \textbf{UP}\@: o caractere \textbf{`W'} faz com que o item selecionado receba seu anterior, dentro de uma lista encadeada circular, ou seja o anterior do primeiro é o último;
-        \item \textbf{DOWN}\@: o caractere \textbf{`S'} faz com que o item selecionado receba seu próximo, dentro de uma lista encadeada circular, ou seja o próximo do último é o primeiro;
-    \item 1--9 (dígitos): Quando a entrada é um dígito, o item selecionado se torna aquele com o número entrado, e quando essa entrada for igual a opção selecionada é equivalente a tecla ``ENTER'' supracitada. Por exemplo caso o usuário aperte ``44'', o programa executará a função ``Carregar lista de produtos.''.
+    \item \textbf{ENTER}\@: faz com que execute a função escolhida;
+    \item \textbf{ESC}\@: faz com que volte ao menu anterior ou encerra o programa caso esteja no menu principal;
+        \item \textbf{`W'}\@: faz com que o item selecionado receba seu anterior, dentro de uma lista encadeada circular, ou seja o anterior do primeiro é o último;
+        \item \textbf{`S'}\@: faz com que o item selecionado receba seu próximo, dentro de uma lista encadeada circular, ou seja o próximo do último é o primeiro;
+        \item \textbf{[1--9] (dígitos)}: Quando a entrada é um dígito, o item selecionado se torna aquele com o número entrado, e quando essa entrada for igual a opção selecionada é equivalente a tecla ``ENTER'' supracitada. Por exemplo caso o usuário aperte ``44'', o programa executará a função ``Carregar lista de produtos.''.
 \end{itemize}
 
+\subsection{Menus em execução}\label{Menus em execução}
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\textwidth]{principal.png}
+    \caption{\label{fig:pricipal}Menu principal}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\textwidth]{buscar}
+    \caption{\label{fig:buscar}Menu de busca}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\textwidth]{mudar}
+    \caption{\label{fig:mudar}Menu de alterar}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\textwidth]{confirmar}
+    \caption{\label{fig:confirmar}Menu de confirmar}
+\end{figure}
+
+\cleardoublepage
 \section{Estruturas de Dados}\label{Estruturas de Dados}
-Escrever algo aqui
+
+Segue abaixo as principais estruturas de dados utilizadas ao longo da execução do programa.
+
 \subsection{Estrutura do Menu}\label{Estrutura do Menu}
+
+Estruturas encarregadas de definir o menu.
+
 \begin{lstlisting}
 typedef int CallbackFunct(ArgStack head);
 typedef void HeaderFunct();
@@ -169,6 +208,7 @@ typedef struct entryNode {
     struct entryNode *next;
     struct entryNode *prev;
 }Entry;
+
 typedef Entry* EntryList;
 
 typedef struct {
@@ -178,8 +218,13 @@ typedef struct {
     EntryList selected;
 }Menu;
 \end{lstlisting}
+
+\cleardoublepage
 \subsection{Estruturas do arquivo de índices}\label{Estruturas do arquivo de índices}
-\begin{lstlisting}[title=Dados gravados no arquivo ``index.bin'']
+
+Dados gravados no arquivo ``index.bin'' para representar a árvore B.
+
+\begin{lstlisting}
 typedef struct {
     int regRoot;
     int regLast;
@@ -192,14 +237,6 @@ typedef struct {
     int leftChild;
     int rightChild;
 }RegistryField;
-\end{lstlisting}
-
-\subsection{Estruturas do arquivo de Dados}\label{Estruturas do arquivo de Dados}
-\begin{lstlisting}[title=Dados gravados no arquivo ``data.bin'']
-typedef struct {
-    int regLast;
-    int regFree;
-}DataHead;
 
 typedef struct {
     int numberOfKeys;
@@ -209,11 +246,21 @@ typedef struct {
 }Registry;
 \end{lstlisting}
 
-\subsection{Estruturas em memória}\label{Estruturas em memória}
+\cleardoublepage
+\subsection{Estruturas do arquivo de Dados}\label{Estruturas do arquivo de Dados}
+
+Dados gravados no arquivo ``data.bin'' para representar os dados dos produtos contidos na árvore B.
+
 \begin{lstlisting}
+
 #define MAX_NAME 51
 
 #define MAX_LOCAL 101
+
+typedef struct {
+    int regLast;
+    int regFree;
+}DataHead;
 
 typedef struct {
     int code;
@@ -222,5 +269,7 @@ typedef struct {
     float value;
     char local[MAX_LOCAL];
 }Product;
+
 \end{lstlisting}
+
 \end{document}
