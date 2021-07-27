@@ -14,9 +14,9 @@
 #ifdef __gnu_linux__
 
 /**
- * @brief
+ * @brief Lê um caractere ASCII do teclado
  * 
- * @return char 
+ * @return char Valor ASCII do caractere lido
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -42,10 +42,11 @@ char getChar() {
 
 #else
 
+
 /**
- * @brief
+ * @brief Lê um caractere ASCII do teclado
  * 
- * @return char 
+ * @return char Valor ASCII do caractere lido
  * @pre Nenhuma
  * @post Nenhuma
  */
