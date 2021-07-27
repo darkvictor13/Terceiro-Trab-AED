@@ -536,7 +536,7 @@ Bool removeBTreeRec(BTree bTree, int *position, int code) {
 /**
  * @brief remove um elemento dentro de uma arvore b
  * 
- * @param bTree arvore b contendo da qual se deseja remover um elemento
+ * @param bTree arvore b da qual se deseja remover um elemento
  * @param code codigo do elemento a remover
  * @return Bool valor indicando se o elemento a ser rfemoviddo foi encontrado na arvore
  * @pre Nenhuma
