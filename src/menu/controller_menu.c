@@ -12,9 +12,9 @@
 #include "controller_menu.h"
 
 /**
- * @brief 
+ * @brief Remove um elemento do menu
  * 
- * @param queue 
+ * @param queue lista interna de elementos do menu
  * @return int 
  * @pre Nenhuma
  * @post Nenhuma
@@ -24,9 +24,9 @@ int removeEntryQueue(EntryList *queue) {
 }
 
 /**
- * @brief Create a Menu object
+ * @brief Cria o Menu, alocando a memória do mesmo
  * 
- * @return Menu* 
+ * @return Menu* ponteiro para um menu inicializado
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -37,11 +37,11 @@ Menu *createMenu() {
 }
 
 /**
- * @brief 
+ * @brief Adiciona uma nova opção ao menu
  * 
- * @param menu 
- * @param message 
- * @param funct 
+ * @param menu Um ponteiro para um menu válido
+ * @param message Mensagem da nova opção
+ * @param funct ponteiro para a função a ser executada na opção
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -57,10 +57,10 @@ void addEntryToMenu(Menu *menu, char *message, CallbackFunct *funct) {
 }
 
 /**
- * @brief 
+ * @brief Adiciona um cabeçalho para o menu
  * 
- * @param menu 
- * @param header 
+ * @param menu Um ponteiro para um menu válido
+ * @param header ponteiro para o cabeçalho do menu
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -69,10 +69,10 @@ void setHeader(Menu *menu, HeaderFunct header) {
 }
 
 /**
- * @brief 
+ * @brief Adiciona um rodapé para o menu
  * 
- * @param menu 
- * @param footer 
+ * @param menu Um ponteiro para um menu válido
+ * @param footer ponteiro para o rodapé do menu
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -81,11 +81,11 @@ void setFooter(Menu *menu, FooterFunct footer) {
 }
 
 /**
- * @brief 
+ * @brief Executa o loop de um menu válido
  * 
- * @param menu 
- * @param head 
- * @return int 
+ * @param menu Um ponteiro para um menu válido
+ * @param head ponteiro para uma pilha de argumentos
+ * @return int indica se deve retornar ao menu anterior
  * @pre Nenhuma
  * @post Nenhuma
  */
