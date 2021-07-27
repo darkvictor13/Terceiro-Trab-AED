@@ -12,10 +12,10 @@
 #include "b_tree_prints.h"
 
 /**
- * @brief 
+ * @brief imprime os elementos de uma arbore b em ordem
  * 
- * @param bTree 
- * @param position 
+ * @param bTree arvore b a ser imprimessa
+ * @param position posicao atual do percorrimento da arvore
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -36,9 +36,9 @@ void printBTreeInOrderRec(BTree bTree, int position) {
 }
 
 /**
- * @brief 
+ * @brief imprime o s elementos de uma arvore b em ordem
  * 
- * @param bTree 
+ * @param bTree arvore a ser impressa
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -50,9 +50,9 @@ void printBTreeInOrder(BTree bTree) {
 }
 
 /**
- * @brief 
+ * @brief immprime os codigos de uma arvore b por niveis
  * 
- * @param bTree 
+ * @param bTree arvore a ser impressa
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -87,13 +87,13 @@ void printBTreeByLevel(BTree bTree) {
 }
 
 /**
- * @brief 
+ * @brief imprime um registro em um canvas
  * 
- * @param registry 
- * @param position 
- * @param canvas 
- * @param x 
- * @param y 
+ * @param registry registro a ser impresso
+ * @param position posicao na lista de registros do arquivo
+ * @param canvas canvas on de sera impresso o registro
+ * @param x posicao do registro no eixo x dentro do canvas
+ * @param y posicao do registro no eixo y dentro do canvas
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -120,9 +120,9 @@ void printBTreeRegistry(Registry *registry, int position, Canvas canvas, int x, 
 }
 
 /**
- * @brief 
+ * @brief imprime uma lista de registros na saida estandar
  * 
- * @param bTree 
+ * @param bTree arvore b a ser impressa
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -144,9 +144,9 @@ void printBTreeRegistryList(BTree bTree) {
 }
 
 /**
- * @brief 
+ * @brief imprime os registros dentro do arquivo de dados
  * 
- * @param bTree 
+ * @param bTree arvore b a ser impressa
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -164,10 +164,10 @@ void printBTreeProductList(BTree bTree) {
 }
 
 /**
- * @brief 
+ * @brief imprime a lista de regsitros libres no arquivo que representa a arvore
  * 
- * @param bTree 
- * @param position 
+ * @param bTree arvore a ser impressa
+ * @param position posicao atual na lista de registros
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -182,9 +182,9 @@ void printBTreeFreeIndexRec(BTree bTree, int position) {
 }
 
 /**
- * @brief 
+ * @brief imprime a lista de regsitros libres no arquivo que representa a arvore
  * 
- * @param bTree 
+ * @param bTree arvore a ser impressa
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -196,10 +196,10 @@ void printBTreeFreeIndex(BTree bTree) {
 }
 
 /**
- * @brief 
+ * @brief imprime a lista de registros libres no arquivo que contem os dados dos produtos
  * 
- * @param bTree 
- * @param position 
+ * @param bTree arvore a ser impressa
+ * @param position posicao atual na lista de dados
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -214,9 +214,9 @@ void printBTreeFreeDataRec(BTree bTree, int position) {
 }
 
 /**
- * @brief 
+ * @brief imprime a lista de registros libres no arquivo que contem os dados dos produtos
  * 
- * @param bTree 
+ * @param bTree arvore a ser impressa
  * @pre Nenhuma
  * @post Nenhuma
  */
