@@ -12,9 +12,9 @@
 #include "product.h"
 
 /**
- * @brief 
+ * @brief Aloca o espaço de memória para um novo Produto
  * 
- * @return Product* 
+ * @return Product* Ponteiro para o Produto
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -29,9 +29,9 @@ Product *allocProduct() {
 }
 
 /**
- * @brief 
+ * @brief Imprime na tela as informações do Produto
  * 
- * @param product 
+ * @param product Um produto válido
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -39,9 +39,9 @@ void printProduct(Product *product) {
     printLine();
     printf("\n\tNome: ");
     printString(product->name);
-    printf(".\n\tCode: %d.\n", product->code);
-    printf("\tNumber: %d.\n", product->number);
-    printf("\tValue: %.2f.\n", product->value);
+    printf(".\n\tCódigo do produto: %d.\n", product->code);
+    printf("\tQuantidade em estoque: %d.\n", product->number);
+    printf("\tValor: %.2f.\n", product->value);
     printf("\tLocal: ");
     printString(product->local);
     printf(".\n\n");
@@ -49,9 +49,11 @@ void printProduct(Product *product) {
 }
 
 /**
- * @brief 
+ * @brief Imprime de forma simplificada, somente 2 informações
+ *  - o código do produto
+ *  - o nome do produto
  * 
- * @param product 
+ * @param product Um produto válido
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -62,9 +64,9 @@ void printBasicProduct(Product *product) {
 }
 
 /**
- * @brief 
+ * @brief Lê do teclado as informações de um produto
  * 
- * @return Product* 
+ * @return Product* Ponteiro para o Produto
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -85,11 +87,12 @@ Product* scanProduct() {
 }
 
 /**
- * @brief 
+ * @brief Deixa a string de entrada com todos
+ * os caracteres nulos, com 0 absoluto
  * 
- * @param str 
- * @param size 
- * @pre Nenhuma
+ * @param str uma string de entrada válida
+ * @param size o tamanho da string
+ * @pre uma string válida
  * @post Nenhuma
  */
 void reset(char *str, int size) {
