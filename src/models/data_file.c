@@ -12,9 +12,9 @@
 #include "data_file.h"
 
 /**
- * @brief 
+ * @brief cria um arquivo para o armazenamento dos dados dos produtos
  * 
- * @param dataFilePath 
+ * @param dataFilePath cadeia de carateres contendo o nome e endereco do arquivo a ser criado
  * @return FILE* 
  * @pre Nenhuma
  * @post Nenhuma
