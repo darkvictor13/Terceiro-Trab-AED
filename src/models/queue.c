@@ -12,11 +12,11 @@
 #include "queue.h"
 
 /**
- * @brief 
+ * @brief Informa se a fila está vazia
  * 
- * @param queue 
- * @return int 
- * @pre Nenhuma
+ * @param queue Uma fila válida
+ * @return int (Booleano)
+ * @pre uma fila válida
  * @post Nenhuma
  */
 int emptyQueue(Queue *queue) {
@@ -24,9 +24,9 @@ int emptyQueue(Queue *queue) {
 }
 
 /**
- * @brief Create a Queue object
+ * @brief Cria a Queue
  * 
- * @return Queue* 
+ * @return Queue* Ponteiro para a fila
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -38,9 +38,10 @@ Queue* createQueue() {
 }
 
 /**
- * @brief 
+ * @brief Aloca o espaço de memória para uma
+ * nova fila
  * 
- * @return QueueNode* 
+ * @return QueueNode* Ponteiro para a fila
  * @pre Nenhuma
  * @post Nenhuma
  */
@@ -49,11 +50,11 @@ QueueNode* allocQueueNode() {
 }
 
 /**
- * @brief 
+ * @brief Retorna o tamanho da fila
  * 
- * @param queue 
+ * @param queue Uma fila válida
  * @return int 
- * @pre Nenhuma
+ * @pre uma fila válida
  * @post Nenhuma
  */
 int sizeQueue(Queue *queue) {
@@ -61,12 +62,13 @@ int sizeQueue(Queue *queue) {
 }
 
 /**
- * @brief 
+ * @brief Insere na fila um elemento da arvore B
  * 
- * @param queue 
- * @param position 
- * @param tabs 
- * @pre Nenhuma
+ * @param queue Uma fila válida
+ * @param position Qual a posição do elemento no arquivo
+ * @param tabs Espacamentos equivalentes ao nível
+ * em que o elemento estava na árvore
+ * @pre uma fila válida
  * @post Nenhuma
  */
 void insertQueue(Queue *queue, int position, int tabs) {
@@ -83,11 +85,11 @@ void insertQueue(Queue *queue, int position, int tabs) {
 }
 
 /**
- * @brief 
+ * @brief Remove da fila um elemento da arvore B
  * 
- * @param queue 
- * @return int 
- * @pre Nenhuma
+ * @param queue Uma fila válida
+ * @return int A posição em que o elemento estava na árvore
+ * @pre uma fila válida
  * @post Nenhuma
  */
 int removeQueue(Queue * queue) {
