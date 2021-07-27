@@ -12,11 +12,12 @@
 #include "print_menu.h"
 
 /**
- * @brief 
+ * @brief Função padrão para imprimir o cabeçalho
+ * do menu
  * 
- * @param message 
+ * @param message Mensagem a ser impressa
  * @pre Nenhuma
- * @post Nenhuma
+ * @post Elemento impresso na tela
  */
 void printHead(const char *message) {
     system(CLEAR);
@@ -26,11 +27,11 @@ void printHead(const char *message) {
 }
 
 /**
- * @brief 
+ * @brief Imprime uma string na tela
  * 
- * @param message 
+ * @param message mensagem a ser impressa
  * @pre Nenhuma
- * @post Nenhuma
+ * @post Elemento impresso na tela
  */
 void printString(const char* message) {
     if(message == NULL || message[0] == '\0')
@@ -40,11 +41,11 @@ void printString(const char* message) {
 }
 
 /**
- * @brief 
+ * @brief Imprime a mensagem alinhada a Esquerda
  * 
- * @param message 
+ * @param message mensagem a ser impressa
  * @pre Nenhuma
- * @post Nenhuma
+ * @post Elemento impresso na tela
  */
 void printAlignedLeft(const char *message) {
     printf("|%s", message);
@@ -53,11 +54,11 @@ void printAlignedLeft(const char *message) {
 }
 
 /**
- * @brief 
+ * @brief Imprime a mensagem alinhada ao centro do console
  * 
- * @param message 
+ * @param message mensagem a ser impressa
  * @pre Nenhuma
- * @post Nenhuma
+ * @post Elemento impresso na tela
  */
 void printAlignedCenter(const char *message) {
     int sizeRead = (strlen(message) + 2);
@@ -72,11 +73,11 @@ void printAlignedCenter(const char *message) {
 }
 
 /**
- * @brief 
+ * @brief Imprime a mensagem alinhada a direita
  * 
- * @param message 
+ * @param message mensagem a ser impressa
  * @pre Nenhuma
- * @post Nenhuma
+ * @post Elemento impresso na tela
  */
 void printAlignedRight(const char *message) {
     printf("|");
@@ -85,10 +86,10 @@ void printAlignedRight(const char *message) {
 }
 
 /**
- * @brief 
+ * @brief Imprime uma linha do Menu
  * 
  * @pre Nenhuma
- * @post Nenhuma
+ * @post Elemento impresso na tela
  */
 void printLine() {
     printf("|");
@@ -97,12 +98,12 @@ void printLine() {
 }
 
 /**
- * @brief 
+ * @brief Imprime um caractere "number" vezes
  * 
- * @param c 
- * @param number 
+ * @param c caractere a ser impresso
+ * @param number quantidade de vezes a ser impresso
  * @pre Nenhuma
- * @post Nenhuma
+ * @post Elemento impresso na tela
  */
 void printExtended(char c, int number) {
     for(int i = 0; i < number; i++)
@@ -110,11 +111,11 @@ void printExtended(char c, int number) {
 }
 
 /**
- * @brief 
+ * @brief Imprime o menu completo
  * 
  * @param menu 
  * @pre Nenhuma
- * @post Nenhuma
+ * @post Elemento impresso na tela
  */
 void printMenu(Menu *menu) {
     menu->header();
@@ -127,12 +128,12 @@ void printMenu(Menu *menu) {
 }
 
 /**
- * @brief 
+ * @brief Imprime A lista de opções do menu
  * 
- * @param first 
- * @param selected 
+ * @param first primeira opção do menu
+ * @param selected opção selecionada do menu
  * @pre Nenhuma
- * @post Nenhuma
+ * @post Elemento impresso na tela
  */
 void printListOptions(EntryList first, EntryList selected) {
     EntryList p = first;
@@ -143,12 +144,12 @@ void printListOptions(EntryList first, EntryList selected) {
 }
 
 /**
- * @brief 
+ * @brief Imprime uma única opção do menu
  * 
- * @param item 
- * @param selected 
+ * @param item o item do menu
+ * @param selected boleano se ele está selecionado
  * @pre Nenhuma
- * @post Nenhuma
+ * @post Elemento impresso na tela
  */
 void printOption(EntryList item, int selected) {
     putchar('|');
@@ -162,10 +163,11 @@ void printOption(EntryList item, int selected) {
 }
 
 /**
- * @brief 
+ * @brief Imprime um menu que aguarda a entrada do usuário para continuar
+ * equivalente ao system(PAUSE) porém multi-plataforma
  * 
  * @pre Nenhuma
- * @post Nenhuma
+ * @post Elemento impresso na tela
  */
 void printWaitMenu() {
     printLine();
@@ -179,11 +181,12 @@ void printWaitMenu() {
 }
 
 /**
- * @brief 
+ * @brief Imprime um menu que aguarda a entrada do usuário para continuar
+ * porém com uma mensagem extra passada como parâmetro
  * 
- * @param message 
+ * @param message mensagem a ser impressa
  * @pre Nenhuma
- * @post Nenhuma
+ * @post Elemento impresso na tela
  */
 void printWaitMenuWhitMessage(const char *message) {
     printLine();
@@ -200,10 +203,10 @@ void printWaitMenuWhitMessage(const char *message) {
 }
 
 /**
- * @brief 
+ * @brief Imprime a mensagem final do programa
  * 
  * @pre Nenhuma
- * @post Nenhuma
+ * @post Elemento impresso na tela
  */
 void printEndMessage() {
     system(CLEAR);
